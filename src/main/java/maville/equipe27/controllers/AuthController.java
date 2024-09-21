@@ -10,7 +10,7 @@ import maville.equipe27.views.AuthView;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
-public class AuthController {
+public class AuthController implements IController {
     private final AuthView view;
     private final AuthHelper authHelper;
     private final PropertyChangeSupport support;
@@ -24,10 +24,6 @@ public class AuthController {
 
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
-    }
-
-    private void fireEvent(User user) {
-
     }
 
     private void attemptLogin(String username, String password) {
@@ -53,6 +49,7 @@ public class AuthController {
         }
     }
 
+    @Override
     public void run() {
         AuthChoices option = view.promptMenu();
 

@@ -1,6 +1,5 @@
 package maville.equipe27.helpers;
 
-import com.google.gson.Gson;
 import maville.equipe27.enums.RoleChoices;
 import maville.equipe27.models.User;
 
@@ -20,6 +19,7 @@ public class UserDataStore {
         try (Reader reader = new FileReader(FILE_NAME)) {
             users = GsonSingleton.getInstance().fromJson(reader, User[].class);
         } catch (IOException e) {
+            // We should add real Exception handling.
             e.printStackTrace();
         }
 

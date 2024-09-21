@@ -7,14 +7,13 @@ import maville.equipe27.models.User;
 public class AuthHelper {
 
     private final UserDataStore userDataStore;
-    private User user = null;
 
     public AuthHelper(UserDataStore userDataStore) {
         this.userDataStore = userDataStore;
     }
 
     public User login(String username, String password) {
-        this.user = this.userDataStore.fetchUser(username);
+        User user = this.userDataStore.fetchUser(username);
 
         User returnedUser = null;
 
