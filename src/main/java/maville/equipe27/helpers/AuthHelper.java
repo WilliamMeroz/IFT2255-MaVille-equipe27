@@ -3,15 +3,12 @@ package maville.equipe27.helpers;
 import at.favre.lib.crypto.bcrypt.BCrypt;
 import maville.equipe27.models.User;
 
-import java.beans.PropertyChangeListener;
-import java.beans.PropertyChangeSupport;
-
-public class LoginHelper {
+public class AuthHelper {
 
     private final UserDataStore userDataStore;
     private User user = null;
 
-    public LoginHelper(UserDataStore userDataStore) {
+    public AuthHelper(UserDataStore userDataStore) {
         this.userDataStore = userDataStore;
     }
 

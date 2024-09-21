@@ -9,7 +9,7 @@ public class IntervenantController implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         if (((User) evt.getNewValue()).getRole().equals("INTERVENANT")) {
-            System.out.println("ON EST CONNECTÉ EN TANT QUE INTERVENANT");
+            System.out.println("ON EST CONNECTÉ EN TANT QU'INTERVENANT");
         }
     }
 }

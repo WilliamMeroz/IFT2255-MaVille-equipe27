@@ -3,11 +3,11 @@ package maville.equipe27.views;
 
 import org.beryx.textio.TextIO;
 
-public class LoginView {
+public class AuthView {
 
    TextIO textIO;
 
-    public LoginView(TextIO textIO) {
+    public AuthView(TextIO textIO) {
         this.textIO = textIO;
     }
 

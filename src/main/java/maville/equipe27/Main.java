@@ -1,25 +1,25 @@
 package maville.equipe27;
 
 import maville.equipe27.controllers.IntervenantController;
-import maville.equipe27.controllers.LoginController;
+import maville.equipe27.controllers.AuthController;
 import maville.equipe27.controllers.ResidentController;
 import maville.equipe27.helpers.UserDataStore;
-import maville.equipe27.views.LoginView;
+import maville.equipe27.views.AuthView;
 import maville.equipe27.views.TextIOSingleton;
 
 public class Main {
     public static void main(String[] args) {
-        LoginView loginView = new LoginView(TextIOSingleton.getInstance());
+        AuthView authView = new AuthView(TextIOSingleton.getInstance());
         UserDataStore userDataStore = new UserDataStore("/users.json");
 
-        LoginController loginController = new LoginController(loginView, userDataStore);
+        AuthController authController = new AuthController(authView, userDataStore);
         ResidentController residentController = new ResidentController();
         IntervenantController intervenantController = new IntervenantController();
 
-        loginController.addPropertyChangeListener(residentController);
-        loginController.addPropertyChangeListener(intervenantController);
+        authController.addPropertyChangeListener(residentController);
+        authController.addPropertyChangeListener(intervenantController);
 
-        loginController.run();
+        authController.run();
 
     }
 }
