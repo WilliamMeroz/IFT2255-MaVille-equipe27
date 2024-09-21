@@ -1,11 +1,11 @@
 package maville.equipe27.helpers;
 
 import com.google.gson.Gson;
+import maville.equipe27.enums.RoleChoices;
 import maville.equipe27.models.User;
 
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.Reader;
+import java.io.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class UserDataStore {
@@ -15,16 +15,35 @@ public class UserDataStore {
         this.FILE_NAME = filename;
     }
 
-    public User fetchUser(String username) {
+    private User[] getUserList() {
         User[] users = null;
-        try (Reader reader = new InputStreamReader(this.getClass().getResourceAsStream(FILE_NAME))) {
-            users = new Gson().fromJson(reader, User[].class);
+        try (Reader reader = new FileReader(FILE_NAME)) {
+            users = GsonSingleton.getInstance().fromJson(reader, User[].class);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-         return Arrays.stream(users)
+        return users;
+    }
+
+    public User fetchUser(String username) {
+         return Arrays.stream(getUserList())
                     .filter(user -> user.getUsername().equals(username))
                     .findFirst().orElse(null);
+    }
+
+    public User saveUser(String username, String password, RoleChoices role) {
+        ArrayList<User> users = new ArrayList<>(Arrays.asList(getUserList()));
+
+        User newUser = new User(username, password, role);
+        users.add(newUser);
+
+        try (FileWriter fileWriter = new FileWriter(FILE_NAME)) {
+            GsonSingleton.getInstance().toJson(users, fileWriter);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return newUser;
     }
 }

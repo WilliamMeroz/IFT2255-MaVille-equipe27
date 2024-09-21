@@ -1,5 +1,7 @@
 package maville.equipe27.controllers;
 
+import maville.equipe27.enums.AuthChoices;
+import maville.equipe27.enums.RoleChoices;
 import maville.equipe27.helpers.AuthHelper;
 import maville.equipe27.helpers.UserDataStore;
 import maville.equipe27.models.User;
@@ -24,6 +26,10 @@ public class AuthController {
         support.addPropertyChangeListener(listener);
     }
 
+    private void fireEvent(User user) {
+
+    }
+
     private void attemptLogin(String username, String password) {
         User user = authHelper.login(username, password);
         if(user != null) {
@@ -36,10 +42,29 @@ public class AuthController {
         }
     }
 
+    private void register(String username, String password, RoleChoices role) {
+        User user = authHelper.register(username, password, role);
+        if(user != null) {
+            view.registerSuccess(username);
+            support.firePropertyChange("user", null, user);
+        } else {
+            view.registerFailure();
+            this.run();
+        }
+    }
+
     public void run() {
+        AuthChoices option = view.promptMenu();
+
+        if (option == AuthChoices.QUITTER) System.exit(0);
+
         String username = view.promptUsername();
         String password = view.promptPassword();
 
-        attemptLogin(username, password);
+        if (option == AuthChoices.INSCRIPTION) {
+            RoleChoices role = view.promptRole();
+            register(username, password, role);
+        }
+        else attemptLogin(username, password);
     }
 }

@@ -10,7 +10,7 @@ import maville.equipe27.views.TextIOSingleton;
 public class Main {
     public static void main(String[] args) {
         AuthView authView = new AuthView(TextIOSingleton.getInstance());
-        UserDataStore userDataStore = new UserDataStore("/users.json");
+        UserDataStore userDataStore = new UserDataStore("users.json");
 
         AuthController authController = new AuthController(authView, userDataStore);
         ResidentController residentController = new ResidentController();

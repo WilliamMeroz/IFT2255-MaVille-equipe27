@@ -1,9 +1,17 @@
 package maville.equipe27.models;
 
+import maville.equipe27.enums.RoleChoices;
+
 public class User {
     private String username;
     private String password;
-    private String role;
+    private RoleChoices role;
+
+    public User(String username, String password, RoleChoices role) {
+        this.username = username;
+        this.password = password;
+        this.role = role;
+    }
 
     public String getUsername() {
         return username;
@@ -21,11 +29,11 @@ public class User {
         this.password = password;
     }
 
-    public String getRole() {
+    public RoleChoices getRole() {
         return role;
     }
 
-    public void setRole(String role) {
+    public void setRole(RoleChoices role) {
         this.role = role;
     }
 
