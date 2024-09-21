@@ -18,4 +18,12 @@ public class LoginView {
     public String promptPassword() {
         return textIO.newStringInputReader().withMinLength(8).withInputMasking(true).read("Entrez le mot de passe");
     }
+
+    public void loginSuccess(String username) {
+        textIO.getTextTerminal().printf("\nBienvenue %s, vous avez été connecté(e) avec succès\n", username);
+    }
+
+    public void loginFailure() {
+        textIO.getTextTerminal().println("Nom d'utilisateur ou mot de passe incorrect.");
+    }
 }
