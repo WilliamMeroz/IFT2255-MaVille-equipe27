@@ -9,6 +9,7 @@ import maville.equipe27.views.AuthView;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.time.LocalDate;
 
 public class AuthController implements IController {
     private final AuthView view;
@@ -55,13 +56,26 @@ public class AuthController implements IController {
 
         if (option == AuthChoices.QUITTER) System.exit(0);
 
-        String username = view.promptUsername();
+        String email = view.promptEmail();
         String password = view.promptPassword();
+
 
         if (option == AuthChoices.INSCRIPTION) {
             RoleChoices role = view.promptRole();
-            register(username, password, role);
+            String firstname = view.promptFirstname();
+            String lastname = view.promptLastname();
+
+            if(role == RoleChoices.RÉSIDENT) {
+                LocalDate dob = view.promptDateOfBirth();
+                if (dob == null) System.exit(0);
+                String phone = view.promptPhone();
+                String address = view.promptAddress();
+
+
+            }
+
+            register(email, password, role);
         }
-        else attemptLogin(username, password);
+        else attemptLogin(email, password);
     }
 }
