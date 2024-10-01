@@ -1,6 +1,7 @@
 package maville.equipe27.controllers;
 
 import maville.equipe27.enums.AuthChoices;
+import maville.equipe27.enums.CompanyChoices;
 import maville.equipe27.enums.RoleChoices;
 import maville.equipe27.helpers.AuthHelper;
 import maville.equipe27.helpers.UserDataStore;
@@ -70,10 +71,14 @@ public class AuthController implements IController {
                 if (dob == null) System.exit(0);
                 String phone = view.promptPhone();
                 String address = view.promptAddress();
-
-
             }
 
+            if (role == RoleChoices.INTERVENANT) {
+                CompanyChoices companyChoice = view.promptCompanyType();
+                String cityIdentifier = view.promptCityIdentifier();
+                System.out.println(companyChoice);
+                System.out.println(cityIdentifier);
+            }
             register(email, password, role);
         }
         else attemptLogin(email, password);

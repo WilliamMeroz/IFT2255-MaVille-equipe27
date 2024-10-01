@@ -2,6 +2,7 @@ package maville.equipe27.views;
 
 
 import maville.equipe27.enums.AuthChoices;
+import maville.equipe27.enums.CompanyChoices;
 import maville.equipe27.enums.RoleChoices;
 import maville.equipe27.validators.AuthValidator;
 import org.beryx.textio.TextIO;
@@ -90,6 +91,15 @@ public class AuthView {
         StringJoiner joiner = new StringJoiner(",");
         joiner.add(String.valueOf(civicNumber)).add(street).add(String.valueOf(unit)).add(postalCode);
         return joiner.toString();
+    }
+
+    public CompanyChoices promptCompanyType() {
+        return textIO.newEnumInputReader(CompanyChoices.class).read("Choisissez un type d'entreprise");
+    }
+
+    public String promptCityIdentifier() {
+        int code = textIO.newIntInputReader().withMinVal(10000000).withMaxVal(99999999).read("Entrez l'identifiant");
+        return String.valueOf(code);
     }
 
     public void loginSuccess(String username) {
