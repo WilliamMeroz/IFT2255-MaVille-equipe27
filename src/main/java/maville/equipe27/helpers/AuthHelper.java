@@ -1,7 +1,6 @@
 package maville.equipe27.helpers;
 
 import at.favre.lib.crypto.bcrypt.BCrypt;
-import maville.equipe27.enums.RoleChoices;
 import maville.equipe27.models.User;
 
 public class AuthHelper {
@@ -26,18 +25,16 @@ public class AuthHelper {
         return returnedUser;
     }
 
-    public User register(String username, String password, RoleChoices role) {
+    public boolean register(User user) {
 
-        User fetchedUser = this.userDataStore.fetchUser(username);
-
-        User returnedUser = null;
-
+        User existingUser = this.userDataStore.fetchUser(user.getEmail());
         // Return null to controller so we know the user already exists.
-        if (fetchedUser == null) {
-            String hashedPassword = BCrypt.withDefaults().hashToString(10, password.toCharArray());
-            returnedUser = this.userDataStore.saveUser(username, hashedPassword, role);
+        if (existingUser == null) {
+            String hashedPassword = BCrypt.withDefaults().hashToString(10, user.getPassword().toCharArray());
+            user.setPassword(hashedPassword);
+            return this.userDataStore.saveUser(user);
         }
 
-        return returnedUser;
+        return false;
     }
 }

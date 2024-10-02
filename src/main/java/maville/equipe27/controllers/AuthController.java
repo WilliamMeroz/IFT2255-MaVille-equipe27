@@ -5,6 +5,8 @@ import maville.equipe27.enums.CompanyChoices;
 import maville.equipe27.enums.RoleChoices;
 import maville.equipe27.helpers.AuthHelper;
 import maville.equipe27.helpers.UserDataStore;
+import maville.equipe27.models.Intervenant;
+import maville.equipe27.models.Resident;
 import maville.equipe27.models.User;
 import maville.equipe27.views.AuthView;
 
@@ -28,10 +30,10 @@ public class AuthController implements IController {
         support.addPropertyChangeListener(listener);
     }
 
-    private void attemptLogin(String username, String password) {
-        User user = authHelper.login(username, password);
+    private void attemptLogin(String email, String password) {
+        User user = authHelper.login(email, password);
         if(user != null) {
-            view.loginSuccess(username);
+            view.loginSuccess(user.getFirstname());
             support.firePropertyChange("user", null, user);
         }
         else {
@@ -40,10 +42,10 @@ public class AuthController implements IController {
         }
     }
 
-    private void register(String username, String password, RoleChoices role) {
-        User user = authHelper.register(username, password, role);
-        if(user != null) {
-            view.registerSuccess(username);
+    private void register(User user) {
+        boolean success = authHelper.register(user);
+        if(success) {
+            view.registerSuccess(user.getFirstname());
             support.firePropertyChange("user", null, user);
         } else {
             view.registerFailure();
@@ -66,20 +68,23 @@ public class AuthController implements IController {
             String firstname = view.promptFirstname();
             String lastname = view.promptLastname();
 
+            User user = null;
             if(role == RoleChoices.RÉSIDENT) {
                 LocalDate dob = view.promptDateOfBirth();
                 if (dob == null) System.exit(0);
                 String phone = view.promptPhone();
                 String address = view.promptAddress();
+
+                user = new Resident(email, password, role, firstname, lastname, dob, phone, address);
             }
 
             if (role == RoleChoices.INTERVENANT) {
                 CompanyChoices companyChoice = view.promptCompanyType();
                 String cityIdentifier = view.promptCityIdentifier();
-                System.out.println(companyChoice);
-                System.out.println(cityIdentifier);
+                user = new Intervenant(email, password, role, firstname, lastname, companyChoice, cityIdentifier);
             }
-            register(email, password, role);
+
+            register(user);
         }
         else attemptLogin(email, password);
     }

@@ -20,13 +20,12 @@ public class AuthEventHandler implements PropertyChangeListener {
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         User user = (User) evt.getNewValue();
-        RoleChoices role = user.getRole();
-        if (role == RoleChoices.RÉSIDENT) {
-            this.residentController.handleConnectionEvent(new Resident(user));
+        if (user instanceof Resident) {
+            this.residentController.handleConnectionEvent((Resident) user);
             this.residentController.run();
         }
-        if (role == RoleChoices.INTERVENANT) {
-            this.intervenantController.handleConnectionEvent(new Intervenant(user));
+        if (user instanceof Intervenant) {
+            this.intervenantController.handleConnectionEvent((Intervenant) user);
             this.intervenantController.run();
         }
     }

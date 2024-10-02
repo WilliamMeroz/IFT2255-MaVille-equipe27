@@ -1,1 +1,31 @@
-[{"username":"ChatBlanc","password":"$2y$10$Rp3uo4TLlEKvQrlBu/XRse1CM64aSIvQREgieBVn.3sQUciHHfajW","role":"1"},{"username":"ChatNoir","password":"$2y$10$haXYZOKA8rm6T/lfR10HbeMO3Da.E/gQTD6SFzFVHSNKj9k3tfPc.","role":"1"},{"username":"ChatGris","password":"$2y$10$4KYHqc59CsqLlEZqpXnHwuvhQ5THWrTl5D9G4HLkO0LYEecikU7ey","role":"2"},{"username":"ChatBrun","password":"$2y$10$FRL2XR2Hf/Pqi4WvObMXeeGx6aYyh4jnRKidGwyAKG9U5rOUJi3FG","role":"2"},{"username":"ChatRoux","password":"$2a$10$9egCIKHjiE5L5O/X7oK60O6fSzvQVSOQWHfVWgSI3TAlzybwHcZ2G","role":"1"}]
+[
+  {
+    "email": "resident@gmail.com",
+    "password": "$2a$10$9yBcOxG6bM9vad3q7bbvluYlBInRovkyLkKZfOUBmaqjYJ.cj3I/q",
+    "role": "1",
+    "firstname": "Alice",
+    "lastname": "Liddell",
+    "dob": "1852-05-04",
+    "phone": "",
+    "address": "3,Rue des merveilles,8,H3Y 2S5"
+  },
+  {
+    "email": "resident2@gmail.com",
+    "password": "$2a$10$FJ/25zcuSFztiyncTcR/yOBM5SeSIJIFowPtAJila2iNWlTOshcMm",
+    "role": "2",
+    "firstname": "Peter",
+    "lastname": "Pan",
+    "dob": "2000-10-10",
+    "phone": "",
+    "address": "5,Rue Neverland,0,H1J 5B4"
+  },
+  {
+    "email": "intervenant@gmail.com",
+    "password": "$2a$10$NMOQaLp31iZUNXrxCqQo8uzUp/1Nygq3CMrSbYH3/CZd7VTDgag7a",
+    "role": "2",
+    "firstname": "Harry",
+    "lastname": "Potter",
+    "companyChoice": "PARTICULIER",
+    "cityIdentifier": "34543456"
+  }
+]

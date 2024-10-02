@@ -115,6 +115,6 @@ public class AuthView {
     }
 
     public void registerFailure() {
-        textIO.getTextTerminal().println("Une erreur est survenue lors de votre inscription");
+        textIO.getTextTerminal().println("Une erreur est survenue lors de votre inscription ou un utilisateur avec le même courriel existe déjà.");
     }
 }

@@ -1,11 +1,13 @@
 package maville.equipe27.helpers;
 
-import maville.equipe27.enums.RoleChoices;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import maville.equipe27.models.Resident;
 import maville.equipe27.models.User;
 
 import java.io.*;
 import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.List;
 
 public class UserDataStore {
     private final String FILE_NAME;
@@ -14,10 +16,13 @@ public class UserDataStore {
         this.FILE_NAME = filename;
     }
 
-    private User[] getUserList() {
-        User[] users = null;
+    private List<User> getUserList() {
+        List<User> users = null;
         try (Reader reader = new FileReader(FILE_NAME)) {
-            users = GsonSingleton.getInstance().fromJson(reader, User[].class);
+            GsonBuilder builder = new GsonBuilder();
+            builder.registerTypeHierarchyAdapter(List.class, new CustomerUsersJsonAdapter());
+            Gson gson = builder.create();
+            users = gson.fromJson(reader, List.class);
         } catch (IOException e) {
             // We should add real Exception handling.
             e.printStackTrace();
@@ -26,24 +31,27 @@ public class UserDataStore {
         return users;
     }
 
-    public User fetchUser(String username) {
-         return Arrays.stream(getUserList())
-                    .filter(user -> user.getUsername().equals(username))
-                    .findFirst().orElse(null);
+    public User fetchUser(String email) {
+         return getUserList().stream().filter(user -> user.getEmail().equals(email)).findFirst().orElse(null);
     }
 
-    public User saveUser(String username, String password, RoleChoices role) {
-        ArrayList<User> users = new ArrayList<>(Arrays.asList(getUserList()));
+    public boolean saveUser(User user) {
+        ArrayList<User> users = (ArrayList<User>) getUserList();
+        users.add(user);
 
-        User newUser = new User(username, password, role);
-        users.add(newUser);
-
+        boolean success;
         try (FileWriter fileWriter = new FileWriter(FILE_NAME)) {
-            GsonSingleton.getInstance().toJson(users, fileWriter);
+            GsonBuilder builder = new GsonBuilder();
+            builder.registerTypeHierarchyAdapter(List.class, new CustomerUsersJsonAdapter());
+            builder.setPrettyPrinting();
+            Gson gson = builder.create();
+            gson.toJson(users, fileWriter);
+            success = true;
         } catch (IOException e) {
             e.printStackTrace();
+            success = false;
         }
 
-        return newUser;
+        return success;
     }
 }
