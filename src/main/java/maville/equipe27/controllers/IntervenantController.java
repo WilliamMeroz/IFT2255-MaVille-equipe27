@@ -37,8 +37,6 @@ public class IntervenantController implements IController {
                 int reponse = textIO.newIntInputReader()
                         .read( " \n Enter your choice : " );
 
-                String reponseString = String.valueOf(reponse);
-
                 if( reponse > 6 || reponse < 1) {
                     terminal.printf( " \n Veuillez entrer un numéro valide" );
                     continue;
