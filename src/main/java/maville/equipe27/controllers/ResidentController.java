@@ -1,6 +1,7 @@
 package maville.equipe27.controllers;
 
 import maville.equipe27.models.Resident;
+import maville.equipe27.controllers.Menu;
 
 public class ResidentController implements IController {
 
