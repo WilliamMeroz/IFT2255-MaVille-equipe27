@@ -69,7 +69,7 @@ public class ResidentController implements IController {
                     Scanner scanner = new Scanner(System.in);
                     String recherche = new String();
                     recherche = scanner.nextLine();
-                    scanner.close();
+
                     System.out.println("Affiche une liste de travaux filtrer par ce titre");
                 }
 
@@ -80,7 +80,7 @@ public class ResidentController implements IController {
                     Scanner scanner = new Scanner(System.in);
                     String recherche = new String();
                     recherche = scanner.nextLine();
-                    scanner.close();
+
                     System.out.println("Affiche une liste de travaux filtrer par ce type de travaux");
                 }
 
@@ -90,7 +90,7 @@ public class ResidentController implements IController {
                     Scanner scanner = new Scanner(System.in);
                     String probleme = new String();
                     probleme = scanner.nextLine();
-                    scanner.close();
+
                     System.out.println("Affiche une liste de travaux filtrer par ce quartier");
                 }
 
@@ -108,10 +108,22 @@ public class ResidentController implements IController {
 
                 if(reponse == 2) {
                     System.out.println("Entrez la rue que vous désirez vous abonner");
+
+                    Scanner scanner = new Scanner(System.in);
+                    String rueAbonne = new String();
+                    rueAbonne = scanner.nextLine();
+
+                    System.out.println("Vous êtes abonné au rue de votre choix");
                 }
 
                 if(reponse == 3) {
                     System.out.println("Entrez le quartier que vous désirez vous abonner");
+
+                    Scanner scanner = new Scanner(System.in);
+                    String quartierAbonne = new String();
+                    quartierAbonne = scanner.nextLine();
+
+                    System.out.println("Vous êtes abonné au quartier de votre choix");
                 }
 
                 if(reponse == 4) {
@@ -121,7 +133,7 @@ public class ResidentController implements IController {
                     Scanner scanner = new Scanner(System.in);
                     String abonnement = new String();
                     abonnement = scanner.nextLine();
-                    scanner.close();
+
 
                     System.out.println("vous êtes désabonner de cet abonnement");
                 }
@@ -141,7 +153,6 @@ public class ResidentController implements IController {
                     Scanner scanner = new Scanner(System.in);
                     String plageHoraire = new String();
                     plageHoraire = scanner.nextLine();
-                    scanner.close();
 
                     System.out.println("votre plage horaire est enregistrée");
                 }
@@ -157,7 +168,6 @@ public class ResidentController implements IController {
                     Scanner scanner = new Scanner(System.in);
                     String forumTravail = new String();
                     forumTravail = scanner.nextLine();
-                    scanner.close();
 
                     System.out.println("Entrez votre commentaire ou entrer retour pour retourner aux menu principale");
 
@@ -184,7 +194,6 @@ public class ResidentController implements IController {
 
                 String description = new String();
                 description = scanner.nextLine();
-                scanner.close();
 
                 System.out.println("Votre problème à été envoyer à la ville");
             }
@@ -203,14 +212,12 @@ public class ResidentController implements IController {
 
                     String description = new String();
                     description = scanner.nextLine();
-                    scanner.close();
 
                     System.out.println("Afficher une liste de type de travaux");
                     System.out.println("Choisissez un type de travaux");
 
                     String typeTravaux = new String();
                     typeTravaux = scanner.nextLine();
-                    scanner.close();
 
                     System.out.println("Votre requête à été envoyer à la ville");
                 }
@@ -228,6 +235,5 @@ public class ResidentController implements IController {
                 mainMenu = false;
             }
         }
-
     }
 }
