@@ -25,10 +25,9 @@ public class Menu {
 
         } catch(NumberFormatException e) {
             System.out.println("Pas un numero");
+            }
         }
 
-        }
-        scanner.close();
         return reponse;
 
     }
@@ -56,7 +55,7 @@ public class Menu {
         }
 
         }
-        scanner.close();
+
         return reponse;
     }
 
@@ -83,7 +82,6 @@ public class Menu {
         }
 
         }
-        scanner.close();
         return reponse;
     }
 
@@ -111,7 +109,7 @@ public class Menu {
         }
 
         }
-        scanner.close();
+
         return reponse;
     }
 
@@ -140,7 +138,7 @@ public class Menu {
         }
 
         }
-        scanner.close();
+
         return reponse;
     }
 
@@ -168,7 +166,7 @@ public class Menu {
         }
 
         }
-        scanner.close();
+
         return reponse;
     }
 
@@ -195,7 +193,7 @@ public class Menu {
         }
 
         }
-        scanner.close();
+
         return reponse;
     }
 }
