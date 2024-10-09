@@ -45,12 +45,14 @@ public class IntervenantController implements IController {
                 switch ( reponse ) {
 
                     case 1:
-                        terminal.printf( " \n Voici la liste des travaux en cours : \n " );
+                        terminal.printf( " \n Voici la liste des travaux en cours : \n Aucun travail en cours \n " );
                         while ( reponse == 1 ) {
                             int revenir = textIO.newIntInputReader()
-                                    .read( " \n 1. Revenir au menu principal \n Enter your choice : " );
-                            if ( revenir != 1 ) {
-                                terminal.printf( " \n Veuillez entrer un numéro valide \n " );
+                                    .read( " \n 1. Filtrer par rue \n 2. Filtrer par type \n" +
+                                            " 3. Filtrer par quartier \n 4. Revenir au menu principal \n " +
+                                            "Enter your choice : " );
+                            if ( revenir != 4 ) {
+                                terminal.printf( " \n L'option n'est pas encore disponible \n " );
                             } else {
                                 break;
                             }
@@ -58,12 +60,14 @@ public class IntervenantController implements IController {
                         break;
 
                     case 2:
-                        terminal.printf( " \n Recherche : \n " );
+                        terminal.printf( " \n Démarrer une recherche : \n " );
                         while ( reponse == 2 ) {
                             int revenir = textIO.newIntInputReader()
-                                    .read( " \n 1. Revenir au menu principal \n Enter your choice : " );
-                            if ( revenir != 1 ) {
-                                terminal.printf( " \n Veuillez entrer un numéro valide \n " );
+                                    .read( " \n 1. Recherche par titre \n 2. Recherche par type \n" +
+                                            " 3. Recherche par quartier \n 4. Revenir au menu principal \n " +
+                                            "Enter your choice : " );
+                            if ( revenir != 4 ) {
+                                terminal.printf( " \n L'option n'est pas encore disponible \n " );
                             } else {
                                 break;
                             }
@@ -71,12 +75,14 @@ public class IntervenantController implements IController {
                         break;
 
                     case 3:
-                        terminal.printf( " \n Voici la liste des requêtes de travail : \n " );
+                        terminal.printf( " \n Voici la liste des requêtes de travail : \n Aucune requête en cours \n ");
                         while ( reponse == 3 ) {
                             int revenir = textIO.newIntInputReader()
-                                    .read( " \n 1. Revenir au menu principal \n Enter your choice : " );
-                            if ( revenir != 1 ) {
-                                terminal.printf( " \n Veuillez entrer un numéro valide \n " );
+                                    .read( " \n 1. Soumettre sa candidature \n 2. Filtrer par type \n" +
+                                            " 3. Filtrer par quartier \n 4. Filtrer par date de début \n " +
+                                            "5. Revenir au menu principal \n Enter your choice : " );
+                            if ( revenir != 5 ) {
+                                terminal.printf( " \n L'option n'est pas encore disponible \n " );
                             } else {
                                 break;
                             }
@@ -87,9 +93,10 @@ public class IntervenantController implements IController {
                         terminal.printf( " \n Soumettez le nouveau projet ici : \n " );
                         while ( reponse == 4 ) {
                             int revenir = textIO.newIntInputReader()
-                                    .read( " \n 1. Revenir au menu principal \n Enter your choice : " );
-                            if ( revenir != 1 ) {
-                                terminal.printf( " \n Veuillez entrer un numéro valide \n " );
+                                    .read( " \n 1. Consulter les préférences des résidents \n" +
+                                            " 2. Revenir au menu principal \n Enter your choice : " );
+                            if ( revenir != 2 ) {
+                                terminal.printf( " \n L'option n'est pas encore disponible \n " );
                             } else {
                                 break;
                             }
@@ -97,12 +104,14 @@ public class IntervenantController implements IController {
                         break;
 
                     case 5:
-                        terminal.printf( " \n Sélectionnez le chantier à modifier : \n " );
+                        terminal.printf( " \n Sélectionnez le chantier à modifier : \n Aucun projet en cours \n" );
                         while ( reponse == 5 ) {
                             int revenir = textIO.newIntInputReader()
-                                    .read( " \n 1. Revenir au menu principal \n Enter your choice : " );
-                            if ( revenir != 1 ) {
-                                terminal.printf( " \n Veuillez entrer un numéro valide \n " );
+                                    .read( " \n 1. Mettre à jour la description du projet \n" +
+                                            " 2. Mettre à jour la date de fin prévue \n 3. Changer le statut du projet \n" +
+                                            " 4. Revenir au menu principal \n Enter your choice : " );
+                            if ( revenir != 4 ) {
+                                terminal.printf( " \n L'option n'est pas encore disponible \n " );
                             } else {
                                 break;
                             }
