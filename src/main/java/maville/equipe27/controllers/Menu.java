@@ -7,8 +7,8 @@ public class Menu {
 
         System.out.println("Entrez le numero désiré");
         System.out.println("1. Consulter les travaux en cours");
-        System.out.println("2. consulter les travaux à venir");
-        System.out.println("3. Rechercher des travaux");
+        System.out.println("2. Consulter les travaux à venir");
+        System.out.println("3. Recherche des travaux");
         System.out.println("4. Notifications");
         System.out.println("5. Planification participative");
         System.out.println("6. Signaler un problème à la ville");
