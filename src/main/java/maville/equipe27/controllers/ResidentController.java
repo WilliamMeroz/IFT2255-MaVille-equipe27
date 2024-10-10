@@ -1,7 +1,6 @@
 package maville.equipe27.controllers;
 
 import maville.equipe27.models.Resident;
-import maville.equipe27.controllers.Menu;
 import java.util.Scanner;
 
 public class ResidentController implements IController {
@@ -14,7 +13,7 @@ public class ResidentController implements IController {
 
     @Override
     public void run() {
-        System.out.println("ON EST CONNECTÉ EN TANT QUE RÉSIDENT. Username: " + this.resident.getEmail());
+        System.out.println("Résident: " + this.resident.getEmail());
 
         boolean mainMenu = true;
         while(mainMenu == true) {

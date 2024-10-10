@@ -22,7 +22,7 @@ public class IntervenantController implements IController {
     @Override
     public void run() {
 
-        System.out.println("ON EST CONNECTÉ EN TANT QU'INTERVENANT. Username: " + intervenant.getEmail());
+        System.out.println("Intervenant: " + intervenant.getEmail());
         intervenantMenu();
     }
 

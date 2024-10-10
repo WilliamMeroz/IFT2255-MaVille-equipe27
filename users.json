@@ -10,16 +10,6 @@
     "address": "3,Rue des merveilles,8,H3Y 2S5"
   },
   {
-    "email": "resident2@gmail.com",
-    "password": "$2a$10$FJ/25zcuSFztiyncTcR/yOBM5SeSIJIFowPtAJila2iNWlTOshcMm",
-    "role": "2",
-    "firstname": "Peter",
-    "lastname": "Pan",
-    "dob": "2000-10-10",
-    "phone": "",
-    "address": "5,Rue Neverland,0,H1J 5B4"
-  },
-  {
     "email": "intervenant@gmail.com",
     "password": "$2a$10$NMOQaLp31iZUNXrxCqQo8uzUp/1Nygq3CMrSbYH3/CZd7VTDgag7a",
     "role": "2",

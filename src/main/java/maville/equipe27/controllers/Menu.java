@@ -1,3 +1,5 @@
+package maville.equipe27.controllers;
+
 import java.util.Scanner;
 
 public class Menu {
