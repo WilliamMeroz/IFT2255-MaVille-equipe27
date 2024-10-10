@@ -6,6 +6,7 @@ import maville.equipe27.controllers.AuthController;
 import maville.equipe27.controllers.ResidentController;
 import maville.equipe27.helpers.UserDataStore;
 import maville.equipe27.views.AuthView;
+import maville.equipe27.views.ResidentView;
 import maville.equipe27.views.TextIOSingleton;
 
 public class Main {
@@ -19,7 +20,10 @@ public class Main {
 
         // Initialize controllers.
         AuthController authController = new AuthController(authView, userDataStore);
-        ResidentController residentController = new ResidentController();
+
+        ResidentView residentView = new ResidentView(TextIOSingleton.getInstance());
+        ResidentController residentController = new ResidentController(residentView);
+
         IntervenantController intervenantController = new IntervenantController();
 
         // Initialize event handlers (used for Observer pattern).
