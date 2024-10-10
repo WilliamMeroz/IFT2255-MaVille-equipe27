@@ -688,7 +688,7 @@
 
                 <h3 class="subsection-title">Hypothèses (optionnel)</h3>
                 <p>
-                    <em>Présentation des hypothèses faites dans l'élaboration des exigences et l'analyse</em>
+                    <em>Aucune hypothèse nécéssaire.</em>
                 </p>
             </section>
 
@@ -918,11 +918,16 @@
                 <div>
                     <h3 class="subsection-title">Risques</h3>
                     <ol class="risks">
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
-                        <li></li>
+                        <li><b>Inexactitude des données : </b>Si les informations sur les travaux ne sont pas exactes ou obsolètes, cela pourrait amener les utilisateurs à planifier leurs déplacements de manière incorrecte, en plus de causer de la frustration chez eux. Pour pallier ce problème, les utilisateurs peuvent utiliser les fonctionnalités de mise à jour des travaux (s'ils sont intervenants) et de signalement de problèmes (s'ils sont résidents).</li>
+                        <li><b>Faible adoption par les utilisateurs : </b>Le système repose sur la contribution des utilisateurs pour fournir des données sur les travaux. Un faible nombre d'utilisateurs limite son utilité. Pour pallier ce problème, le système propose une interface conviviale et un processus d'inscription rapide afin de ne pas décourager les utilisateurs d'adopter le produit.</li>
+                        <li><b>Sécurité des données : </b>Des données sensibles, comme les mots de passe, pourraient nuire au projet et à ses utilisateurs si elles étaient compromises. La confiance des gens dans le système pourrait diminuer s'ils estiment qu'il n'est pas sécurisé. C'est pourquoi le système d'inscription et de connexion de MaVille utilise un algorithme de hachage robuste pour protéger les mots de passe des utilisateurs.</li>
+                        <li><b>Difficultés de localisation : </b>Le projet pourrait rendre la localisation géographique des différents travaux complexe, ce qui compliquerait l'accès des utilisateurs à des informations claires sur les travaux qui les concernent. Pour remédier à cette situation, le système utilise l'adresse complète de chaque résident afin de lui fournir des informations pertinentes et adaptées à ses besoins.</li>
+                        <li><b>Manipulation malveillante : </b>Certains utilisateurs malintentionnés pourraient tenter de fournir de fausses informations pour nuire à d'autres. 
+                            Ce risque est atténué pour les intervenants, qui doivent s'enregistrer auprès de la ville avant de soumettre des données. 
+                            Cependant, un résident malveillant pourrait, par exemple, demander des travaux en pleine heure de pointe ou au milieu de la nuit pour perturber le voisinage. 
+                            L'instauration d'un système de vote sur les horaires pourrait aider à contrer ce problème. 
+                            De plus, des résidents pourraient soumettre de fausses demandes de travaux pour saturer la liste des requêtes. 
+                            Un système de modération, supervisé par la ville, pourrait également contribuer à résoudre ces problèmes. </li>
                     </ol>
                 </div>
 
@@ -952,6 +957,7 @@
                         Nous utilisons des fichiers au format .JSON. Pour l'instant, nous avons un seul fichier pour persister les informations de chacun des utilisateurs inscrits au système, mais il est possible d'en ajouter plusieurs à l'avenir pour stocker d'autres types d'informations. 
                         Nous comprenons les limitations qu'une telle solution peut avoir, et il est évident que, dans la réalité, le système utiliserait une vraie base de données. 
                         Cependant, pour notre usage, les fichiers .JSON sont beaucoup plus simples à manipuler et à utiliser lors de l'exécution de notre code. Le format JSON est également très bien supporté en Java grâce à la librairie <a href="https://github.com/google/gson" target="_blank">Gson</a>
+                        Les ressources nénéssaires pour l'utilisation d'un tel système de stockage sont minimes, l'ordinateur qui éxécute le code sera également capable de lire les fichiers, tant que ceux-ci se trouvent dans le répertoire approprié.
                     </p>
                 </div>
 
@@ -959,7 +965,13 @@
                     <h3 class="subsection-title">Solution d'intégration</h3>
 
                     <p>
-                        <em>Description de votre solution d'intégration...</em>
+                        Il serait envisageable d’intégrer notre solution à un service existant, tel que le service d’information sur les entraves et les travaux de la ville de Montréal, qui utilise des données similaires à celles du système MaVille (adresses, quartiers, etc.). 
+                        Les deux systèmes pourraient ainsi partager une grande partie de leurs données, et MaVille pourrait enrichir l’expérience utilisateur en offrant des fonctionnalités interactives, 
+                        telles que la possibilité de soumettre des demandes de nouveaux travaux ou de consulter les horaires des chantiers, ce qui n’est pas vraiment pris en charge par le système actuel.
+                        <br><br>
+                        Il sera toutefois nécessaire d'améliorer la sécurité du système, car des données sensibles, comme les mots de passe, seront désormais stockées par le nouveau système. 
+                        De plus, étant donné que le service actuel de la ville de Montréal ne répertorie pas les informations des autres villes et agglomérations de l’île, 
+                        mais redirige uniquement les utilisateurs vers leurs sites respectifs, notre système devra également envisager une intégration avec ces plateformes pour assurer une couverture complète de l’île de Montréal.
                     </p>
                 </div>
             </section>
