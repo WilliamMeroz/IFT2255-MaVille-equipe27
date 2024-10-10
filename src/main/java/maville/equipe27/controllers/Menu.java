@@ -37,8 +37,8 @@ public class Menu {
         int reponse = -1;
 
         System.out.println("Entrez le numero désiré");
-        System.out.println("1. filtrer par rue");
-        System.out.println("2. filtrer par type de travaux");
+        System.out.println("1. Filtrer par rue");
+        System.out.println("2. Filtrer par type de travaux");
         System.out.println("3. Filtrer par quartier");
         System.out.println("4. Retour");
 
@@ -64,8 +64,8 @@ public class Menu {
         int reponse = -1;
 
         System.out.println("Entrez le numero désiré");
-        System.out.println("1. filtrer par rue");
-        System.out.println("2. filtrer par type de travaux");
+        System.out.println("1. Filtrer par rue");
+        System.out.println("2. Filtrer par type de travaux");
         System.out.println("3. Filtrer par quartier");
         System.out.println("4. Retour");
 
@@ -93,7 +93,7 @@ public class Menu {
         System.out.println("1. Recherche par titre");
         System.out.println("2. Recherche par type de travaux");
         System.out.println("3. Rechercher par quartier");
-        System.out.println("4. retour");
+        System.out.println("4. Retour");
 
 
         while(reponse > 4 || reponse < 1) {
@@ -120,7 +120,7 @@ public class Menu {
         System.out.println("Entrez le numero désiré");
         System.out.println("1. Mes notifications");
         System.out.println("2. S'abonner aux notification d'une rue");
-        System.out.println("3. S'sabonner aux notification d'un quartier");
+        System.out.println("3. S'abonner aux notification d'un quartier");
         System.out.println("4. Désabonnement des notifications");
         System.out.println("5. Retour");
 
@@ -148,7 +148,7 @@ public class Menu {
 
         System.out.println("Entrez le numero désiré");
         System.out.println("1. Plage(s) horaire(s) préfèré pour les travaux dans votre quartier");
-        System.out.println("2. consulter les plages horaires préfèré des voisins");
+        System.out.println("2. Consulter les plages horaires préfèré des voisins");
         System.out.println("3. Forum des travaux.");
         System.out.println("4. Retour");
 
