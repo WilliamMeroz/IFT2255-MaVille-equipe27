@@ -184,7 +184,7 @@ public class ResidentController implements IController {
             }
 
             else if(reponse == 6) {
-                System.out.println("Entrer le type de problème");
+                System.out.println("Entrez le type de problème");
 
                 Scanner scanner = new Scanner(System.in);
                 String typeProbleme = new String();
@@ -202,7 +202,7 @@ public class ResidentController implements IController {
                 reponse = Menu.resident_7();
 
                 if(reponse == 1) {
-                    System.out.println("Entrer le titre du travail");
+                    System.out.println("Entrez le titre du travail");
 
                     Scanner scanner = new Scanner(System.in);
                     String titreTravail = new String();
