@@ -65,7 +65,7 @@ public class CustomerUsersJsonAdapter implements JsonDeserializer<List<User>>, J
                 jsonObject.addProperty("address", resident.getAddress());
             } else {
                 Intervenant intervenant = (Intervenant)u;
-                jsonObject.addProperty("companyChoice", intervenant.getCompanyChoices().toString());
+                jsonObject.addProperty("companyChoices", intervenant.getCompanyChoices().toString());
                 jsonObject.addProperty("cityIdentifier", intervenant.getCityIdentifier());
             }
 

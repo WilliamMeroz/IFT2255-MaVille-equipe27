@@ -15,7 +15,7 @@
     "role": "2",
     "firstname": "Harry",
     "lastname": "Potter",
-    "companyChoice": "PARTICULIER",
+    "companyChoices": "PARTICULIER",
     "cityIdentifier": "34543456"
   }
 ]
