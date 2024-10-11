@@ -11,14 +11,12 @@ public class ResidentView {
 
     public int promptMainMenu() {
         textIO.getTextTerminal().println("=== MENU PRINCIPAL ===");
-        textIO.getTextTerminal().println("1. Consulter les travaux en cours\n" +
-                                         "2. Consulter les travaux à venir\n" +
-                                         "3. Recherche des travaux\n" +
-                                         "4. Notifications\n" +
-                                         "5. Planification participative\n" +
-                                         "6. Signaler un problème à la ville\n" +
-                                         "7. Requête de travail\n" +
-                                         "8. Déconnecter\n");
+        textIO.getTextTerminal().println("1. Menu des travaux\n" +
+                                         "2. Notifications\n" +
+                                         "3. Planification participative\n" +
+                                         "4. Signaler un problème à la ville\n" +
+                                         "5. Requête de travail\n" +
+                                         "6. Déconnecter\n");
 
         return textIO.newIntInputReader().withMinVal(1).withMaxVal(8).read("Entrez votre choix: ");
     }
@@ -31,7 +29,7 @@ public class ResidentView {
                                          "3. Filter par quartier (pas implémenté)\n" +
                                          "4. Retour en arrière");
         int choice = textIO.newIntInputReader().withMaxVal(4).withMinVal(4).read("Entrez votre choix: ");
-        if (choice == 4) return 0;
+        if (choice == 4) return 1;
         return choice;
     }
 
@@ -43,7 +41,7 @@ public class ResidentView {
                 "3. Filter par quartier (pas implémenté)\n" +
                 "4. Retour en arrière");
         int choice = textIO.newIntInputReader().withMaxVal(4).withMinVal(4).read("Entrez votre choix: ");
-        if (choice == 4) return 0;
+        if (choice == 4) return 1;
         return choice;
     }
 
@@ -55,7 +53,7 @@ public class ResidentView {
                 "3. Recherche par quartier (pas implémenté)\n" +
                 "4. Retour en arrière");
         int choice = textIO.newIntInputReader().withMaxVal(4).withMinVal(4).read("Entrez votre choix: ");
-        if (choice == 4) return 0;
+        if (choice == 4) return 1;
         return choice;
     }
 
@@ -108,5 +106,25 @@ public class ResidentView {
         if (choice == 3) return 0;
         return choice;
 
+    }
+
+    public int promptTravaux() {
+        textIO.getTextTerminal().println("=== MENU DES TRAVAUX ===");
+        textIO.getTextTerminal().println("1. Travaux en cours. ");
+        textIO.getTextTerminal().println("2. Travaux à venir. ");
+        textIO.getTextTerminal().println("3. Rechercher travaux. ");
+        textIO.getTextTerminal().println("4. Retour en arrière. ");
+
+        int choice = textIO.newIntInputReader().withMinVal(1).withMaxVal(4).read("Entrez votre choix: ");
+        switch (choice) {
+            case 1:
+                return 11;
+            case 2:
+                return 12;
+            case 3:
+                return 13;
+            default:
+                return 0;
+        }
     }
 }
