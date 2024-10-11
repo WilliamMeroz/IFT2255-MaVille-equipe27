@@ -914,7 +914,203 @@
                         </em>
                     </p>
                 </div>
-                  
+
+                <div>
+                    <p>
+                        <em>
+                            • CU: Crée un compte en tant que résident. <br>
+                            • Objectif: Un résident veut s'inscrire en tant que résident. <br>
+                            • Acteurs: Un résident <br>
+                            • Préconditions: Aucun <br>
+                            • Postconditions: Le compte est créé et enregistrer <br>
+                            
+                            • Scénario principal: <br>
+                            1. L'utilisateur démarre l'application. <br>
+                            2. L'utilisateur choisis l'option d'inscription en tant que résident. <br>
+                            3. L'utilisateur entre ses informations demander par le système. <br>
+                            4. Le système valide les informations entrées. <br>
+                            5. Le système sauvegarde les informations validées. <br>
+                            6. Le système affiche la confirmation de la création du compte. <br>
+                            7. Le système affiche les options pour la connexion. <br>
+                            
+                            • Scénario alternatif: <br>
+                            4a. Les informations entrées sont invalides. <br>
+                            &nbsp;&nbsp;&nbsp;4a.1. Le système demande à l'utilisateur d'entrer l'information encore une fois. <br>
+                            &nbsp;&nbsp;&nbsp;4a.2. Le scénario continue si les informations sont valides. <br>
+
+                        </em>
+                    </p>
+                </div>
+
+                <div>
+                    <p>
+                        <em>
+                            • CU: Consulter les travaux. <br>
+                            • Objectif: Un résident veut consulter les travaux. <br>
+                            • Acteur: Un résident <br>
+                            • Précondition: Avoir un compte en tant que résident. <br>
+                            • Postconditions: Aucun <br>
+                            
+                            • Scénario principal: <br>
+                            1. L'utilisateur démarre l'application. <br>
+                            2. L'utilisateur connecte en tant que résident. <br>
+                            3. Le système affiche le menu principal. <br>
+                            4. L'utilisateur choisis l'option de consulter les travaux à venir. <br>
+                            5. Le système affiche les choix de filtration. <br>
+                            6. L'utilisateur choisis de filtrer par quartier. <br>
+                            7. Le système demande l'information requise. <br>
+                            8. L'utilisateur entre l'information requise. <br>
+                            9. Le système valide l'information entrée. <br>
+                            10. Le système affiche une liste de travaux qui sont dans le quartier. <br>
+                            
+                            • Scénario alternatif: <br>
+                            4a. L'utilisateur veut consulter les travaux en cours. <br>
+                            &nbsp;&nbsp;&nbsp;4a.1. L'utilisateur choisit l'option de consulter les travaux en cours. <br>
+                            &nbsp;&nbsp;&nbsp;4a.2. Le scénario continue avec l'étape 5. <br>
+                            
+                            4b. L'utilisateur veut chercher les travaux. <br>
+                            &nbsp;&nbsp;&nbsp;4b.1. L'utilisateur choisis l'option recherche des travaux. <br>
+                            &nbsp;&nbsp;&nbsp;4b.2. Le système affiche les choix de recherche. <br>
+                            &nbsp;&nbsp;&nbsp;4b.3. Le scénario continue avec l'étape 6. <br>
+                            
+                            6a. L'utilisateur veut filtrer par rue. <br>
+                            &nbsp;&nbsp;&nbsp;6a.1. L'utilisateur choisis de filtrer par rue. <br>
+                            &nbsp;&nbsp;&nbsp;6a.2. Le scénario continue avec l'étape 7 <br>
+                            
+                            6b. L'utilisateur veut filtrer par type de travaux. <br>
+                            &nbsp;&nbsp;&nbsp;6b.1. L'utilisateur choisis de filtrer par type de travaux. <br>
+                            &nbsp;&nbsp;&nbsp;6b.2. Le scénario continue avec l'étape 7. <br>
+
+                        </em>
+                    </p>
+                </div>
+
+                <div>
+                    <p>
+                        <em>
+                            • CU: Consulter les notifications. <br>
+                            • Objectif: Un résident veut consulter ses notifications. <br>
+                            • Acteur: Un résident <br>
+                            • Précondition: Avoir un compte en tant que résident. <br>
+                            • Postcondition: Aucun <br>
+                            
+                            • Scénario principal: <br>
+                            1. L'utilisateur démarre l'application. <br>
+                            2. L'utilisateur connecte en tant que résident. <br>
+                            3. Le système affiche le menu principal. <br>
+                            4. L'utilisateur choisis l'option des notifications. <br>
+                            5. Le système affiche les options liées aux notifications. <br>
+                            6. L'utilisateur choisis l'option de ses notifications. <br>
+                            7. Le système affiche les notifications du compte de l'utilisateur. <br>
+                            
+                            • Scénario alternatif: <br>
+                            &nbsp;&nbsp;&nbsp;6a. L'utilisateur veut s'abonner aux notifications d'une rue. <br>
+                            &nbsp;&nbsp;&nbsp;6a.1. L'utilisateur choisis l'option de s'abonner aux notifications d'une rue. <br>
+                            &nbsp;&nbsp;&nbsp;6a.2. Le système demande l'information requise. <br>
+                            &nbsp;&nbsp;&nbsp;6a.3. L'utilisateur entre l'information demandée. <br>
+                            &nbsp;&nbsp;&nbsp;6a.4. Le système valide l'information entrée. <br>
+                            &nbsp;&nbsp;&nbsp;6a.5. Le système affiche que l'abonnement de l'utilisateur à été changer. <br>
+                            
+                            6b. L'utilisateur veut se désabonner aux notifications. <br>
+                            &nbsp;&nbsp;&nbsp;6b.1. L'utilisateur choisis l'option de désabonnement des notifications. <br>
+                            &nbsp;&nbsp;&nbsp;6b.2. Le système demande l'information requise. <br>
+                            &nbsp;&nbsp;&nbsp;6b.3. L'utilisateur entre l'information demandée. <br>
+                            &nbsp;&nbsp;&nbsp;6b.4. Le système valide l'information entrée. <br>
+                            &nbsp;&nbsp;&nbsp;6b.5. Le système affiche que l'abonnement de l'utilisateur a été changer. <br>
+                        </em>
+                    </p>
+                </div>
+
+                <div>
+                    <p>
+                        <em>
+                            • CU: Participer à la planification participative. <br>
+                            • Objectif: Un résident veut participer à la planification participative. <br>
+                            • Acteur: Un résident <br>
+                            • Précondition: Avoir un compte en tant que résident. <br>
+                            • Postcondition: Plages horaire de l'utilisateur est enregistrer. <br>
+                            
+                            • Scénario principal: <br>
+                            1. L'utilisateur démarre l'application. <br>
+                            2. L'utilisateur connecte en tant que résident. <br>
+                            3. Le système affiche le menu principal. <br>
+                            4. L'utilisateur choisis l'option de planification participative. <br>
+                            5. Le système affiche les options de la planification participative. <br>
+                            6. L'utilisateur choisit l'option des plages d'horaires préféré pour les travaux. <br>
+                            7. Le système donne une liste de plages horaire. <br>
+                            8. Le système demande le choix d'une plage d'horaire. <br>
+                            9. L'utilisateur entre le choix. <br>
+                            10. Le système valide l'entré. <br>
+                            11. Le système affiche que la préférence est enregistrée. <br>
+                            
+                            • Scénario alternative: <br>
+                            &nbsp;&nbsp;&nbsp;4a. L'utilisateur veux consulter les plages préférer de ses voisins. <br>
+                            &nbsp;&nbsp;&nbsp;4a.1. L'utilisateur choisis l'option de consulter les plages préférées. <br>
+                            &nbsp;&nbsp;&nbsp;4a.2. Le système affiche une liste de plages horaires avec le nombre de vote. <br>
+                            
+                            4b. L'utilisateur veux accéder aux forums des travaux. <br>
+                            &nbsp;&nbsp;&nbsp;4b.1. L'utilisateur choisis l'option du forum de travail. <br>
+                            &nbsp;&nbsp;&nbsp;4b.2. Le système affiche une liste de travaux à choisir. <br>
+                            &nbsp;&nbsp;&nbsp;4b.3. L'utilisateur entre les informations désirer. <br>
+                            &nbsp;&nbsp;&nbsp;4b.4. Le système affiche que les informations sont enregistrées dans le forum. <br>
+                        </em>
+                    </p>
+                </div>
+
+                <div>
+                    <p>
+                        <em>
+                            • CU: Signaler un problème à la ville. <br>
+                            • Objectif: Un résident veut signaler un problème à la ville <br>
+                            • Acteur: Un résident <br>
+                            • Précondition: Avoir un compte en tant que résident. <br>
+                            • Postcondition: Le problème décrit est envoyé à la ville. <br>
+                            
+                            • Scénario principal: <br>
+                            1. L'utilisateur démarre l'application. <br>
+                            2. L'utilisateur connecte en tant que résident. <br>
+                            3. Le système affiche le menu principal. <br>
+                            4. L'utilisateur choisit l'option de signaler un problème. <br>
+                            5. Le système demande l'information requise. <br>
+                            6. L'utilisateur entre l'information requise. <br>
+                            7. Le system valide l'information requise. <br>
+                            8. Le system affiche que le problème est envoyé à la ville. <br>
+                            
+                            • Scénario alternative: <br>
+                            7a. L'information n'est pas dans le système. <br>
+                            &nbsp;&nbsp;&nbsp;7a.1. Le système demande à l'utilisateur d'entrer l'information encore une fois. <br>
+                            &nbsp;&nbsp;&nbsp;7a.2. Le scénario continue avec l'étape 7. <br>
+                        </em>
+                    </p>
+                </div>
+
+                <div>
+                    <p>
+                        <em>
+                            • CU: Requête de travail. <br>
+                            • Objectif: Un résident veut requêter un travail. <br>
+                            • Acteur: Un résident <br>
+                            • Précondition: Avoir un compte en tant que résident. <br>
+                            • Postcondition: La requête est envoyée à la ville. <br>
+                            
+                            • Scénario principal: <br>
+                            1. L'utilisateur démarre l'application. <br>
+                            2. L'utilisateur connecte en tant que résident. <br>
+                            3. Le système affiche le menu principal. <br>
+                            4. L'utilisateur choisit l'option de requête de travail. <br>
+                            5. Le système demande l'information requise. <br>
+                            6. L'utilisateur entre l'information requise. <br>
+                            7. Le system valide l'information requise. <br>
+                            8. Le system affiche que la requête est envoyée à la ville. <br>
+                            
+                            • Scénario alternative: <br>
+                            7a. L'information n'est pas dans le système. <br>
+                            &nbsp;&nbsp;&nbsp;7a.1. Le système demande à l'utilisateur d'entrer l'information encore une fois. <br>
+                            &nbsp;&nbsp;&nbsp;7a.2. Le scénario continue avec l'étape 7. <br>
+                        </em>
+                    </p>
+                </div>
+                
                 <h3 class="subsection-title">Diagramme d'activités</h3>
                 <div class="activity">
                     <h4>Titre du diagramme 1</h4>
