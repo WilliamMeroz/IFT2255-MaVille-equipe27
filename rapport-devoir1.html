@@ -773,316 +773,137 @@
 
                 <h3 class="subsection-title">Scénarios</h3>
 
-                
-                <div class="scenario" id="cu-1">
-                    <div class="scenario-meta">
-                        <h4 class="cu-name">
-                            <strong>CU :</strong> Créer un compte en tant qu'intervenant
-                        </h4>
-                        <p class="cu-goal">
-                            <strong>Objectif :</strong> Un intervenant souhaite se créer un compte sur l’application
-                        </p>
-    
-                        <hr>
-    
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Acteurs</h5>
-                            <ul class="bare-list cu-actors">
-                                <li class="cu-actor">Intervenant (Principal)</li>
-                            </ul>
-                        </div>
-    
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Préconditions</h5>
-                            <ul class="bare-list cu-conditions">
-                                <li class="dash">L’intervenant doit être enregistré auprès de la ville.</li>
-                            </ul>
-                        </div>
-    
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Postconditions</h5>
-                            <ul class="bare-list cu-conditions">
-                                <li class="dash">L’identifiant de l’intervenant ainsi que son mot de passe sont enregistrés par le système.</li>
-                            </ul>
-                        </div>
-    
-                        <div class="cu-part cu-part--notes">
-                            <h5 class="cu-part-title">Notes</h5>
-                            <p class="cu-notes">Notes additionnelles et hypothèses</p>
-                        </div>
-                    </div>
-                    <div class="scenario-main">
-                        <h5 class="scenario-main-title">Scénario principal</h5>
-                        <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">L’intervenant démarre l’application.</li>
-                            <li class="scenario-main-step">Le système lui demande ses informations.</li>
-                            <li class="scenario-main-step">Le système valide les informations.</li>
-                            <li class="scenario-main-step">Le système sauvegarde ses informations.</li>
-                            <li class="scenario-main-step">Le système confirme la création du compte et l’intervenant est désormais connecté.</li>
-                            <li class="scenario-main-step">Le menu principal pour intervenant est affiché.</li>
-                        </ol>
-    
-                        <div class="scenario-alt">
-                            <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
-                            <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="3">
-                                    Les informations de l’intervenant ne sont pas valides.
-                                    <ol class="bare-list">
-                                        <li value="3">Le système demande à l’intervenant d’entrer les données à nouveau.</li>
-                                        <li value="3">Le scénario reprend à l’étape 2.</li>
-                                    </ol>
-                                </li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="scenario" id="cu-2">
-                    <div class="scenario-meta">
-                        <h4 class="cu-name">
-                            <strong>CU :</strong> Consulter la liste des requêtes de travail
-                        </h4>
-                        <p class="cu-goal">
-                            <strong>Objectif :</strong> Un intervenant souhaite consulter les requêtes de travaux.
-                        </p>
-    
-                        <hr>
-    
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Acteurs</h5>
-                            <ul class="bare-list cu-actors">
-                                <li class="cu-actor">Intervenant (Principal)</li>
-                            </ul>
-                        </div>
-    
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Préconditions</h5>
-                            <ul class="bare-list cu-conditions">
-                                <li class="dash">L’intervenant doit avoir un compte de type intervenant dans le logiciel.</li>
-                            </ul>
-                        </div>
-    
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Postconditions</h5>
-                            <ul class="bare-list cu-conditions">
-                                <li class="dash">Le système enregistre la candidature de l’intervenant pour la/les requêtes choisie(s) s'il/elle l'a soumis.</li>
-                            </ul>
-                        </div>
-    
-                        <div class="cu-part cu-part--notes">
-                            <h5 class="cu-part-title">Notes</h5>
-                            <p class="cu-notes">Notes additionnelles et hypothèses</p>
-                        </div>
-                    </div>
-                    <div class="scenario-main">
-                        <h5 class="scenario-main-title">Scénario principal</h5>
-                        <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">L’intervenant entre ses informations sur l’application pour se connecter.</li>
-                            <li class="scenario-main-step">Le système valide les informations.</li>
-                            <li class="scenario-main-step">L’intervenant est connecté et voit le menu principal pour les intervenants.</li>
-                            <li class="scenario-main-step">L’intervenant choisit l’option 3 dans le menu.</li>
-                            <li class="scenario-main-step">Le système affiche toutes les requêtes.</li>
-                            <li class="scenario-main-step">L’intervenant consulte les requêtes.</li>
-                        </ol>
-    
-                        <div class="scenario-alt">
-                            <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
-                            <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="2">
-                                    Les informations de l’intervenant ne sont pas valides.
-                                    <ol class="bare-list">
-                                        <li value="2">Le système demande à l’intervenant d’entrer les données à nouveau.</li>
-                                        <li value="2">Le scénario reprend à l’étape 2.</li>
-                                    </ol>
-                                </li>
-                                <li class="scenario-alt-step" value="5">
-                                    Il n’y a aucune requête à consulter.
-                                    <ol class="bare-list">
-                                        <li value="5">Le scénario se termine.</li>
-                                    </ol>
-                                </li>
-                                <li class="scenario-alt-step" value="5||">
-                                    L’intervenant décide de filtrer les requêtes par type, quartier ou par date de début.
-                                    <ol class="bare-list">
-                                        <li value="5">Le système affiche les requêtes selon le/les filtre(s).</li>
-                                        <li value="5">Le scénario reprend à l’étape 6.</li>
-                                    </ol>
-                                </li>
-                                <li class="scenario-alt-step" value="6||">
-                                    L’intervenant veut soumettre sa candidature pour une ou plusieurs requête(s).
-                                    <ol class="bare-list">
-                                        <li value="6">L’intervenant soumet sa candidature.</li>
-                                        <li value="6">Le système valide la soumission.</li>
-                                        <li value="6">Le scénario se termine.</li>
-                                    </ol>
-                                </li>
-                            </ol>
-                        </div>
-                    </div>
-                </div>
 
-                <div class="scenario" id="cu-3">
-                    <div class="scenario-meta">
-                        <h4 class="cu-name">
-                            <strong>CU :</strong> Soumettre un nouveau projet de travaux
-                        </h4>
-                        <p class="cu-goal">
-                            <strong>Objectif :</strong> Un intervenant souhaite soumettre un nouveau projet de travaux pour la ville.
-                        </p>
+                <div>
+                    <p>
+                        • Cas d’utilisation: Créer un compte en tant qu’intervenant
+                        • But: Un intervenant souhaite se créer un compte sur l’application
+                        • Préconditions: L’intervenant doit être enregistré auprès de la ville.
+                        • Acteurs: Intervenant (principal)
+                        • Scénario principal:
+                        1. L’intervenant démarre l’application
+                        2. Le système lui demande ses informations.
+                        3. Le système valide les informations.
+                        4. Le système sauvegarde ses informations.
+                        5. Le système confirme la création du compte et l’intervenant est désormais connecté.
+                        6. Le menu principal pour intervenant est affiché.
+                        • Scénarios alternatifs:
+                        3a. Les informations de l’intervenant ne sont pas valides.
+                            3a.1. Le système demande à l’intervenant d’entrer les données à nouveau.
+                            3a.2. Le scénario reprend à l’étape 2.
+                        • Postconditions: L’identifiant de l’intervenant ainsi que son mot de passe sont enregistrés par le système.
+                    </p>
     
-                        <hr>
-    
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Acteurs</h5>
-                            <ul class="bare-list cu-actors">
-                                <li class="cu-actor">Intervenant (Principal)</li>
-                            </ul>
-                        </div>
-    
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Préconditions</h5>
-                            <ul class="bare-list cu-conditions">
-                                <li class="dash">L’intervenant doit avoir un compte de type intervenant dans le logiciel.</li>
-                            </ul>
-                        </div>
-    
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Postconditions</h5>
-                            <ul class="bare-list cu-conditions">
-                                <li class="dash">Le système enregistre le projet et lui assigne le statut de "Prévu".</li>
-                            </ul>
-                        </div>
-    
-                        <div class="cu-part cu-part--notes">
-                            <h5 class="cu-part-title">Notes</h5>
-                            <p class="cu-notes">Notes additionnelles et hypothèses</p>
-                        </div>
-                    </div>
-                    <div class="scenario-main">
-                        <h5 class="scenario-main-title">Scénario principal</h5>
-                        <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">L’intervenant entre ses informations sur l’application pour se connecter.</li>
-                            <li class="scenario-main-step">Le système valide les informations.</li>
-                            <li class="scenario-main-step">L’intervenant est connecté et voit le menu principal pour les intervenants.</li>
-                            <li class="scenario-main-step">L’intervenant choisit l’option 4 dans le menu.</li>
-                            <li class="scenario-main-step">Le système affiche le formulaire à remplir.</li>
-                            <li class="scenario-main-step">L’intervenant entre les informations du projet.</li>
-                            <li class="scenario-main-step">L’intervenant soumet le projet.</li>
-                            <li class="scenario-main-step">Le système valide la soumission.</li>
-                        </ol>
-    
-                        <div class="scenario-alt">
-                            <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
-                            <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="2">
-                                    Les informations de l’intervenant ne sont pas valides.
-                                    <ol class="bare-list">
-                                        <li value="2">Le système demande à l’intervenant d’entrer les données à nouveau.</li>
-                                        <li value="2">Le scénario reprend à l’étape 2.</li>
-                                    </ol>
-                                </li>
-                                <li class="scenario-alt-step" value="6">
-                                    L’intervenant n’entre pas toutes les informations demandées.
-                                    <ol class="bare-list">
-                                        <li value="6">Le système lui demande d’entrer les données à nouveau.</li>
-                                        <li value="6">Le scénario reprend à l’étape 6.</li>
-                                    </ol>
-                                </li>
-                                <li class="scenario-alt-step" value="6||">
-                                    L’intervenant consulte les préférences des résidents en premier.
-                                    <ol class="bare-list">
-                                        <li value="6">Le scénario reprend à l’étape 6.</li>
-                                    </ol>
-                                </li>
-                                <li class="scenario-alt-step" value="7">
-                                    Il y a un conflit avec les préférences des résidents.
-                                    <ol class="bare-list">
-                                        <li value="7">Le système annonce qu’il y a un conflit.</li>
-                                        <li value="7">Le scénario se termine.</li>
-                                    </ol>
-                                </li>
-                            </ol>
-                        </div>
-                    </div>
                 </div>
-
-                <div class="scenario" id="cu-4">
-                    <div class="scenario-meta">
-                        <h4 class="cu-name">
-                            <strong>CU :</strong> Mettre à jour les informations d’un chantier
-                        </h4>
-                        <p class="cu-goal">
-                            <strong>Objectif :</strong> Un intervenant souhaite mettre à jour les informations d’un chantier.
-                        </p>
     
-                        <hr>
-    
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Acteurs</h5>
-                            <ul class="bare-list cu-actors">
-                                <li class="cu-actor">Intervenant (Principal)</li>
-                            </ul>
-                        </div>
-    
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Préconditions</h5>
-                            <ul class="bare-list cu-conditions">
-                                <li class="dash">L’intervenant doit avoir un compte de type intervenant dans le logiciel.</li>
-                            </ul>
-                        </div>
-    
-                        <div class="cu-part">
-                            <h5 class="cu-part-title">Postconditions</h5>
-                            <ul class="bare-list cu-conditions">
-                                <li class="dash">Le système enregistre les changements apportés au(x) chantier(s).</li>
-                            </ul>
-                        </div>
-    
-                        <div class="cu-part cu-part--notes">
-                            <h5 class="cu-part-title">Notes</h5>
-                            <p class="cu-notes">Notes additionnelles et hypothèses</p>
-                        </div>
-                    </div>
-                    <div class="scenario-main">
-                        <h5 class="scenario-main-title">Scénario principal</h5>
-                        <ol class="scenario-main-steps">
-                            <li class="scenario-main-step">L’intervenant entre ses informations sur l’application pour se connecter.</li>
-                            <li class="scenario-main-step">Le système valide les informations.</li>
-                            <li class="scenario-main-step">L’intervenant est connecté et voit le menu principal pour les intervenants.</li>
-                            <li class="scenario-main-step">L’intervenant choisit l’option 5 dans le menu.</li>
-                            <li class="scenario-main-step">Le système affiche tous les chantiers.</li>
-                            <li class="scenario-main-step">L’intervenant choisit le chantier à modifier.</li>
-                            <li class="scenario-main-step">L’intervenant modifie le chantier.</li>
-                            <li class="scenario-main-step">Le système valide les changements.</li>
-                        </ol>
-    
-                        <div class="scenario-alt">
-                            <h5 class="scenario-alt-title">Scénarios alternatifs</h5>
-                            <ol class="bare-list scenario-alt-steps">
-                                <li class="scenario-alt-step" value="2">
-                                    Les informations de l’intervenant ne sont pas valides.
-                                    <ol class="bare-list">
-                                        <li value="2">Le système demande à l’intervenant d’entrer les données à nouveau.</li>
-                                        <li value="2">Le scénario reprend à l’étape 2.</li>
-                                    </ol>
-                                </li>
-                                <li class="scenario-alt-step" value="5">
-                                    Il n’y a pas de chantier à modifier.
-                                    <ol class="bare-list">
-                                        <li value="5">Le scénario se termine.</li>
-                                    </ol>
-                                </li>
-                                <li class="scenario-alt-step" value="5">
-                                    L’intervenant choisit plus d’un chantier à modifier.
-                                    <ol class="bare-list">
-                                        <li value="5">Le scénario reprend à l’étape 6.</li>
-                                    </ol>
-                                </li>
-                            </ol>
-                        </div>
-                    </div>
+                <div>
+                    <p>
+                        • Cas d’utilisation: Consulter la liste des requêtes de travail
+                        • But: Un intervenant souhaite consulter les requêtes de travaux.
+                        • Préconditions: L’intervenant doit avoir un compte de type intervenant dans le logiciel.
+                        • Acteurs: Intervenant (principal)
+                        • Scénario principal:
+                        1. L’intervenant entre ses informations sur l’application pour se connecter.
+                        2. Le système valide les informations.
+                        3. L’intervenant est connecté et voit le menu principal pour les intervenants.
+                        4. L’intervenant choisit l’option 3 dans le menu.
+                        5. Le système affiche toutes les requêtes.
+                        6. L’intervenant consulte les requêtes.
+                        • Scénarios alternatifs:
+                        2a. Les informations de l’intervenant ne sont pas valides.
+                            2a.1. Le système demande à l’intervenant d’entrer les données à nouveau.
+                            2a.2. Le scénario reprend à l’étape 1.
+                        5a. Il n’y a aucune requête à consulter.
+                            5a.1. Le scénario se termine.
+                        5b|| L’intervenant décide de filtrer les requêtes par type, quartier ou par date de début.
+                            5b.1. Le système affiche les requêtes selon le/les filtre(s).
+                            5b.2. Le scénario reprend à l’étape 6.
+                    </p>
                 </div>
-
+    
+                <div>
+                    <p>
+                        • Cas d’utilisation: Soumettre sa candidature pour une requête
+                        • But: Un intervenant souhaite soumettre sa candidature pour une requête de travail.
+                        • Préconditions: L’intervenant doit avoir un compte de type intervenant sur le logiciel.
+                        • Acteurs: Intervenant (principal)
+                        • Scénario principal:
+                        1. L’intervenant entre ses informations sur l’application pour se connecter.
+                        2. Le système valide les informations.
+                        3. L’intervenant est connecté et voit le menu principal pour les intervenants.
+                        4. L’intervenant choisit l’option 3 dans le menu.
+                        5. L’intervenant consulte les requêtes.
+                        6. L’intervenant soumet sa candidature pour une requête.
+                        7. Le système valide la soumission.
+                        • Scénarios alternatifs:
+                        2a. Les informations de l’intervenant ne sont pas valides.
+                            2a.1. Le système demande à l’intervenant d’entrer les données à nouveau.
+                            2a.2. Le scénario reprend à l’étape 1.
+                        5a|| L’intervenant décide de filtrer les requêtes par type, quartier ou par date de début.
+                            5a.1. Le scénario reprend à l’étape 5.
+                        5b. Il n’y a aucune requête à consulter.
+                            5b.1. Le scénario se termine.
+                        6a. L’intervenant soumet sa candidature pour plus d’une requête.
+                            6a.1. Le scénario reprend à l’étape 7.
+                        • Postconditions: Le système enregistre la candidature de l’intervenant pour la/les requêtes choisie(s).
+                    </p>
+                </div>
+    
+                <div>
+                    <p>
+                        • Cas d’utilisation: Soumettre un nouveau projet de travaux
+                        • But: Un intervenant souhaite soumettre un nouveau projet de travaux pour la ville.
+                        • Préconditions: L’intervenant doit avoir un compte de type intervenant sur le logiciel.
+                        • Acteurs: Intervenant (principal)
+                        • Scénario principal:
+                        1. L’intervenant entre ses informations sur l’application pour se connecter.
+                        2. Le système valide les informations.
+                        3. L’intervenant est connecté et voit le menu principal pour les intervenants.
+                        4. L’intervenant choisit l’option 4 dans le menu.
+                        5. L’intervenant entre les informations du projet.
+                        6. L’intervenant soumet le projet.
+                        7. Le système valide la soumission.
+                        • Scénarios alternatifs:
+                        2a. Les informations de l’intervenant ne sont pas valides.
+                            2a.1. Le système demande à l’intervenant d’entrer les données à nouveau.
+                            2a.2. Le scénario reprend à l’étape 1.
+                        5a. L’intervenant n’entre pas toutes les informations demandées.
+                            5a.1. Le système lui demande d’entrer les données à nouveau.
+                            5a.2. Le scénario reprend à l’étape 5.
+                        5b|| L’intervenant consulte les préférences des résidents en premier.
+                            5b.1. Le scénario reprend à l’étape 5.
+                        7a. Il y a un conflit avec les préférences des résidents.
+                            7a.1. Le système annonce qu’il y a un conflit.
+                            7a.2. Le scénario se termine.
+                        • Postconditions: Le système enregistre le projet et lui assigne le statut de "Prévu".
+                    </p>
+                </div>
+    
+                <div>
+                    <p>
+                        • Cas d’utilisation: Mettre à jour les informations d’un chantier
+                        • But: Un intervenant souhaite mettre à jour les informations d’un chantier.
+                        • Préconditions: L’intervenant doit avoir un compte de type intervenant sur le logiciel.
+                        • Acteurs: Intervenant (principal)
+                        • Scénario principal:
+                        1. L’intervenant entre ses informations sur l’application pour se connecter.
+                        2. Le système valide les informations.
+                        3. L’intervenant est connecté et voit le menu principal pour les intervenants.
+                        4. L’intervenant choisit l’option 5 dans le menu.
+                        5. L’intervenant choisit le chantier à modifier.
+                        6. L’intervenant modifie le chantier.
+                        7. Le système valide les changements.
+                        • Scénarios alternatifs:
+                        2a. Les informations de l’intervenant ne sont pas valides.
+                            2a.1. Le système demande à l’intervenant d’entrer les données à nouveau.
+                            2a.2. Le scénario reprend à l’étape 1.
+                        5a. Il n’y a pas de chantier à modifier.
+                            5a.1. Le scénario se termine.
+                        5b. L’intervenant choisit plus d’un chantier à modifier.
+                            5b.1. Le scénario reprend à l’étape 6.
+                        • Postconditions: Le système enregistre les changements apportés au(x) chantier(s).
+                    </p>
+                </div>
                   
                 <h3 class="subsection-title">Diagramme d'activités</h3>
                 <div class="activity">
