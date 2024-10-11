@@ -18,7 +18,7 @@ public class ResidentView {
                                          "5. Requête de travail\n" +
                                          "6. Déconnecter\n");
 
-        return textIO.newIntInputReader().withMinVal(1).withMaxVal(8).read("Entrez votre choix: ");
+        return textIO.newIntInputReader().withMinVal(1).withMaxVal(6).read("Entrez votre choix: ");
     }
 
     public int promptTravauxEnCours() {
