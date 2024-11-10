@@ -1,13 +1,11 @@
 package maville.equipe27.controllers;
 
-import maville.equipe27.enums.AuthChoices;
 import maville.equipe27.models.Intervenant;
 
 import org.beryx.textio.TextIO;
 import org.beryx.textio.TextIoFactory;
 import org.beryx.textio.TextTerminal;
 
-import static java.lang.System.exit;
 import java.util.concurrent.TimeUnit;
 
 public class IntervenantController implements IController {

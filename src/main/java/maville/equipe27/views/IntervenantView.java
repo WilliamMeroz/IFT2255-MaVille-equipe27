@@ -1,4 +1,4 @@
 package maville.equipe27.views;
 
-public class IntervenantVIew {
+public class IntervenantView {
 }
