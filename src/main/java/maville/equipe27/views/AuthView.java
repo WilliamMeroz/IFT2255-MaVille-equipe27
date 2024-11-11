@@ -1,6 +1,5 @@
 package maville.equipe27.views;
 
-
 import maville.equipe27.enums.AuthChoices;
 import maville.equipe27.enums.CompanyChoices;
 import maville.equipe27.enums.RoleChoices;
@@ -14,7 +13,7 @@ import java.util.StringJoiner;
 
 public class AuthView {
 
-   TextIO textIO;
+    TextIO textIO;
 
     public AuthView(TextIO textIO) {
         this.textIO = textIO;
@@ -47,12 +46,12 @@ public class AuthView {
     public LocalDate promptDateOfBirth() {
         String dateLiteral;
         LocalDate date;
-        while(true) {
+        while (true) {
             try {
                 dateLiteral = textIO.newStringInputReader().read("Entrez votre date de naissance (YYYY-MM-DD)");
                 date = LocalDate.parse(dateLiteral);
                 break;
-            } catch(DateTimeParseException _) {
+            } catch (DateTimeParseException _) {
                 textIO.getTextTerminal().println("Entrez une date avec un format valide");
             }
         }
@@ -81,7 +80,7 @@ public class AuthView {
         int unit = textIO.newIntInputReader().withMinVal(0).withDefaultValue(0).read("Entrez votre unité (si applicable)");
         String postalCode;
 
-        while(true) {
+        while (true) {
             postalCode = textIO.newStringInputReader().read("Entrez votre code postal (A1B 2C3)");
             if (AuthValidator.validatePostalCode(postalCode))
                 break;

@@ -3,8 +3,6 @@ package maville.equipe27.controllers;
 import maville.equipe27.models.Resident;
 import maville.equipe27.views.ResidentView;
 
-import java.util.Scanner;
-
 public class ResidentController implements IController {
 
     private Resident resident;
