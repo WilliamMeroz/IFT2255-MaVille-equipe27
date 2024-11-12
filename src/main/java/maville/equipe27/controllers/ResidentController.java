@@ -1,5 +1,6 @@
 package maville.equipe27.controllers;
 
+import maville.equipe27.helpers.HTTPRequestsHelper;
 import maville.equipe27.models.Resident;
 import maville.equipe27.views.ResidentView;
 
@@ -7,13 +8,19 @@ public class ResidentController implements IController {
 
     private Resident resident;
     private ResidentView residentView;
+    HTTPRequestsHelper httpRequestsHelper;
 
     public ResidentController(ResidentView residentView) {
         this.residentView = residentView;
+        this.httpRequestsHelper = new HTTPRequestsHelper();
     }
 
     public void handleConnectionEvent(Resident resident) {
         this.resident = resident;
+    }
+
+    public void consulterEntraves(String rue) {
+        this.httpRequestsHelper.getEntravesByStreet(rue);
     }
 
     @Override
@@ -45,8 +52,11 @@ public class ResidentController implements IController {
                     choice = residentView.promptPlanificationParticipative();
                     break;
                 case 4:
-                    choice = residentView.promptSignalerProbleme();
+                    choice = residentView.promptEntraves();
                     break;
+                case 42:
+                    String rue = residentView.promptEntravesRue();
+                    consulterEntraves(rue);
                 case 5:
                     choice = residentView.promptRequeteTravail();
                     break;

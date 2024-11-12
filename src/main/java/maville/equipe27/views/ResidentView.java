@@ -14,7 +14,7 @@ public class ResidentView {
         textIO.getTextTerminal().println("1. Menu des travaux\n" +
                                          "2. Notifications\n" +
                                          "3. Planification participative\n" +
-                                         "4. Signaler un problème à la ville\n" +
+                                         "4. Infos entraves\n" +
                                          "5. Requête de travail\n" +
                                          "6. Déconnecter\n");
 
@@ -31,6 +31,25 @@ public class ResidentView {
         int choice = textIO.newIntInputReader().withMaxVal(4).withMinVal(4).read("Entrez votre choix: ");
         if (choice == 4) return 1;
         return choice;
+    }
+
+    public int promptEntraves() {
+        textIO.getTextTerminal().println("=== Liste des entraves ===");
+        textIO.getTextTerminal().println("1. Entraves associées à un travail\n" +
+                "2. Entraves par rue\n" +
+                "3. Retour en arrière");
+
+        int choice = textIO.newIntInputReader().withMaxVal(3).withMinVal(1).read("Entrez votre choix: ");
+        return switch (choice) {
+            case 1 -> 41;
+            case 2 -> 42;
+            case 3 -> 0;
+            default -> choice;
+        };
+    }
+
+    public String promptEntravesRue() {
+        return textIO.newStringInputReader().withMinLength(1).read("Entrez votre rue: ");
     }
 
     public int promptTravauxAVenir() {
