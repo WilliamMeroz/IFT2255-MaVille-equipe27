@@ -28,11 +28,13 @@ public class HTTPRequestsHelper {
         this.encodedRessourceEntrave = URLEncoder.encode(RESSOURCE_ENTRAVE, StandardCharsets.UTF_8);
     }
 
-    public List<Entrave> getEntravesByStreet(String street) {
+    private List<Entrave> getEntravesFromFilter(String attributeName, String attributeValue) {
         List<Entrave> returnedEntraves = null;
+
+        String encodedFilter = URLEncoder.encode(String.format("{\"%s\":\"%s \"}", attributeName, attributeValue), StandardCharsets.UTF_8);
         try {
-            String encodedFilter = URLEncoder.encode(String.format("{\"streetid\":\"%s \"}", street), StandardCharsets.UTF_8);
             URI uri = new URI(BASE_URL + encodedRessourceEntrave + "&filters=" + encodedFilter);
+
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(uri)
                     .header("Accept", "application/json")
@@ -55,6 +57,15 @@ public class HTTPRequestsHelper {
         } catch (IOException | InterruptedException | java.net.URISyntaxException e) {
             e.printStackTrace();
         }
+
         return returnedEntraves;
+    }
+
+    public List<Entrave> getEntravesByStreet(String street) {
+        return getEntravesFromFilter("streetid", street);
+    }
+
+    public List<Entrave> getEntravesByIdRequest(String idRequest) {
+        return getEntravesFromFilter("id_request", idRequest);
     }
 }
