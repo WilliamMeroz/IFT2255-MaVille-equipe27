@@ -24,7 +24,7 @@ public class Entrave {
 
     @Override
     public String toString() {
-        return String.format("impactWidth: %s\nimpactType: %s\nsidewalkStatus: %s\nbikepathStatus: %s\nfrom: %s\nto: %s\n",
+        return String.format("Largeur d'obstruction: %s\nType d'entrave: %s\nStatus des trottoir: %s\nStatus des pistes cyclables: %s\nDe: %s\nÀ: %s\n",
                 impactWidth, impactType, sidewalkStatus, bikepathStatus, from, to);
     }
 }

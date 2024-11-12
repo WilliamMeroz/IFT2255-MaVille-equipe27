@@ -1,8 +1,11 @@
 package maville.equipe27.controllers;
 
 import maville.equipe27.helpers.HTTPRequestsHelper;
+import maville.equipe27.models.Entrave;
 import maville.equipe27.models.Resident;
 import maville.equipe27.views.ResidentView;
+
+import java.util.List;
 
 public class ResidentController implements IController {
 
@@ -19,8 +22,8 @@ public class ResidentController implements IController {
         this.resident = resident;
     }
 
-    public void consulterEntraves(String rue) {
-        this.httpRequestsHelper.getEntravesByStreet(rue);
+    public List<Entrave> consulterEntraves(String rue) {
+        return this.httpRequestsHelper.getEntravesByStreet(rue);
     }
 
     @Override
@@ -54,9 +57,12 @@ public class ResidentController implements IController {
                 case 4:
                     choice = residentView.promptEntraves();
                     break;
+                case 41:
+                    break;
                 case 42:
                     String rue = residentView.promptEntravesRue();
-                    consulterEntraves(rue);
+                    residentView.showEntraves(consulterEntraves(rue));
+                    break;
                 case 5:
                     choice = residentView.promptRequeteTravail();
                     break;

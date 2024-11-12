@@ -1,7 +1,6 @@
 package maville.equipe27.views;
 
 import org.beryx.textio.TextIO;
-import org.beryx.textio.TextIoFactory;
 
 public class IntervenantView {
     TextIO textIO;

@@ -1,6 +1,9 @@
 package maville.equipe27.views;
 
+import maville.equipe27.models.Entrave;
 import org.beryx.textio.TextIO;
+
+import java.util.List;
 
 public class ResidentView {
     private TextIO textIO;
@@ -40,16 +43,33 @@ public class ResidentView {
                 "3. Retour en arrière");
 
         int choice = textIO.newIntInputReader().withMaxVal(3).withMinVal(1).read("Entrez votre choix: ");
-        return switch (choice) {
-            case 1 -> 41;
-            case 2 -> 42;
-            case 3 -> 0;
-            default -> choice;
-        };
+        switch (choice) {
+            case 1: return 41;
+            case 2: return 42;
+            case 3:
+            default: return 0;
+        }
     }
 
     public String promptEntravesRue() {
         return textIO.newStringInputReader().withMinLength(1).read("Entrez votre rue: ");
+    }
+
+    public int showEntraves(List<Entrave> entraves) {
+        textIO.getTextTerminal().println("=== ENTRAVES TROUVÉES ===");
+        if (entraves.isEmpty()) {
+            textIO.getTextTerminal().println("Aucune entrave ne correspond à votre recherche.\n\n");
+        }
+        else {
+            for (Entrave e : entraves)
+                textIO.getTextTerminal().println(e.toString());
+            textIO.getTextTerminal().println("=== FIN DES ENTRAVES ===");
+        }
+
+        textIO.getTextTerminal().println("1. Retour en arrière");
+        textIO.newIntInputReader().withMinVal(1).withMaxVal(1).read("Entrez votre choix: ");
+
+        return 0;
     }
 
     public int promptTravauxAVenir() {
