@@ -22,8 +22,12 @@ public class ResidentController implements IController {
         this.resident = resident;
     }
 
-    public List<Entrave> consulterEntraves(String rue) {
+    public List<Entrave> consulterEntravesRue(String rue) {
         return this.httpRequestsHelper.getEntravesByStreet(rue);
+    }
+
+    public List<Entrave> consulterEntravesTravail(String id) {
+        return this.httpRequestsHelper.getEntravesByIdRequest(id);
     }
 
     @Override
@@ -58,10 +62,12 @@ public class ResidentController implements IController {
                     choice = residentView.promptEntraves();
                     break;
                 case 41:
+                    String id = residentView.promptEntravesTravail();
+                    choice = residentView.showEntraves(consulterEntravesTravail(id));
                     break;
                 case 42:
                     String rue = residentView.promptEntravesRue();
-                    residentView.showEntraves(consulterEntraves(rue));
+                    choice = residentView.showEntraves(consulterEntravesRue(rue));
                     break;
                 case 5:
                     choice = residentView.promptRequeteTravail();

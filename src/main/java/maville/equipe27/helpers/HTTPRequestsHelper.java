@@ -31,7 +31,7 @@ public class HTTPRequestsHelper {
     private List<Entrave> getEntravesFromFilter(String attributeName, String attributeValue) {
         List<Entrave> returnedEntraves = null;
 
-        String encodedFilter = URLEncoder.encode(String.format("{\"%s\":\"%s \"}", attributeName, attributeValue), StandardCharsets.UTF_8);
+        String encodedFilter = URLEncoder.encode(String.format("{\"%s\":\"%s\"}", attributeName, attributeValue), StandardCharsets.UTF_8);
         try {
             URI uri = new URI(BASE_URL + encodedRessourceEntrave + "&filters=" + encodedFilter);
 
@@ -62,7 +62,7 @@ public class HTTPRequestsHelper {
     }
 
     public List<Entrave> getEntravesByStreet(String street) {
-        return getEntravesFromFilter("streetid", street);
+        return getEntravesFromFilter("streetid", street + " ");
     }
 
     public List<Entrave> getEntravesByIdRequest(String idRequest) {

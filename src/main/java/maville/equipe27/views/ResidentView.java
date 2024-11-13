@@ -55,6 +55,12 @@ public class ResidentView {
         return textIO.newStringInputReader().withMinLength(1).read("Entrez votre rue: ");
     }
 
+    public String promptEntravesTravail() {
+        textIO.getTextTerminal().println("Vous devez entrer le numéro d'identification du travail.\n" +
+                "Vous pouvez obtenir ce numéro à partir du menu des travaux.");
+        return textIO.newStringInputReader().withMinLength(1).read("Entrez le numéro d'ID: ").strip();
+    }
+
     public int showEntraves(List<Entrave> entraves) {
         textIO.getTextTerminal().println("=== ENTRAVES TROUVÉES ===");
         if (entraves.isEmpty()) {
