@@ -1,6 +1,9 @@
 package maville.equipe27.views;
 
+import maville.equipe27.models.Entrave;
 import org.beryx.textio.TextIO;
+
+import java.util.List;
 
 public class ResidentView {
     private TextIO textIO;
@@ -14,7 +17,7 @@ public class ResidentView {
         textIO.getTextTerminal().println("1. Menu des travaux\n" +
                                          "2. Notifications\n" +
                                          "3. Planification participative\n" +
-                                         "4. Signaler un problème à la ville\n" +
+                                         "4. Infos entraves\n" +
                                          "5. Requête de travail\n" +
                                          "6. Déconnecter\n");
 
@@ -31,6 +34,48 @@ public class ResidentView {
         int choice = textIO.newIntInputReader().withMaxVal(4).withMinVal(4).read("Entrez votre choix: ");
         if (choice == 4) return 1;
         return choice;
+    }
+
+    public int promptEntraves() {
+        textIO.getTextTerminal().println("=== Liste des entraves ===");
+        textIO.getTextTerminal().println("1. Entraves associées à un travail\n" +
+                "2. Entraves par rue\n" +
+                "3. Retour en arrière");
+
+        int choice = textIO.newIntInputReader().withMaxVal(3).withMinVal(1).read("Entrez votre choix: ");
+        switch (choice) {
+            case 1: return 41;
+            case 2: return 42;
+            case 3:
+            default: return 0;
+        }
+    }
+
+    public String promptEntravesRue() {
+        return textIO.newStringInputReader().withMinLength(1).read("Entrez votre rue: ");
+    }
+
+    public String promptEntravesTravail() {
+        textIO.getTextTerminal().println("Vous devez entrer le numéro d'identification du travail.\n" +
+                "Vous pouvez obtenir ce numéro à partir du menu des travaux.");
+        return textIO.newStringInputReader().withMinLength(1).read("Entrez le numéro d'ID: ").strip();
+    }
+
+    public int showEntraves(List<Entrave> entraves) {
+        textIO.getTextTerminal().println("=== ENTRAVES TROUVÉES ===");
+        if (entraves.isEmpty()) {
+            textIO.getTextTerminal().println("Aucune entrave ne correspond à votre recherche.\n\n");
+        }
+        else {
+            for (Entrave e : entraves)
+                textIO.getTextTerminal().println(e.toString());
+            textIO.getTextTerminal().println("=== FIN DES ENTRAVES ===");
+        }
+
+        textIO.getTextTerminal().println("1. Retour en arrière");
+        textIO.newIntInputReader().withMinVal(1).withMaxVal(1).read("Entrez votre choix: ");
+
+        return 0;
     }
 
     public int promptTravauxAVenir() {

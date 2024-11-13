@@ -34,5 +34,7 @@ public class Main {
 
         // Run the first controller needed. The other controllers will be ran as needed from the auth event handler.
         authController.run();
+
+
     }
 }

@@ -1,19 +1,33 @@
 package maville.equipe27.controllers;
 
+import maville.equipe27.helpers.HTTPRequestsHelper;
+import maville.equipe27.models.Entrave;
 import maville.equipe27.models.Resident;
 import maville.equipe27.views.ResidentView;
+
+import java.util.List;
 
 public class ResidentController implements IController {
 
     private Resident resident;
     private ResidentView residentView;
+    HTTPRequestsHelper httpRequestsHelper;
 
     public ResidentController(ResidentView residentView) {
         this.residentView = residentView;
+        this.httpRequestsHelper = new HTTPRequestsHelper();
     }
 
     public void handleConnectionEvent(Resident resident) {
         this.resident = resident;
+    }
+
+    public List<Entrave> consulterEntravesRue(String rue) {
+        return this.httpRequestsHelper.getEntravesByStreet(rue);
+    }
+
+    public List<Entrave> consulterEntravesTravail(String id) {
+        return this.httpRequestsHelper.getEntravesByIdRequest(id);
     }
 
     @Override
@@ -45,7 +59,15 @@ public class ResidentController implements IController {
                     choice = residentView.promptPlanificationParticipative();
                     break;
                 case 4:
-                    choice = residentView.promptSignalerProbleme();
+                    choice = residentView.promptEntraves();
+                    break;
+                case 41:
+                    String id = residentView.promptEntravesTravail();
+                    choice = residentView.showEntraves(consulterEntravesTravail(id));
+                    break;
+                case 42:
+                    String rue = residentView.promptEntravesRue();
+                    choice = residentView.showEntraves(consulterEntravesRue(rue));
                     break;
                 case 5:
                     choice = residentView.promptRequeteTravail();
