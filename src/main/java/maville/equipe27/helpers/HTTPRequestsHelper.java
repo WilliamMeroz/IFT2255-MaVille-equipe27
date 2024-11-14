@@ -3,6 +3,7 @@ package maville.equipe27.helpers;
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import maville.equipe27.models.Entrave;
+import maville.equipe27.models.Travail;
 
 import java.io.IOException;
 import java.lang.reflect.Type;
@@ -12,7 +13,9 @@ import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
+import java.time.LocalDate;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class HTTPRequestsHelper {
     private final String BASE_URL = "https://donnees.montreal.ca/api/3/action/datastore_search?resource_id=";
@@ -61,11 +64,54 @@ public class HTTPRequestsHelper {
         return returnedEntraves;
     }
 
+    private List<Travail> getTravaux() {
+        List<Travail> travaux = null;
+
+        try {
+            URI uri = new URI(BASE_URL + encodedRessourceTravaux);
+
+            HttpRequest request = HttpRequest.newBuilder()
+                    .uri(uri)
+                    .header("Accept", "application/json")
+                    .GET()
+                    .build();
+
+            HttpResponse<String> response = this.client.send(request, HttpResponse.BodyHandlers.ofString());
+
+            if (response.statusCode() == 200) {
+                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                Type travailType = new TypeToken<List<Travail>>() {}.getType();
+
+                JsonObject jsonObject = JsonParser.parseString(response.body()).getAsJsonObject();
+                JsonArray records = jsonObject.getAsJsonObject("result").getAsJsonArray("records");
+                travaux = gson.fromJson(records, travailType);
+            } else {
+                System.out.println("Une erreur est survenue lors de la requête pour les travaux...");
+            }
+        } catch (IOException | InterruptedException | java.net.URISyntaxException e) {
+            e.printStackTrace();
+        }
+
+        return travaux;
+    }
+
     public List<Entrave> getEntravesByStreet(String street) {
         return getEntravesFromFilter("streetid", street + " ");
     }
 
     public List<Entrave> getEntravesByIdRequest(String idRequest) {
         return getEntravesFromFilter("id_request", idRequest);
+    }
+
+    public List<Travail> getCurrentTravaux() {
+        return getTravaux().stream().filter(travail -> travail.getDebut().isBefore(LocalDate.now())).toList();
+    }
+
+    public List<Travail> getFutureTravaux(int numFutureMonths) {
+        return getTravaux()
+                .stream()
+                .filter(travail -> travail.getDebut().isAfter(LocalDate.now()) &&
+                        travail.getDebut().isBefore(LocalDate.now().plusMonths(numFutureMonths)))
+                .toList();
     }
 }
