@@ -20,9 +20,9 @@ public class AuthController implements IController {
     private final PropertyChangeSupport support;
 
 
-    public AuthController(AuthView view, UserDataStore userDataStore) {
+    public AuthController(AuthView view, AuthHelper authHelper) {
         this.view = view;
-        this.authHelper = new AuthHelper(userDataStore);
+        this.authHelper = authHelper;
         this.support = new PropertyChangeSupport(this);
     }
 
@@ -30,7 +30,7 @@ public class AuthController implements IController {
         support.addPropertyChangeListener(listener);
     }
 
-    private void attemptLogin(String email, String password) {
+    public void attemptLogin(String email, String password) {
         User user = authHelper.login(email, password);
         if(user != null) {
             view.loginSuccess(user.getFirstname());
@@ -38,18 +38,16 @@ public class AuthController implements IController {
         }
         else {
             view.loginFailure();
-            this.run();
         }
     }
 
-    private void register(User user) {
+    public void register(User user) {
         boolean success = authHelper.register(user);
         if(success) {
             view.registerSuccess(user.getFirstname());
             support.firePropertyChange("user", null, user);
         } else {
             view.registerFailure();
-            this.run();
         }
     }
 

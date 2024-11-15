@@ -4,6 +4,7 @@ import maville.equipe27.controllers.AuthEventHandler;
 import maville.equipe27.controllers.IntervenantController;
 import maville.equipe27.controllers.AuthController;
 import maville.equipe27.controllers.ResidentController;
+import maville.equipe27.helpers.AuthHelper;
 import maville.equipe27.helpers.UserDataStore;
 import maville.equipe27.views.AuthView;
 import maville.equipe27.views.IntervenantView;
@@ -20,7 +21,8 @@ public class Main {
         UserDataStore userDataStore = new UserDataStore("users.json");
 
         // Initialize controllers.
-        AuthController authController = new AuthController(authView, userDataStore);
+        AuthHelper authHelper = new AuthHelper(userDataStore);
+        AuthController authController = new AuthController(authView, authHelper);
 
         ResidentView residentView = new ResidentView(TextIOSingleton.getInstance());
         ResidentController residentController = new ResidentController(residentView);
