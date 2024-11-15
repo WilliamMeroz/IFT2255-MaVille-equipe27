@@ -1,19 +1,31 @@
 package maville.equipe27.models;
 
+import com.google.gson.annotations.SerializedName;
 import maville.equipe27.enums.TravauxTypes;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 public class Travail {
+    @SerializedName("id")
     private String id;
+
+    @SerializedName("organizationname")
     private String nomIntervenant;
-    private TravauxTypes type;
-    private LocalDate debut;
-    private LocalDate fin;
+
+    @SerializedName("reason_category")
+    private String type;
+
+    @SerializedName("duration_start_date")
+    private Date debut;
+
+    @SerializedName("duration_end_date")
+    private Date fin;
 
     public Travail() { }
 
-    public Travail(String id, String nomIntervenant, TravauxTypes type, LocalDate debut, LocalDate fin) {
+    public Travail(String id, String nomIntervenant, String type, Date debut, Date fin) {
         this.id = id;
         this.nomIntervenant = nomIntervenant;
         this.type = type;
@@ -38,33 +50,33 @@ public class Travail {
         this.nomIntervenant = nomIntervenant;
     }
 
-    public TravauxTypes getType() {
+    public String getType() {
         return type;
     }
 
-    public void setType(TravauxTypes type) {
+    public void setType(String type) {
         this.type = type;
     }
 
-    public LocalDate getDebut() {
+    public Date getDebut() {
         return debut;
     }
 
-    public void setDebut(LocalDate debut) {
+    public void setDebut(Date debut) {
         this.debut = debut;
     }
 
-    public LocalDate getFin() {
+    public Date getFin() {
         return fin;
     }
 
-    public void setFin(LocalDate fin) {
+    public void setFin(Date fin) {
         this.fin = fin;
     }
 
     @Override
     public String toString() {
-        return String.format("Largeur d'obstruction: %s\nType d'entrave: %s\nStatus des trottoir: %s\nStatus des pistes cyclables: %s\nDe: %s\nÀ: %s\n",
-                impactWidth, impactType, sidewalkStatus, bikepathStatus, from, to);
+        return String.format("ID: %s\nIntervenant: %s\nType de travaux: %s\nDe: %s\nÀ: %s\n",
+                id, (nomIntervenant == null ? "NA" : nomIntervenant), type, debut, fin);
     }
 }

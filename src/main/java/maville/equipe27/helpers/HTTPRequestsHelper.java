@@ -14,6 +14,9 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -64,11 +67,15 @@ public class HTTPRequestsHelper {
         return returnedEntraves;
     }
 
-    private List<Travail> getTravaux() {
+    private List<Travail> getTravauxFromFilter(String attributeName, String attributeValue) {
         List<Travail> travaux = null;
 
+        String encodedFilter = URLEncoder.encode(String.format("{\"%s\":\"%s\"}", attributeName, attributeValue), StandardCharsets.UTF_8);
         try {
-            URI uri = new URI(BASE_URL + encodedRessourceTravaux);
+
+            URI uri;
+            if (attributeName != null && attributeValue != null) uri = new URI(BASE_URL + encodedRessourceTravaux + "&filters=" + encodedFilter);
+            else uri = new URI(BASE_URL + encodedRessourceTravaux);
 
             HttpRequest request = HttpRequest.newBuilder()
                     .uri(uri)
@@ -104,14 +111,30 @@ public class HTTPRequestsHelper {
     }
 
     public List<Travail> getCurrentTravaux() {
-        return getTravaux().stream().filter(travail -> travail.getDebut().isBefore(LocalDate.now())).toList();
+        return getTravauxFromFilter(null, null).stream().filter(travail -> travail.getDebut().before(new Date())).toList();
     }
 
-    public List<Travail> getFutureTravaux(int numFutureMonths) {
-        return getTravaux()
+    public List<Travail> getTravauxByQuartier(String quartier) {
+        return getTravauxFromFilter("boroughid", quartier);
+    }
+
+    public List<Travail> getTravauxByType(String type) {
+        return getTravauxFromFilter("reason_category", type);
+    }
+
+    public List<Travail> getFutureTravaux(List<Travail> travaux, int numFutureMonths) {
+        return getTravauxFromFilter(null, null)
                 .stream()
-                .filter(travail -> travail.getDebut().isAfter(LocalDate.now()) &&
-                        travail.getDebut().isBefore(LocalDate.now().plusMonths(numFutureMonths)))
+                .filter(travail ->
+                {
+                    Date currentDate = new Date();
+                    Calendar calendar = Calendar.getInstance();
+                    calendar.setTime(currentDate);
+                    calendar.add(Calendar.MONTH, numFutureMonths);
+                    Date dateAfterThreeMonths = calendar.getTime();
+
+                    return (travail.getDebut().after(currentDate)) && travail.getDebut().before(dateAfterThreeMonths);
+                })
                 .toList();
     }
 }

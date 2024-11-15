@@ -1,8 +1,10 @@
 package maville.equipe27.controllers;
 
+import maville.equipe27.enums.TravauxTypes;
 import maville.equipe27.helpers.HTTPRequestsHelper;
 import maville.equipe27.models.Entrave;
 import maville.equipe27.models.Resident;
+import maville.equipe27.models.Travail;
 import maville.equipe27.views.ResidentView;
 
 import java.util.List;
@@ -30,6 +32,18 @@ public class ResidentController implements IController {
         return this.httpRequestsHelper.getEntravesByIdRequest(id);
     }
 
+    public List<Travail> consulterTousLesTravauxCourrants() {
+        return this.httpRequestsHelper.getCurrentTravaux();
+    }
+
+    public List<Travail> consulterTravauxParQuartier(String quartier) {
+        return this.httpRequestsHelper.getTravauxByQuartier(quartier);
+    }
+
+    public List<Travail> consulterTravauxParType(TravauxTypes type) {
+        return this.httpRequestsHelper.getTravauxByType(type.toString());
+    }
+
     @Override
     public void run() {
         System.out.println("Résident: " + this.resident.getEmail());
@@ -44,7 +58,18 @@ public class ResidentController implements IController {
                     choice = residentView.promptTravaux();
                     break;
                 case 11:
-                    choice = residentView.promptTravauxEnCours();
+                    choice = residentView.showTravauxEnCours();
+                    break;
+                case 111:
+                    TravauxTypes type = residentView.promptTypeTravaux();
+                    residentView.showTravaux(consulterTravauxParType(type));
+                    break;
+                case 112:
+                    String quartier = residentView.promptTravauxQuartier();
+                    residentView.showTravaux(consulterTravauxParQuartier(quartier));
+                    break;
+                case 113:
+                    choice = residentView.showTravaux(consulterTousLesTravauxCourrants());
                     break;
                 case 12:
                     choice = residentView.promptTravauxAVenir();
