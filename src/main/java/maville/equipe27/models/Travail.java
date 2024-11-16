@@ -8,26 +8,24 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 public class Travail {
-    @SerializedName("id")
     private String id;
 
-    @SerializedName("organizationname")
     private String nomIntervenant;
 
-    @SerializedName("reason_category")
-    private String type;
+    private String quartier;
 
-    @SerializedName("duration_start_date")
-    private Date debut;
+    private TravauxTypes type;
 
-    @SerializedName("duration_end_date")
-    private Date fin;
+    private LocalDate debut;
+
+    private LocalDate fin;
 
     public Travail() { }
 
-    public Travail(String id, String nomIntervenant, String type, Date debut, Date fin) {
+    public Travail(String id, String nomIntervenant, String quartier, TravauxTypes type, LocalDate debut, LocalDate fin) {
         this.id = id;
         this.nomIntervenant = nomIntervenant;
+        this.quartier = quartier;
         this.type = type;
 
         this.debut = debut;
@@ -50,33 +48,41 @@ public class Travail {
         this.nomIntervenant = nomIntervenant;
     }
 
-    public String getType() {
+    public String getQuartier() {
+        return this.quartier;
+    }
+
+    public void setQuartier(String quartier) {
+        this.quartier = quartier;
+    }
+
+    public TravauxTypes getType() {
         return type;
     }
 
-    public void setType(String type) {
+    public void setType(TravauxTypes type) {
         this.type = type;
     }
 
-    public Date getDebut() {
+    public LocalDate getDebut() {
         return debut;
     }
 
-    public void setDebut(Date debut) {
+    public void setDebut(LocalDate debut) {
         this.debut = debut;
     }
 
-    public Date getFin() {
+    public LocalDate getFin() {
         return fin;
     }
 
-    public void setFin(Date fin) {
+    public void setFin(LocalDate fin) {
         this.fin = fin;
     }
 
     @Override
     public String toString() {
-        return String.format("ID: %s\nIntervenant: %s\nType de travaux: %s\nDe: %s\nÀ: %s\n",
-                id, (nomIntervenant == null ? "NA" : nomIntervenant), type, debut, fin);
+    return String.format("ID: %s\nIntervenant: %s\nQuartier: %s\nType de travaux: %s\nDe: %s\nÀ: %s\n",
+                id, (nomIntervenant == null ? "NA" : nomIntervenant), quartier, type, debut, fin);
     }
 }

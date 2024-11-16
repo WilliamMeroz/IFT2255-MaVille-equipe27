@@ -62,11 +62,11 @@ public class ResidentController implements IController {
                     break;
                 case 111:
                     TravauxTypes type = residentView.promptTypeTravaux();
-                    residentView.showTravaux(consulterTravauxParType(type));
+                    choice = residentView.showTravaux(consulterTravauxParType(type));
                     break;
                 case 112:
                     String quartier = residentView.promptTravauxQuartier();
-                    residentView.showTravaux(consulterTravauxParQuartier(quartier));
+                    choice = residentView.showTravaux(consulterTravauxParQuartier(quartier));
                     break;
                 case 113:
                     choice = residentView.showTravaux(consulterTousLesTravauxCourrants());

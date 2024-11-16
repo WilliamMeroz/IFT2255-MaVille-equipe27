@@ -10,5 +10,6 @@ public enum TravauxTypes {
     SOUTERRAINS,
     RESIDENTIEL,
     URBAIN,
-    TELECOMS
+    TELECOMS,
+    AUTRE
 }

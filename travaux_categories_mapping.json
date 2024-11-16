@@ -1,0 +1,17 @@
+{
+  "Réseaux routier - Réfection et travaux corrélatifs": "ROUTIER",
+  "Construction/rénovation sans excavation": "CONSTRUCTION",
+  "Construction/rénovation avec excavation": "CONSTRUCTION",
+  "Feux de signalisation - Ajout/réparation": "SIGNALISATION",
+  "Égouts et aqueducs - Réhabilitation": "SOUTERRAINS",
+  "Égouts et aqueducs - Inspection et nettoyage": "SOUTERRAINS",
+  "S-3 Infrastructure souterraine majeure - Puits d'accès": "SOUTERRAINS",
+  "S-3 Infrastructure souterraine majeure - Massifs et conduits": "SOUTERRAINS",
+  "Égouts et aqueducs - Excavation": "SOUTERRAINS",
+  "Toiture - Rénovation": "RESIDENTIEL",
+  "Entretien": "URBAIN",
+  "Forage/excavation exploratoire": "SOUTERRAINS",
+  "AS-2 Réseau aérosouterrain existant": "SOUTERRAINS",
+  "autre": "AUTRE",
+  "Autre": "AUTRE"
+}

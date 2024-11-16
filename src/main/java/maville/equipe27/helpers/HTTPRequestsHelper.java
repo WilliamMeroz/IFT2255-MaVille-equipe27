@@ -2,10 +2,13 @@ package maville.equipe27.helpers;
 
 import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
+import maville.equipe27.enums.TravauxTypes;
 import maville.equipe27.models.Entrave;
 import maville.equipe27.models.Travail;
 
+import java.io.FileReader;
 import java.io.IOException;
+import java.io.Reader;
 import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URLEncoder;
@@ -86,7 +89,7 @@ public class HTTPRequestsHelper {
             HttpResponse<String> response = this.client.send(request, HttpResponse.BodyHandlers.ofString());
 
             if (response.statusCode() == 200) {
-                Gson gson = new GsonBuilder().setPrettyPrinting().create();
+                Gson gson = new GsonBuilder().registerTypeAdapter(Travail.class, new CustomTravauxJsonAdapter()).setPrettyPrinting().create();
                 Type travailType = new TypeToken<List<Travail>>() {}.getType();
 
                 JsonObject jsonObject = JsonParser.parseString(response.body()).getAsJsonObject();
@@ -111,7 +114,7 @@ public class HTTPRequestsHelper {
     }
 
     public List<Travail> getCurrentTravaux() {
-        return getTravauxFromFilter(null, null).stream().filter(travail -> travail.getDebut().before(new Date())).toList();
+        return getTravauxFromFilter(null, null).stream().filter(travail -> travail.getDebut().isBefore(LocalDate.now())).toList();
     }
 
     public List<Travail> getTravauxByQuartier(String quartier) {
@@ -119,22 +122,14 @@ public class HTTPRequestsHelper {
     }
 
     public List<Travail> getTravauxByType(String type) {
-        return getTravauxFromFilter("reason_category", type);
+        return getCurrentTravaux().stream().filter(travail -> travail.getType() == TravauxTypes.valueOf(type)).toList();
     }
 
     public List<Travail> getFutureTravaux(List<Travail> travaux, int numFutureMonths) {
         return getTravauxFromFilter(null, null)
                 .stream()
                 .filter(travail ->
-                {
-                    Date currentDate = new Date();
-                    Calendar calendar = Calendar.getInstance();
-                    calendar.setTime(currentDate);
-                    calendar.add(Calendar.MONTH, numFutureMonths);
-                    Date dateAfterThreeMonths = calendar.getTime();
-
-                    return (travail.getDebut().after(currentDate)) && travail.getDebut().before(dateAfterThreeMonths);
-                })
+                        (travail.getDebut().isAfter(LocalDate.now())) && travail.getDebut().isBefore(LocalDate.now().plusMonths(numFutureMonths)))
                 .toList();
     }
 }
