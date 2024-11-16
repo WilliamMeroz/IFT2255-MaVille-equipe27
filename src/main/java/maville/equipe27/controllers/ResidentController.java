@@ -44,6 +44,17 @@ public class ResidentController implements IController {
         return this.httpRequestsHelper.getTravauxByType(type.toString());
     }
 
+    public List<Travail> consulterFutursTravaux() {
+        return this.httpRequestsHelper.getFutureTravaux();
+    }
+
+    public List<Travail> consulterFutursTravauxParQuartier(String quartier) {
+        return this.httpRequestsHelper.getFutureTravauxByQuartier(quartier);
+    }
+
+    public List<Travail> consulterFutursTravauxParType(TravauxTypes type) {
+        return this.httpRequestsHelper.getFutureTravauxByType(type.toString());
+    }
     @Override
     public void run() {
         System.out.println("Résident: " + this.resident.getEmail());
@@ -61,18 +72,29 @@ public class ResidentController implements IController {
                     choice = residentView.showTravauxEnCours();
                     break;
                 case 111:
-                    TravauxTypes type = residentView.promptTypeTravaux();
-                    choice = residentView.showTravaux(consulterTravauxParType(type));
+                    TravauxTypes typeCourrant = residentView.promptTypeTravaux();
+                    choice = residentView.showTravaux(consulterTravauxParType(typeCourrant));
                     break;
                 case 112:
-                    String quartier = residentView.promptTravauxQuartier();
-                    choice = residentView.showTravaux(consulterTravauxParQuartier(quartier));
+                    String quartierCourrant = residentView.promptTravauxQuartier();
+                    choice = residentView.showTravaux(consulterTravauxParQuartier(quartierCourrant));
                     break;
                 case 113:
                     choice = residentView.showTravaux(consulterTousLesTravauxCourrants());
                     break;
                 case 12:
                     choice = residentView.promptTravauxAVenir();
+                    break;
+                case 121:
+                    TravauxTypes typeFuture = residentView.promptTypeTravaux();
+                    choice = residentView.showTravaux(consulterFutursTravauxParType(typeFuture));
+                    break;
+                case 122:
+                    String quartierFuture = residentView.promptTravauxQuartier();
+                    choice = residentView.showTravaux(consulterFutursTravauxParQuartier(quartierFuture));
+                    break;
+                case 123:
+                    choice = residentView.showTravaux(consulterFutursTravaux());
                     break;
                 case 13:
                     choice = residentView.promptRechercheTravaux();

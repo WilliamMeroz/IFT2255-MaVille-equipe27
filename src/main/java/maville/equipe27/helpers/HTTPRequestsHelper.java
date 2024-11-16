@@ -6,9 +6,7 @@ import maville.equipe27.enums.TravauxTypes;
 import maville.equipe27.models.Entrave;
 import maville.equipe27.models.Travail;
 
-import java.io.FileReader;
 import java.io.IOException;
-import java.io.Reader;
 import java.lang.reflect.Type;
 import java.net.URI;
 import java.net.URLEncoder;
@@ -17,11 +15,7 @@ import java.net.http.HttpRequest;
 import java.net.http.HttpResponse;
 import java.nio.charset.StandardCharsets;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Calendar;
-import java.util.Date;
 import java.util.List;
-import java.util.stream.Collectors;
 
 public class HTTPRequestsHelper {
     private final String BASE_URL = "https://donnees.montreal.ca/api/3/action/datastore_search?resource_id=";
@@ -114,22 +108,40 @@ public class HTTPRequestsHelper {
     }
 
     public List<Travail> getCurrentTravaux() {
-        return getTravauxFromFilter(null, null).stream().filter(travail -> travail.getDebut().isBefore(LocalDate.now())).toList();
+        return getTravauxFromFilter(null, null)
+                .stream()
+                .filter(travail -> travail.getDebut().isBefore(LocalDate.now()) && travail.getFin().isAfter(LocalDate.now())).toList();
     }
 
     public List<Travail> getTravauxByQuartier(String quartier) {
-        return getTravauxFromFilter("boroughid", quartier);
+        return getCurrentTravaux().stream().filter(travail -> travail.getQuartier().equals(quartier)).toList();
     }
 
     public List<Travail> getTravauxByType(String type) {
         return getCurrentTravaux().stream().filter(travail -> travail.getType() == TravauxTypes.valueOf(type)).toList();
     }
 
-    public List<Travail> getFutureTravaux(List<Travail> travaux, int numFutureMonths) {
-        return getTravauxFromFilter(null, null)
+    public List<Travail> getFutureTravaux() {
+        List<Travail> t = getTravauxFromFilter(null, null)
+                .stream()
+                .filter(travail -> travail.getDebut().isBefore(LocalDate.now().plusMonths(3)))
+                .toList();
+        System.out.println(t);
+        return t;
+    }
+
+    public List<Travail> getFutureTravauxByQuartier(String quartier) {
+        return getFutureTravaux()
+                .stream()
+                .filter(travail -> travail.getQuartier().equals(quartier))
+                .toList();
+    }
+
+    public List<Travail> getFutureTravauxByType(String type) {
+        return getTravauxByType(type)
                 .stream()
                 .filter(travail ->
-                        (travail.getDebut().isAfter(LocalDate.now())) && travail.getDebut().isBefore(LocalDate.now().plusMonths(numFutureMonths)))
+                        (travail.getDebut().isAfter(LocalDate.now())) && travail.getDebut().isBefore(LocalDate.now().plusMonths(3)))
                 .toList();
     }
 }

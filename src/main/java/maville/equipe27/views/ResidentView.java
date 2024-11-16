@@ -91,13 +91,18 @@ public class ResidentView {
     public int promptTravauxAVenir() {
         textIO.getTextTerminal().println("=== LISTE DES TRAVAUX À VENIR (Pas implémenté encore) ===");
 
-        textIO.getTextTerminal().println("1. Filter par rue (pas implémenté)\n" +
-                "2. Filter par type de travaux (pas implémenté)\n" +
-                "3. Filter par quartier (pas implémenté)\n" +
-                "4. Retour en arrière");
-        int choice = textIO.newIntInputReader().withMaxVal(4).withMinVal(4).read("Entrez votre choix: ");
-        if (choice == 4) return 1;
-        return choice;
+        textIO.getTextTerminal().println("""
+                1. Filter par type de travaux
+                2. Filter par quartier
+                3. Tous les travaux
+                4. Retour en arrière""");
+        int choice = textIO.newIntInputReader().withMinVal(1).withMaxVal(4).read("Entrez votre choix: ");
+        return switch (choice) {
+            case 1 -> 121;
+            case 2 -> 122;
+            case 3 -> 123;
+            default -> 0;
+        };
     }
 
     public int promptRechercheTravaux() {
