@@ -1,8 +1,11 @@
 package maville.equipe27.views;
 
+import maville.equipe27.enums.TravauxTypes;
 import maville.equipe27.models.Entrave;
+import maville.equipe27.models.Travail;
 import org.beryx.textio.TextIO;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class ResidentView {
@@ -24,16 +27,24 @@ public class ResidentView {
         return textIO.newIntInputReader().withMinVal(1).withMaxVal(6).read("Entrez votre choix: ");
     }
 
-    public int promptTravauxEnCours() {
-        textIO.getTextTerminal().println("=== LISTE DES TRAVAUX EN COURS (Pas implémenté encore) ===");
+    public int showTravauxEnCours() {
+        textIO.getTextTerminal().println("=== LISTE DES TRAVAUX EN COURS ===");
 
-        textIO.getTextTerminal().println("1. Filter par rue (pas implémenté)\n" +
-                                         "2. Filter par type de travaux (pas implémenté)\n" +
-                                         "3. Filter par quartier (pas implémenté)\n" +
+        textIO.getTextTerminal().println("1. Filter par type de travaux\n" +
+                                         "2. Filter par quartier\n" +
+                                         "3. Tous les travaux\n" +
                                          "4. Retour en arrière");
-        int choice = textIO.newIntInputReader().withMaxVal(4).withMinVal(4).read("Entrez votre choix: ");
-        if (choice == 4) return 1;
-        return choice;
+        int choice = textIO.newIntInputReader().withMaxVal(4).withMinVal(1).read("Entrez votre choix: ");
+        switch (choice) {
+            case 1:
+                return 111;
+            case 2:
+                return 112;
+            case 3:
+                return 113;
+            default:
+                return 0;
+        }
     }
 
     public int promptEntraves() {
@@ -81,13 +92,18 @@ public class ResidentView {
     public int promptTravauxAVenir() {
         textIO.getTextTerminal().println("=== LISTE DES TRAVAUX À VENIR (Pas implémenté encore) ===");
 
-        textIO.getTextTerminal().println("1. Filter par rue (pas implémenté)\n" +
-                "2. Filter par type de travaux (pas implémenté)\n" +
-                "3. Filter par quartier (pas implémenté)\n" +
-                "4. Retour en arrière");
-        int choice = textIO.newIntInputReader().withMaxVal(4).withMinVal(4).read("Entrez votre choix: ");
-        if (choice == 4) return 1;
-        return choice;
+        textIO.getTextTerminal().println("""
+                1. Filter par type de travaux
+                2. Filter par quartier
+                3. Tous les travaux
+                4. Retour en arrière""");
+        int choice = textIO.newIntInputReader().withMinVal(1).withMaxVal(4).read("Entrez votre choix: ");
+        return switch (choice) {
+            case 1 -> 121;
+            case 2 -> 122;
+            case 3 -> 123;
+            default -> 0;
+        };
     }
 
     public int promptRechercheTravaux() {
@@ -156,7 +172,7 @@ public class ResidentView {
     public int promptTravaux() {
         textIO.getTextTerminal().println("=== MENU DES TRAVAUX ===");
         textIO.getTextTerminal().println("1. Travaux en cours. ");
-        textIO.getTextTerminal().println("2. Travaux à venir. ");
+        textIO.getTextTerminal().println("2. Travaux à venir (3 mois). ");
         textIO.getTextTerminal().println("3. Rechercher travaux. ");
         textIO.getTextTerminal().println("4. Retour en arrière. ");
 
@@ -171,5 +187,27 @@ public class ResidentView {
             default:
                 return 0;
         }
+    }
+
+    public TravauxTypes promptTypeTravaux() {
+        return textIO.newEnumInputReader(TravauxTypes.class).read("Entrez le type de travaux souhaité: ");
+    }
+
+    public String promptTravauxQuartier() {
+       return textIO.newStringInputReader().withMinLength(1).read("Entrez le quartier: ");
+    }
+
+    public int showTravaux(List<Travail> travaux) {
+        textIO.getTextTerminal().println("=== RÉSULTATS RECHERCHE ===");
+        for (Travail t : travaux) {
+            textIO.getTextTerminal().println(t.toString());
+        }
+
+        textIO.getTextTerminal().println("=== FIN RECHERCHE ===\n");
+
+        textIO.getTextTerminal().println("1. Retour au menu principal.");
+        int choice = textIO.newIntInputReader().withMinVal(1).withMaxVal(1).read("Entrez votre choix: ");
+
+        return 0;
     }
 }
