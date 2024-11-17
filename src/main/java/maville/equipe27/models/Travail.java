@@ -1,14 +1,13 @@
 package maville.equipe27.models;
 
-import com.google.gson.annotations.SerializedName;
 import maville.equipe27.enums.TravauxTypes;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.util.Date;
 
 public class Travail {
     private String id;
+
+    private String titre;
 
     private String nomIntervenant;
 
@@ -22,9 +21,10 @@ public class Travail {
 
     public Travail() { }
 
-    public Travail(String id, String nomIntervenant, String quartier, TravauxTypes type, LocalDate debut, LocalDate fin) {
+    public Travail(String id, String nomIntervenant, String titre, String quartier, TravauxTypes type, LocalDate debut, LocalDate fin) {
         this.id = id;
         this.nomIntervenant = nomIntervenant;
+        this.titre = titre;
         this.quartier = quartier;
         this.type = type;
 
@@ -38,6 +38,14 @@ public class Travail {
 
     public void setId(String id) {
         this.id = id;
+    }
+
+    public String getTitre() {
+        return titre;
+    }
+
+    public void setTitre(String titre) {
+        this.titre = titre;
     }
 
     public String getNomIntervenant() {
@@ -82,7 +90,7 @@ public class Travail {
 
     @Override
     public String toString() {
-    return String.format("ID: %s\nIntervenant: %s\nQuartier: %s\nType de travaux: %s\nDe: %s\nÀ: %s\n",
-                id, (nomIntervenant == null ? "NA" : nomIntervenant), quartier, type, debut, fin);
+    return String.format("ID: %s\nIntervenant: %s\nTitre: %s\nQuartier: %s\nType de travaux: %s\nDe: %s\nÀ: %s\n",
+                id, (nomIntervenant == null ? "NA" : nomIntervenant), titre, quartier, type, debut, fin);
     }
 }

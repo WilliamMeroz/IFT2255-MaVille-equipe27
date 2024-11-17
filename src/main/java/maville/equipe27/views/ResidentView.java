@@ -5,6 +5,7 @@ import maville.equipe27.models.Entrave;
 import maville.equipe27.models.Travail;
 import org.beryx.textio.TextIO;
 
+import java.time.LocalDate;
 import java.util.List;
 
 public class ResidentView {

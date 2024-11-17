@@ -122,12 +122,11 @@ public class HTTPRequestsHelper {
     }
 
     public List<Travail> getFutureTravaux() {
-        List<Travail> t = getTravauxFromFilter(null, null)
+        return getTravauxFromFilter(null, null)
                 .stream()
                 .filter(travail -> travail.getDebut().isBefore(LocalDate.now().plusMonths(3)))
                 .toList();
-        System.out.println(t);
-        return t;
+
     }
 
     public List<Travail> getFutureTravauxByQuartier(String quartier) {

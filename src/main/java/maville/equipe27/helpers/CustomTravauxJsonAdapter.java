@@ -20,7 +20,10 @@ public class CustomTravauxJsonAdapter implements JsonDeserializer<Travail> {
 
         String id = getAsStringSafe(travail, "id");
         String nomIntervenant = getAsStringSafe(travail, "organizationname");
+        String titre = getAsStringSafe(travail, "reason_category") + " dans la zone " +getAsStringSafe(travail, "occupancy_name");
+
         String quartier = getAsStringSafe(travail, "boroughid");
+
 
         String debutString = getAsStringSafe(travail, "duration_start_date");
         LocalDate debut;
@@ -52,7 +55,7 @@ public class CustomTravauxJsonAdapter implements JsonDeserializer<Travail> {
             }
         }
 
-        return new Travail(id, nomIntervenant, quartier, typeTravail, debut, fin);
+        return new Travail(id, nomIntervenant, titre, quartier, typeTravail, debut, fin);
     }
 
     private static String getAsStringSafe(JsonObject jsonObject, String propertyName) {
