@@ -1,0 +1,815 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>IFT2255 | Rapport DM1</title>
+    <link rel="shortcut icon" href="./../favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <style>
+        html,
+        body {
+            position: relative;
+            height: 100%;
+            font: normal 10px 'Segoe UI', 'Droid Sans', Ubuntu, 'Lucida Grande', Arial, Helvetica, sans-serif;
+            scroll-behavior: smooth;
+            background: #f5f5f5;
+            overflow-x: hidden;
+        }
+
+        h1, h2 { margin: 0; }
+
+        h1 { font-size: 4em; font-weight: normal; }
+
+        h2 { font-size: 3em; }
+
+        h3 { font-size: 2.2em; font-weight: normal; }
+
+        h4 { font-size: 1.8em }
+
+        h5 { font-size: 1.6em; }
+
+        h6 { font-size: 1.5em; margin-top: 0; }
+
+        p, li, td, th { font-size: 1.5em; }
+
+        td p, td li, th li,
+        li li, li p, li td, li th { font-size: 1em; }
+
+        table, th, td { border: 1px solid #555; border-collapse: collapse; }
+
+        th { text-align: center; }
+
+        .btn {
+            font-family: 'Segoe UI', 'Droid Sans', Ubuntu, 'Lucida Grande', Arial, sans-serif;
+            text-decoration: none; text-align: center;
+            border: none;
+            background: none;
+            outline-width: 0;
+        }
+
+        .font-ui { font-family: 'Segoe UI', 'Droid Sans', Ubuntu, 'Lucida Grande', Arial, sans-serif; }
+
+
+        /* Organization
+        ---------------------------------------------------------------------------- */
+
+        .left { float: left; }
+
+        .right { float: right; }
+
+        .clear-fix { clear: both; display: block; }
+            .clear-fix:after {
+                content: ".";
+                clear: both;
+                display: block;
+                height: 0;
+                visibility: hidden;
+            }
+
+        .row { display: table-row; }
+            
+        .cell { display: table-cell; }
+
+        /* Reset */
+
+        .bare-list { margin: 0; padding: 0; list-style: none; }
+
+        .bare-link { text-decoration: none; color: inherit; }
+
+        .bare-table { border: none; table-layout: fixed; }
+
+        .bare-table td,
+        .bare-table th { 
+            border: none;
+        }
+
+        .bare-table th {
+            vertical-align: top;
+            text-align: left;
+        }
+
+
+        .inline-link { text-decoration: underline; }
+
+        .output { text-decoration: none; font-style: normal; }
+
+        /* State
+        ---------------------------------------------------------------------------- */
+
+        .hidden { display: none; }
+
+        .fit-content { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .helper {
+            position: absolute;
+            top: 100%; left: 0;
+            min-width: 60px;
+            padding: 3px 6px 4px;
+            border-radius: 1px;
+            font-size: 1.3rem; font-weight: 500; font-style: normal;
+            color: #555;
+            background-color: #e5e4e2;
+            box-shadow: 0 1px 2px -1px #999;
+            opacity: 0;
+            transition: .2s;
+            transform: scale(0); transition-property: opacity, transform;
+            z-index: 20;
+        }
+
+        .ico-helper {
+            display: inline-block;  text-align: center;
+            font-size: 1.2rem; font-weight: bold;
+            height: 18px; width: 18px;
+            color: #fff;
+            border-radius: 50%;
+            background-color: #6667AB;
+            font-style: normal;
+        }
+
+        .has-helper {
+            position: relative;
+        }
+
+            .has-helper:hover > .helper {
+                opacity: 1;   
+                transform: scale(1) translateY(2px);
+            }
+            .ico-helper:focus + .helper {
+                opacity: 1;   
+                transform: scale(1) translateY(2px);
+            }
+
+        .has-def {
+            position: relative;
+            display: inline-block;
+        }
+
+        .def-term {
+            position: relative;
+            display: flex; align-items: center;
+            color: #6667AB;
+            padding-left: 2px; padding-right: 2px;
+            border-bottom: 3px solid currentColor;
+            cursor: default;
+            font-style: normal; font-weight: 500;
+        }
+            .def-term:after {
+                content: "?";
+                text-align: center;
+                font-weight: bold;
+                margin-left: 3px;
+                height: 18px; width: 18px;
+                font-size: 1.2rem; 
+                border-radius: 50%;
+                background-color: #6667AB;
+                color: #fff;
+            }
+
+
+        .def {
+            position: absolute;
+            top: 100%; left: 0;
+            min-width: 300px;
+            padding: 3px 6px 4px;
+            border-radius: 1px;
+            font-size: 1.3rem; font-weight: 500; font-style: normal;
+            color: #fff;
+            background-color: #232425;
+            box-shadow: 0 1px 2px -1px #999;
+            opacity: 0;
+            transform: scale(0); 
+            transition: .2s; transition-property: opacity, transform;
+            z-index: 20;
+        }
+
+            .has-def:hover > .def {
+                opacity: 1;   
+                transform: scale(1) translateY(2px);
+            }
+
+        .report-header {
+            padding-top: 24px; padding-bottom: 24px;
+            background-color: #fff;
+        }
+
+        .title-section {
+            display: flex; align-items: flex-start; justify-content: space-between;
+            padding-left: 5vw;
+            padding-right: 5vw;
+        }
+
+        .report-title {
+            color: royalblue;
+            font-family: Georgia, 'Times New Roman', Times, serif;
+        }
+
+        .report-summary {
+            max-width: 800px;
+            font-size: 1.4em;
+            color: #555;
+        }
+        
+        .report-resources {
+            display: flex;
+            justify-content: flex-end;
+        }
+
+            .report-resource {
+                margin-left: 12px;
+            }
+
+            .report-resource-link {
+                padding: 8px 12px;
+                font-weight: bold;
+                color: #fff;
+                border-radius: 2px;
+                text-decoration: none;
+                background-color: #232425;
+            }
+                .report-resource-link:hover {
+                    background-color: #1b1f23;
+                }
+
+        .section-title {
+            margin-bottom: 6px;
+            text-transform: uppercase;
+            font-size: 2.4em; font-weight: 300;
+        }
+
+        .subsection-title {
+            margin-bottom: 3px;
+            font-size: 2em; font-weight: bold;
+            color: #555;
+        }
+
+        .team-section {
+            padding-left: 5vw;
+            padding-right: 5vw;
+        }
+
+            .team-title {
+                font-weight: 500;
+                margin-bottom: 12px;
+                color: #1C3A94;
+            }
+
+            .members {
+                display: flex; flex-direction: row;
+            }
+
+            .member {
+                display: flex; flex-direction: column;
+            }
+                .member:not(:last-child) {
+                    margin-right: 12px;
+                }
+
+                .member-pic {
+                    display: block;
+                    width: 120px;
+                    height: 120px;
+                    border-radius: 50%;
+                }
+
+                .member-role {
+                    font-size: 0.9em; font-weight: 500;
+                    color: #555;
+                }
+
+        .report-body {
+            display: flex;
+        }
+
+        .report-aside {
+            padding-top: 24px; padding-right: 12px; padding-left: 5vw;
+            min-width: 300px;
+            background-color: #6667AB;
+        }
+            .report-aside .section-title {
+                color: #fff;
+            }
+
+        .report-main {
+            padding-top: 24px; padding-left: 2%; padding-right: 5vw;
+        }
+
+        .main-section {
+            margin-bottom: 24px;
+        }
+
+        .nav {
+            color: #E87429;
+        }
+
+            .nav-item-title {
+                font-size: 1.1em;
+                margin: 0;
+            }
+
+            .nav-item-title__link {
+                display: block;
+                color: #fff;
+                font-weight: 500;
+                padding: 6px;
+                text-decoration: none;
+            }
+
+            .nav-item-details {
+                color: #f5f5f5;
+                padding-left: 6px;
+                line-height: 1.5;
+            }
+
+        .glossary-term {
+            font-weight: bold;
+            background: #222;
+            padding: 3px 6px;
+            display: inline-block;
+            border-radius: 2px;
+            color: #fff;
+        }
+
+        .glossary-def {
+            margin-top: -6px; margin-left: 6px; margin-bottom: 6px;
+            padding: 12px 6px 4px;
+            background-color: #e5e4e2;
+            border-radius: 4px;
+        }
+
+        .personas {
+            display: flex;
+        }
+
+            .persona {
+                position: relative;
+                display: flex; flex-direction: column;
+                margin-right: 12px;
+                max-width: 360px;
+                padding: 6px 12px;
+                border-radius: 2px;
+                box-shadow: 0 1px 2px -1px #999;
+                background-color: #fff;
+                z-index: 2;
+            }
+
+            .persona-stat {
+                display: flex;
+                justify-content: flex-end;
+            }
+
+            .persona-type {
+                display: flex; align-items: center; justify-content: center;
+                height: 40px; width: 40px; 
+                font-size: 1.3rem; font-weight: bold; 
+                border-radius: 50%;
+            }
+
+            .persona-type--pp {
+                background-color: #FF6F61;
+            }
+
+            .persona-type--eco {
+                background-color: #88B04B;
+            }
+
+            .persona-market {
+                display: flex; align-items: center; justify-content: center;
+                margin-left: 6px;
+                height: 40px; width: 40px; 
+                color: #444;
+                font-size: 1.3rem; font-weight: bold; 
+                border-radius: 50%;
+                background-color: #d5d5d5;
+            }
+
+            .persona-color {
+                display: flex; align-items: center; justify-content: center;
+                background-color: #FF6F61;
+                height: 42px; width: 42px; font-weight: bold;
+                justify-self: center; align-self: center;
+                font-size: 1.3rem;
+                border-radius: 50%;
+            }
+
+            .persona-identity {
+                display: flex; 
+            }
+            
+            .persona-name {
+                font-size: 1.2em; font-weight: 300;
+                flex-grow: 2;
+            }
+
+            .persona-demography-line {
+                display: flex;
+            }
+
+            .persona-background {
+                padding: 6px;
+                color: #555;
+            }
+
+            .persona-title {
+                margin-top: 6px; margin-bottom: 3px;
+                color: #222;
+                font-size: 1.1em; font-weight: 500;
+            }
+
+        .use-case {
+            display: flex; flex-wrap: wrap;
+        }
+
+        .use-case-diagram {
+            display: block;
+            height: 100%;
+            width: auto;
+            min-height: 800px;
+            min-width: 600px;
+            border-radius: 4px;
+            background-color: #d5d5d5;
+        }
+
+        .use-case-notes {
+            margin-left: 12px;
+        }
+
+        .scenario {
+            display: flex;
+            margin-bottom: 12px;
+            background-color: #fff;
+            border-radius: 3px;
+            box-shadow: 0 1px 2px #a9a9a9;
+        }
+
+        .scenario-meta {
+            padding: 12px;
+            max-width: 40%;
+            background-color: #e5e4e2;
+        }
+
+        .scenario-main {
+            flex-grow: 2;
+            padding: 12px;
+            margin-left: 12px;
+        }
+
+        .scenario-main-title {
+            margin: 0;
+            color: royalblue;
+        }
+
+        .scenario-alt-title {
+            margin: 0;
+            color: #FF6F61;
+        }
+        
+        .cu-actors {
+            display: flex;
+        }
+
+        .cu-actor {
+            margin-right: 6px;
+            padding: 4px 6px;
+            color: #fff; font-weight: 500;
+            background-color: #6667AB;
+            border-radius: 1px;
+        }
+
+        .cu-name {
+            margin: 0;
+            font-weight: 500;
+        }
+
+        .cu-goal {
+            margin: 0;
+            font-size: 1.6em;
+        }
+
+        .cu-part--notes {
+            margin-top: 12px;
+        }
+
+        .cu-part-title {
+            margin: 0;
+            margin-top: 6px;
+        }
+
+        .cu-conditions {
+            font-weight: 500;
+        }
+
+        .cu-notes {
+            color: #555;
+            margin: 0;
+            font-size: 1.4em;
+        }
+
+        .scenario-main-steps {
+            margin: 0; padding-left: 16px;        
+        }
+
+        .scenario-alt {
+            margin-top: 6px;
+        }
+
+        .scenario-alt p { margin: 0; }
+
+        .scenario-alt-steps { counter-reset: topLevel; }
+            .scenario-alt-steps:not(:last-child) { margin-bottom: 6px; }
+            .scenario-alt-step { counter-increment: topLevel; font-weight: 500; }
+            .scenario-alt-step:before { content: attr(value) counter(topLevel, lower-alpha) '. '; }
+            .scenario-alt-steps ol { font-weight: 400; counter-reset: secondLevel; }
+                .scenario-alt-steps ol li { counter-increment: secondLevel; margin-left: 12px; }
+                    .scenario-alt-steps ol li:before { content: attr(value) counter(topLevel, lower-alpha) '.' counter(secondLevel, decimal) '. '}
+
+        .glossary {
+            font-size: 1.4em;
+        }
+
+        .preview-img {
+            display: block;
+            width: 600px;
+            height: auto;
+        }
+
+        .report-footer {
+            padding: 24px 5vw 24px;
+            color: #fff;
+            background-color: #292723;
+        }
+
+            .report-footer p {
+                margin: 0; margin-bottom: 6px;
+            }
+
+        .activity-diagram {
+            display: block;
+            min-height: 600px;
+            min-width: 600px;
+            height: 100%;
+            width: auto;
+            background-color: #d5d5d5;
+        }
+
+        .dash:before { 
+            content: '-'; 
+            margin-left: 4px;
+            margin-right: 8px; 
+            font-weight: bold;
+            color: currentColor;
+        } 
+
+        .check:before {
+            margin-left: 2px;
+            margin-right: 4px; 
+            font-weight: bold;
+            content: '🗸'; 
+            color: currentColor;
+        }
+    </style>
+</head>
+
+<body>
+    <header class="report-header">
+        <div class="title-section">
+            <div>
+                <h1 class="report-title">Rapport du livrable du Devoir 2</h1>
+                <p class="report-summary">
+                  ....
+                </p>
+            </div>
+
+            <ul class="bare-list report-resources">
+                <li class="report-resource">
+                    <a class="report-resource-link" href="https://github.com/WilliamMeroz/IFT2255-MaVille-equipe27" target="_blank">
+                        Répertoire GitHub
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+        <div class="team-section">
+            <h2 class="team-title">Équipe #27</h2>
+            <ul class="bare-list members">
+                <li class="member">
+                    <div class="member-identification">
+                        <span class="member-name">William Méroz-Moreau</span>
+                        <span class="member-id">20249713</span>
+                    </div> 
+                    <span>Discord: @wimem_34757</span>
+                    <a href="mailto:prenom.nom@umontreal.ca">william.meroz-moreau@umontreal.ca</a>
+                    <span class="member-role"></span>
+                </li>
+                <li class="member">
+                    <div class="member-identification">
+                        <span class="member-name">Jun Yao Xue</span>
+                        <span class="member-id">20276522</span>
+                    </div> 
+                    <span>Discord: @junyao</span>
+                    <a href="mailto:prenom.nom@umontreal.ca">jun.yao.xue@umontreal.ca</a>
+                    <span class="member-role">Chargé de...</span>
+                </li>
+                <li class="member">
+                    <div class="member-identification">
+                        <span class="member-name">Ariane Laverrière</span>
+                        <span class="member-id">20248561</span>
+                    </div> 
+                    <span>Discord: @killuwha</span>
+                    <a href="mailto:prenom.nom@umontreal.ca">ariane.laverriere@umontreal.ca</a>
+                    <span class="member-role">Chargé de...</span>
+                </li>
+            </ul>
+        </div>
+    </header>
+    <main class="report-body">
+        <aside class="report-aside">
+            <nav>
+                <h2 class="section-title">Contenu</h2>
+                <ul class="bare-list nav">
+                    <li class="nav-item">
+                        <h3 class="nav-item-title"><a class="nav-item-title__link" href="#plan">Cadre du projet</a></h3>
+                        <ul class="bare-list nav-item-details">
+                            <li class="dash">Introduction</li>
+                            <li class="dash">Échéancier</li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <h3 class="nav-item-title"><a class="nav-item-title__link" href="#requirements">Exigences</a></h3>
+                        <ul class="bare-list nav-item-details">
+                            <li class="dash">Cas d'utilisation</li>
+                            <li class="dash">Diagramme d'activités</li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <h3 class="nav-item-title"><a class="nav-item-title__link" href="#analysis">Analyse</a></h3>
+                        <ul class="bare-list nav-item-details">
+                            <li class="dash">Risques</li>
+                            <li class="dash">Besoins non fonctionnels</li>
+                            <li class="dash">Besoins matériels</li>
+                            <li class="dash">Stockage</li>
+                            <li class="dash">Intégration</li>
+                        </ul>
+                    </li>
+                    <li class="nav-item">
+                        <h3 class="nav-item-title"><a class="nav-item-title__link" href="#prototype">Prototype</a> </h3>
+                    </li>
+                </ul>
+            </nav>
+        </aside>
+        <div class="report-main">
+            <section class="main-section">
+                <h2 id="plan" class="section-title">Cadre du projet</h2>
+                <h3 class="subsection-title">Introduction</h3>
+                <p>
+                 ...
+                </p>
+                <h3 class="subsection-title">Échéancier</h3>
+                <p>
+                     <img src="https://i.imgur.com/B3Pf5zN.png" alt="échéancier" width="850" height="600"><img>
+                </p>
+
+                
+            </section>
+
+            <section class="main-section">
+                
+             
+                <h3 class="subsection-title">Cas d'utilisation</h3>
+                <div class="use-case">
+                    <img class="use-case-diagram" src="images/use_case_diagram.svg" alt="Diagramme de cas d'utilisation">
+                    <p class="use-case-notes">
+                        <em>
+                            Notes à propos du diagramme <br>
+                            - choix des acteurs <br>
+                            - choix des relations
+                        </em>
+                    </p>
+                </div>
+
+                <h3 class="subsection-title">Diagramme d'activités</h3>
+                <div class="activity">
+                    <h4>Titre du diagramme 1</h4>
+                    <img class="activity-diagram" src="images/activity_diagram.svg" alt="Diagramme d'activités">
+                </div>
+                <div class="activity">
+                    <h4>Titre du diagramme 2</h4>
+                    <img class="activity-diagram" src="images/activity_diagram.svg" alt="Diagramme d'activités">
+                </div>
+            </section>
+
+            <section class="main-section">
+                <h2 id="analysis" class="section-title">Analyse</h2>
+
+                <div>
+                    <h3 class="subsection-title">Risques (mise à jour)</h3>
+                    <ol class="risks">
+                        <li><b>Inexactitude des données : </b>Si les informations sur les travaux et entraves sont désuettes, cela pourrait amener les utilisateurs à planifier leurs déplacements de manière incorrecte, en plus de causer de la frustration chez eux. Pour pallier ce problème, le système fait une nouvelle requête à chaque demande d'information sur les travaux et entraves afin de s'assurer d'avoir des données à jour.</li>
+                        <li><b>Faible adoption par les utilisateurs : </b>Le système repose sur la contribution des utilisateurs pour faire des demandes de nouveaux projets (résidents) et fournir leurs candidatures (intervenants) à ces projets. Un faible nombre d'utilisateurs limite son utilité. Pour pallier ce problème, le système propose une interface conviviale et un processus d'inscription rapide afin de ne pas décourager les utilisateurs d'adopter le produit.</li>
+                        <li><b>API de la ville de Montréal non-fonctionnelle : </b>Le système repose sur les données fournies par l'API de la ville de Montréal pour fonctionner. En cas d'indisponibilité de cette API, les utilisateurs pourraient se retrouver dans l'incapacité d'utiliser le système, puisque les informations sur les travaux et les entraves proviennent directement de cette source. 
+                            Le système est donc dépendant de la disponibilité de l'API et n'a aucun contrôle sur les éventuelles pannes qui pourraient survenir. Des sauvegardes périodiques des informations les plus recherchées pourraient aider à réduire les domages.</li>
+                        <li><b>Difficultés de localisation : </b>Le projet pourrait rendre la localisation géographique des différents travaux complexe, ce qui compliquerait l'accès des utilisateurs à des informations claires sur les travaux qui les concernent. Pour remédier à cette situation, le système utilise l'adresse complète de chaque résident afin de lui fournir des informations pertinentes et adaptées à ses besoins.</li>
+                        <li><b>Manipulation malveillante : </b>Certains utilisateurs malintentionnés pourraient tenter de fournir de fausses informations pour nuire à d'autres. 
+                            Ce risque est atténué pour les intervenants, qui doivent s'enregistrer auprès de la ville avant de soumettre des données. 
+                            Cependant, un résident malveillant pourrait, par exemple, demander des travaux en pleine heure de pointe ou au milieu de la nuit pour perturber le voisinage. 
+                            L'instauration d'un système de vote sur les horaires pourrait aider à contrer ce problème. Les intervenans peuvent également choisir des horaires qu'ils jugent responsables.
+                            De plus, des résidents pourraient soumettre de fausses demandes de travaux pour saturer la liste des requêtes. 
+                            Un système de modération, supervisé par la ville, pourrait également contribuer à résoudre ces problèmes. </li>
+                    </ol>
+                </div>
+
+                <div>
+                    <h3 class="subsection-title">Besoins non-fonctionnelles (mise à jour)</h3>
+                    <ol class="nf-requirements">
+                        <li><b>Vitesse de mise à jour des informations présentées aux utilisateurs : </b>Les mises à jour des informations de travaux devraient se faire instantanément pour ne pas induire les utilisateurs en erreur avec de l'information désuette.</li>
+                        <li><b>Facilité de maintenance : </b>Le système doit être conçu de façon à ne pas interrompre le service lors de maintenance ou l'ajout de nouvelles fonctionnalités.</li>
+                        <li><b>Disponibilité du système en tout temps : </b>Un système qui n'est pas disponible en tout temps pourrait laisser certains utilisateurs sans information concernant les travaux les impactant, mettant en péril le but même du projet.</li>
+                        <li><b>Temps de réponse rapide : </b>Il est important de pouvoir répondre aux requêtes des utilisateurs rapidement afin de bien répondre aux besoins demandés. Un système avec un temps de réponse trop lent ne sera pas assez fiable pour répondre aux besoins évolutifs des utilisateurs.</li>
+                        <li><b>Usabilité de l'interface utilisateur : </b>Un système avec une interface qui n'est pas intuitive pourrait mener certains utilisateurs à faire des erreurs lors de la planification de leurs itinéraires.</li>
+                    </ol>
+                </div>
+                
+                <div>
+                    <h3 class="subsection-title">Besoins matériels (mise à jour)</h3>
+                    <p>
+                        Les besoins matériels restent presque toujours les mêmes. Le système ne requiert que très peu de ressources matérielles. Tel qu'énoncé dans le devoir précédent, le principal besoin pour le développement et l’exécution du système est de disposer d’un ordinateur avec une version récente de Java et d’un espace de stockage suffisant. Cependant, puisque nous allons désormais chercher des données provenant des API de la ville de Montréal, le système nécessite également une connexion Internet permettant d’accéder aux serveurs auxquels nous adressons nos requêtes HTTP.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="subsection-title">Solution de stockage (mise à jour)</h3>
+                    <p>
+                        La solution de stockage n’a pas changé depuis le livrable précédent. Nous utilisons toujours des fichiers JSON, car cette solution est plus simple à implémenter qu'une véritable base de données (locale ou distante). Notre utilisation reste basique, car nous avons peu de données à stocker, et le format JSON est très bien pris en charge en Java grâce à la bibliothèque Gson. L’utilisation de fichiers JSON ne nous empêche pas de stocker des données sensibles, comme les mots de passe des utilisateurs, de manière sécurisée, en les cryptant avant de les enregistrer dans le fichier. Ainsi, les mots de passe ne sont jamais stockés en texte brut et bénéficient de l’ajout d’un "sel" pour respecter les bonnes pratiques de sécurité.
+
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="subsection-title">Solution d'intégration (mise à jour)</h3>
+                    <p>
+                        Après avoir intégré notre système aux API de données de la ville de Montréal, notre système se doit d'être en mesure de faire le pont entre le format des données retournées par les APIs et le format de données utilisé à l'interne par MaVille. Il est donc important pour notre système de pouvoir manipuler les données des APIs de façon efficace afin de s'adapter aux besoins des utilisateurs. De plus, notre système se doit de rendre cette intégration aussi invisible que possible, les utilisateurs n'ont pas besoin de savoir que nous allons chercher nos données, tant et aussi longtemps que celles-ci soient à jour et précise. Finalement, puisque nous sommes dépendants des services offerts par la ville de Montréal, nous devons nous assurer de notre code est adapté a tout mise à jour de l'API pour ne pas obtenir d'erreurs durant l'utilisation.
+                    </p>
+                </div>
+
+                <div>
+                    <h3 class="subsection-title">Justification des choix du desgin</h3>
+
+                    <p>
+                        En adoptant l’architecture MVC, nous structurons le code en séparant clairement les vues, les contrôleurs et les modèles, ce qui permet une organisation modulaire et un faible couplage entre ces composants. Les modèles, correspondant aux entraves, aux travaux et aux utilisateurs, sont implémentés sous forme de classes distinctes qui interagissent uniquement avec les contrôleurs, tandis que les vues se limitent à communiquer avec ces derniers. Cette approche garantit une forte cohésion en assignant chaque fonctionnalité à un contrôleur spécifique, rendant le code plus lisible, compréhensible et bien structuré dans un nombre limité de fichiers. L’encapsulation est respectée grâce à l’usage de getters et setters, exposant uniquement les informations nécessaires, et les contrôleurs interagissent avec les modèles de manière suffisamment abstraite pour permettre une transition simple vers d’autres solutions de stockage, comme une base de données, sans affecter les autres parties du système. En outre, l’utilisation de fonctions privées génériques favorise la réutilisation et la flexibilité du code, facilitant par exemple le remplacement d’une API pour obtenir des données sur les entraves et les travaux sans impact majeur. Nous nous appuyons également sur des bibliothèques externes, (comme TextIO) pour simplifier la gestion des entrées et sorties utilisateur ou des outils de chiffrement pour renforcer la sécurité, ce qui nous permet de nous concentrer sur les fonctionnalités à forte valeur ajoutée pour l’utilisateur tout en garantissant un code maintenable, évolutif et efficace.
+
+                    </p>
+                </div>
+            </section>
+
+            <section class="main-section">
+                <h2 id="prototype" class="section-title">Prototype</h2>
+
+                <p>
+                    Pour exécuter le prototype, il est recommandé d'utiliser l'archive .jar fournie dans le Release sur le répertoire GitHub.<br>
+                    Le release contient également un fichier `users.json` qu'il est impératif de garder dans le même répertoire que le .jar, sous faute de quoi l'exécution va planter. 
+                    
+                    Lors de l'exécution, l'utilisateur sera présenté avec la possibilité de se connecter ou de s'inscrire. Un compte pour résident et un compte pour intervenant sont mis à sa disposition.
+
+                    La version du JDK utilisé pour compiler le code est JDK 23, il est donc recommandé d'utiliser le Java runtime version 23 également.
+                    <table>
+                        <tr>
+                            <th>Compte</th>
+                            <th>Courriel</th>
+                            <th>Mot de passe</th>
+                        </tr>
+                        <tr>
+                            <td>Résident</td>
+                            <td>resident@gmail.com</td>
+                            <td>pomme123</td>
+                        </tr>
+                        <tr>
+                            <td>Intervenant</td>
+                            <td>intervenant@gmail.com</td>
+                            <td>pomme123</td>
+                        </tr>
+                    </table>
+                </p>
+            </section>
+        </div>
+    </main>
+    <footer class="report-footer">
+        <p>
+            Devoir 2 &ndash; Conception de la solution<br>
+            IFT2255 (Génie logiciel) <br>
+            Automne 2024
+        </p>
+        <p>
+            <em>
+          
+            </em>
+        </p>
+    </footer>
+</body>
+
+</html>
