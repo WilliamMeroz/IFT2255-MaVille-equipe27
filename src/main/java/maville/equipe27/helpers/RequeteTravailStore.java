@@ -24,7 +24,7 @@ public class RequeteTravailStore {
     }
 
     public List<RequeteTravail> getRequetes() {
-        List<RequeteTravail> requetes = null;
+        List<RequeteTravail> requetes  = new ArrayList<>();
         try (Reader reader = new FileReader(FILE_NAME)) {
             Gson gson = new Gson();
             Type requeteType = new TypeToken<List<User>>() {}.getType();
