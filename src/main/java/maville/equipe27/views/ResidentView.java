@@ -163,7 +163,7 @@ public class ResidentView {
                 "2. Consulter votre requête(s) (pas implémenté)\n" +
                 "3. Retour en arrière");
 
-        int choice = textIO.newIntInputReader().withMaxVal(3).withMinVal(3).read("Entrez votre choix: ");
+        int choice = textIO.newIntInputReader().withMaxVal(3).withMinVal(1).read("Entrez votre choix: ");
         if (choice == 1) return 51;
         if (choice == 2) return 52;
         if (choice == 3) return 0;
