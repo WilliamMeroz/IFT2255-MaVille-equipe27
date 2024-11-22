@@ -31,6 +31,29 @@ Ce répertoire contient les fichiers de code interagissant directement avec l'ut
 ### Fichier `Main.java`
 Fichier contenant la méthode `main` du projet. 
 
+## Exécuter le programme
+Pour exécuter le programme, il faut s'assurer d'avoir les fichiers:
+- `users.json`
+- `requetes.json`
+- `travaux_categories_mapping.json`
+
+dans le même répertoire que l'exécutable en .JAR. Des comptes préconfigurés sont mis à la disposition de l'utilisateur.
+
+| Compte      | Courriel              | Mot de passe |
+|-------------|-----------------------|--------------|
+| Résident    | resident@gmail.com    | pomme123     |
+| Intervenant | intervenant@gmail.com | pomme123     |
+
+## Tests unitaires
+Les tests unitaires sont séparés par ficher. Chaque fichier de test est nommé par le nom du fichier original qu'il faut tester + `Tests`.
+Les tests unitaires font l'utilisation des librairies [JUnit](https://junit.org/junit5/) mais également [Mockito](https://site.mockito.org/) afin de faire des mocks, stubs et spies plus facilement.
+
+Les fichiers de tests se trouvent dans le répertoire `/src/test/java/maville/equipe27` et sont séparés dans des répertoires de la même façon que les fichiers sources.
+
+### Exécuter les tests unitaires
+Dans un IDE tel que Eclipse, Netbeans ou Intellij, il suffit d'ouvrir un des fichiers de tests et cliquer sur l'icône d'exécution des tests.
+Pour exécuter les tests par ligne de commande (non-recommandé), il faut compiler les fichiers de tests en .JAR. Une documentation est disponible ici: [JUnit User Guide - Running tests](https://junit.org/junit5/docs/current/user-guide/#running-tests)
+
 ## Librairies utilisées
 Le projet fait l'utilisation de certaines librairies de programmation externes.
 
@@ -39,3 +62,7 @@ Le projet fait l'utilisation de certaines librairies de programmation externes.
 - [Text IO](https://text-io.beryx.org/releases/latest/): pour faciliter les entrées et sorties en ligne de commande, et pour aider à la validation des entrées.
 
 - [Bcrypt Java Library](https://github.com/patrickfav/bcrypt): pour le chiffrement et le déchiffrement des mots de passe des utilisateurs.
+
+- [JUnit 5](https://junit.org/junit5/): Pour créer et exécuter des tests unitaires.
+
+- [Mockito](https://site.mockito.org/): Pour aider à la création de mocks, stubs et spies.
