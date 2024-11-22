@@ -64,4 +64,7 @@ public class IntervenantController implements IController {
             intervenantView.textIO.getTextTerminal().println("Erreur lors du chargement des requêtes : " + e.getMessage());
         }
     }
+    public String getIntervenantEmail() {
+        return intervenant.getEmail();
+    }
 }
