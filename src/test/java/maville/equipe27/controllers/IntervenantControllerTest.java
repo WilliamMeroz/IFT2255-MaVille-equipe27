@@ -3,12 +3,14 @@ package maville.equipe27.controllers;
 import maville.equipe27.controllers.IntervenantController;
 import maville.equipe27.models.Intervenant;
 import maville.equipe27.views.IntervenantView;
+import org.json.simple.JSONObject;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.json.simple.JSONArray;
 import java.io.FileReader;
+import java.io.StringReader;
 
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -40,13 +42,19 @@ class IntervenantControllerTest {
     @Test
     void testAfficherRequetesTravail() throws Exception {
         IntervenantView mockView = Mockito.mock(IntervenantView.class);
-        IntervenantController controller = new IntervenantController(mockView);
+        String mockJson = "[{\"titre\":\"Requete 1\",\"description\":\"Description 1\"}]";
+        StringReader mockReader = new StringReader(mockJson);
 
-        JSONArray mockRequetes = new JSONArray();
-        when(new FileReader("requetes.json")).thenReturn(mockRequetes);
+        IntervenantController controller = new IntervenantController(mockView, mockReader);
 
         controller.afficherRequetesTravail();
 
-        verify(mockView).afficherRequetes(mockRequetes);
+        JSONArray expectedRequetes = new JSONArray();
+        JSONObject requete = new JSONObject();
+        requete.put("titre", "Requete 1");
+        requete.put("description", "Description 1");
+        expectedRequetes.add(requete);
+
+        verify(mockView).afficherRequetes(expectedRequetes);
     }
 }
