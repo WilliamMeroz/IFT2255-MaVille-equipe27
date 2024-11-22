@@ -20,9 +20,14 @@ class ResidentControllerTest {
     RequeteTravail mockRequete = new RequeteTravail(null, null, null, null);
 
     @Test
-    @DisplayName("Test pour consulterEntrave")
-    void ConsulterEntravesTravaux() {
+    @DisplayName("Test pour consulterEntraveRue")
+    void ConsulterEntravesTravauxRue() {
         assertEquals("Liste d'entraves de: avenue De Lorimier", mockResident.mockConsulterEntravesRue("avenue De Lorimier"));
+        
+    }
+    @Test
+    @DisplayName("Test pour consulterEntraveId")
+    void ConsulterEntravesTravauxId() {
         assertEquals("Liste d'entraves avec id: 66e8961b1e85b50019ec815d", mockResident.mockConsulterEntravesTravail("66e8961b1e85b50019ec815d"));
     }
 
