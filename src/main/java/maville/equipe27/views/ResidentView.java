@@ -171,6 +171,16 @@ public class ResidentView {
 
     }
 
+    public RequeteTravail promptSoumettreRequete() {
+        String titreTravail = textIO.newStringInputReader().read("Entrez le titre du travail:\n");
+        String typeTravail = textIO.newStringInputReader().read("Entrez le type de travail");
+        String dateDebut = textIO.newStringInputReader().read("Entrez la date de début espéré");
+        String description = textIO.newStringInputReader().read("Entrez une description du travail");
+        RequeteTravail newRequete = new RequeteTravail(titreTravail, description, typeTravail, dateDebut);
+        return newRequete;
+    }
+
+
     public int promptTravaux() {
         textIO.getTextTerminal().println("=== MENU DES TRAVAUX ===");
         textIO.getTextTerminal().println("1. Travaux en cours. ");
