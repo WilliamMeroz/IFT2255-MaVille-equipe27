@@ -14,6 +14,7 @@ public class ResidentController implements IController {
     private Resident resident;
     private ResidentView residentView;
     HTTPRequestsHelper httpRequestsHelper;
+    private RequeteTravailStore requeteStore;
 
     public ResidentController(ResidentView residentView) {
         this.residentView = residentView;
