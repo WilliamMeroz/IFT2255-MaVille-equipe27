@@ -9,10 +9,10 @@ import java.io.IOException;
 public class RequeteTravail {
     private String titreTravail;
     private String description;
-    private TravauxTypes typeTravail;
+    private String typeTravail;
     private String dateDebut;
 
-    public RequeteTravail(String titreTravail, String description, TravauxTypes typeTravail, String dateDebut) {
+    public RequeteTravail(String titreTravail, String description, String typeTravail, String dateDebut) {
         this.titreTravail = titreTravail;
         this.description = description;
         this.typeTravail = typeTravail;
@@ -35,11 +35,11 @@ public class RequeteTravail {
         this.description = description;
     }
 
-    public TravauxTypes getTypeTravail() {
+    public String getTypeTravail() {
         return typeTravail;
     }
 
-    public void setTypeTravail(TravauxTypes typeTravail) {
+    public void setTypeTravail(String typeTravail) {
         this.typeTravail = typeTravail;
     }
 
