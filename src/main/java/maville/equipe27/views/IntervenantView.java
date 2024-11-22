@@ -58,10 +58,6 @@ public class IntervenantView {
                 "2. Filtrer par type (pas implémenté)\n" +
                 "3. Filtrer par quartier (pas implémenté)\n" +
                 "4. Filtrer par date de début (pas implémenté)\n" +
-                "5. Revenir en arrière");        textIO.getTextTerminal().println("1. Soumettre sa candidature\n" +
-                "2. Filtrer par type\n" +
-                "3. Filtrer par quartier\n" +
-                "4. Filtrer par date de début\n" +
                 "5. Revenir en arrière");
         int choice = textIO.newIntInputReader().withMaxVal(5).withMinVal(5).read("Entrez votre choix: ");
         if (choice == 5) return 0;
