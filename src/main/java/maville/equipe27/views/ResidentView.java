@@ -3,6 +3,7 @@ package maville.equipe27.views;
 import maville.equipe27.enums.TravauxTypes;
 import maville.equipe27.models.Entrave;
 import maville.equipe27.models.Travail;
+import maville.equipe27.models.RequeteTravail;
 import org.beryx.textio.TextIO;
 
 import java.time.LocalDate;
