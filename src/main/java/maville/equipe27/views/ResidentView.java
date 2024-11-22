@@ -7,6 +7,7 @@ import maville.equipe27.models.RequeteTravail;
 import org.beryx.textio.TextIO;
 
 import java.time.LocalDate;
+import java.time.format.DateTimeParseException;
 import java.util.List;
 
 public class ResidentView {
@@ -168,14 +169,38 @@ public class ResidentView {
     }
 
     public RequeteTravail promptSoumettreRequete() {
-        String titreTravail = textIO.newStringInputReader().read("Entrez le titre du travail:\n");
-        String typeTravail = textIO.newStringInputReader().read("Entrez le type de travail:\n");
-        String dateDebut = textIO.newStringInputReader().read("Entrez la date de début espéré:\n");
+        String titreTravail = textIO.newStringInputReader().read("Entrez le titre du travail: ");
+        TravauxTypes typeTravail = textIO.newEnumInputReader(TravauxTypes.class).read("Entrez le type de travail: ");
+        LocalDate date = null;
+        boolean success = false;
+        while (!success) {
+            try {
+                String dateDebutStr = textIO.newStringInputReader().read("Entrez la date de début espéré: ");
+                date = LocalDate.parse(dateDebutStr);
+            } catch (DateTimeParseException _) {
+                textIO.getTextTerminal().println("Entrez une date avec un format valide");
+            }
+
+            if (date.isBefore(LocalDate.now())) textIO.getTextTerminal().println("Entrez une date après la date courrante");
+            else success = true;
+        }
+
         String description = textIO.newStringInputReader().read("Entrez une description du travail:\n");
-        RequeteTravail newRequete = new RequeteTravail(titreTravail, description, typeTravail, dateDebut);
+        RequeteTravail newRequete = new RequeteTravail(titreTravail, description, typeTravail, date);
         return newRequete;
     }
 
+    public int showNewRequeteStatus(boolean status) {
+        if (status)
+            textIO.getTextTerminal().println("La requête a été enregistrée avec succès");
+        else textIO.getTextTerminal().println("Un problème est servenu avec la création de la requête...");
+
+        textIO.getTextTerminal().println("1. Retour en arrière. ");
+
+        int choice = textIO.newIntInputReader().withMaxVal(1).withMinVal(1).read("Entrez votre choix: ");
+        if (choice == 1) return 0;
+        return choice;
+    }
 
     public int promptTravaux() {
         textIO.getTextTerminal().println("=== MENU DES TRAVAUX ===");

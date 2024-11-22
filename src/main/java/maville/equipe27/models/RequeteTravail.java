@@ -5,14 +5,15 @@ import maville.equipe27.enums.TravauxTypes;
 import com.google.gson.Gson;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 
 public class RequeteTravail {
     private String titreTravail;
     private String description;
-    private String typeTravail;
-    private String dateDebut;
+    private TravauxTypes typeTravail;
+    private LocalDate dateDebut;
 
-    public RequeteTravail(String titreTravail, String description, String typeTravail, String dateDebut) {
+    public RequeteTravail(String titreTravail, String description, TravauxTypes typeTravail, LocalDate dateDebut) {
         this.titreTravail = titreTravail;
         this.description = description;
         this.typeTravail = typeTravail;
@@ -35,19 +36,19 @@ public class RequeteTravail {
         this.description = description;
     }
 
-    public String getTypeTravail() {
+    public TravauxTypes getTypeTravail() {
         return typeTravail;
     }
 
-    public void setTypeTravail(String typeTravail) {
+    public void setTypeTravail(TravauxTypes typeTravail) {
         this.typeTravail = typeTravail;
     }
 
-    public String getDateDebut() {
+    public LocalDate getDateDebut() {
         return dateDebut;
     }
 
-    public void setDateDebut(String dateDebut) {
+    public void setDateDebut(LocalDate dateDebut) {
         this.dateDebut = dateDebut;
     }
 }
