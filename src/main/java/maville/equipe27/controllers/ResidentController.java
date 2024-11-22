@@ -2,12 +2,13 @@ package maville.equipe27.controllers;
 
 import maville.equipe27.enums.TravauxTypes;
 import maville.equipe27.helpers.HTTPRequestsHelper;
+import maville.equipe27.helpers.RequeteTravailDataStore;
 import maville.equipe27.models.Entrave;
+import maville.equipe27.models.RequeteTravail;
 import maville.equipe27.models.Resident;
 import maville.equipe27.models.Travail;
 import maville.equipe27.views.ResidentView;
 import maville.equipe27.models.RequeteTravail;
-import maville.equipe27.helpers.RequeteTravailStore;
 
 import java.util.List;
 
@@ -16,12 +17,11 @@ public class ResidentController implements IController {
     private Resident resident;
     private ResidentView residentView;
     HTTPRequestsHelper httpRequestsHelper;
-    private RequeteTravailStore requeteStore;
-
+    RequeteTravailDataStore requeteTravailDataStore;
     public ResidentController(ResidentView residentView) {
         this.residentView = residentView;
         this.httpRequestsHelper = new HTTPRequestsHelper();
-        this.requeteStore = new RequeteTravailStore("ListRequetes.json");
+        this.requeteTravailDataStore = new RequeteTravailDataStore("requetes.json");
     }
 
     public void handleConnectionEvent(Resident resident) {
@@ -60,9 +60,6 @@ public class ResidentController implements IController {
         return this.httpRequestsHelper.getFutureTravauxByType(type.toString());
     }
 
-    public boolean requeteTravail(RequeteTravail requete) {
-        return this.requeteStore.saveRequetes(requete);
-    }
     @Override
     public void run() {
         System.out.println("Résident: " + this.resident.getEmail());
@@ -128,11 +125,9 @@ public class ResidentController implements IController {
                     choice = residentView.promptRequeteTravail();
                     break;
                 case 51:
-                    RequeteTravail newRequete = residentView.promptSoumettreRequete();
-                    Boolean store = requeteTravail(newRequete);
-                    if(store == true) {System.out.println("Votre requête à été soumit");}
-                    if(store == false) {System.out.println("Votre requête n'a pas été soumit");}
-                    choice = 5;
+                    RequeteTravail requeteTravail = residentView.promptSoumettreRequete();
+                    boolean success = this.requeteTravailDataStore.saveRequete(requeteTravail);
+                    choice = residentView.showNewRequeteStatus(success);
                     break;
                 case 52:
                     choice = 5;
