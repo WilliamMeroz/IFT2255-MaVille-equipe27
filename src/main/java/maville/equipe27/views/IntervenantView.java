@@ -54,26 +54,6 @@ public class IntervenantView {
 
     public int promptRequeteTravail() {
         textIO.getTextTerminal().println("=== Requêtes de travail ===");
-        try {
-            JSONParser parser = new JSONParser();
-            Object file = parser.parse(new FileReader("requetes.json"));
-
-            JSONArray requetes = (JSONArray) file;
-
-            textIO.getTextTerminal().println("Liste des requêtes disponibles :");
-            for (Object requeteObj : requetes) {
-                JSONObject requete = (JSONObject) requeteObj;
-                textIO.getTextTerminal().println("- Titre: " + requete.get("titre"));
-                textIO.getTextTerminal().println("  Description: " + requete.get("description"));
-                textIO.getTextTerminal().println("  Type: " + requete.get("type"));
-                textIO.getTextTerminal().println("  Date souhaitée: " + requete.get("date"));
-
-            }
-
-        } catch (Exception e) {
-            textIO.getTextTerminal().println("Erreur lors du chargement des requêtes : " + e.getMessage());
-        }
-
         textIO.getTextTerminal().println("1. Soumettre sa candidature (pas implémenté)\n" +
                 "2. Filtrer par type (pas implémenté)\n" +
                 "3. Filtrer par quartier (pas implémenté)\n" +
@@ -87,7 +67,16 @@ public class IntervenantView {
         if (choice == 5) return 0;
         return choice;
     }
-
+    public void afficherRequetes(JSONArray requetes) {
+        textIO.getTextTerminal().println("Liste des requêtes disponibles :");
+        for (Object obj : requetes) {
+            JSONObject requete = (JSONObject) obj;
+            textIO.getTextTerminal().println("- Titre: " + requete.get("titre"));
+            textIO.getTextTerminal().println("  Description: " + requete.get("description"));
+            textIO.getTextTerminal().println("  Type: " + requete.get("type"));
+            textIO.getTextTerminal().println("  Date souhaitée: " + requete.get("date"));
+        }
+    }
     public int promptNouveauProjet() {
         textIO.getTextTerminal().println("=== Soumission de nouveau projet ===");
         textIO.getTextTerminal().println("1. Consulter les préférences des résidents\n" +
