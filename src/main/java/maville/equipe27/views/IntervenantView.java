@@ -11,7 +11,7 @@ import org.json.simple.parser.*;
 import java.io.FileReader;
 
 public class IntervenantView {
-    TextIO textIO;
+    public TextIO textIO;
 
     public IntervenantView(TextIO textIO) {
         this.textIO = textIO;
