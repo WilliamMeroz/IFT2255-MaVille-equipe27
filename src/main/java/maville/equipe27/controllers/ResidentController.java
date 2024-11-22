@@ -6,6 +6,8 @@ import maville.equipe27.models.Entrave;
 import maville.equipe27.models.Resident;
 import maville.equipe27.models.Travail;
 import maville.equipe27.views.ResidentView;
+import maville.equipe27.models.RequeteTravail;
+import maville.equipe27.helpers.RequeteTravailStore;
 
 import java.util.List;
 
