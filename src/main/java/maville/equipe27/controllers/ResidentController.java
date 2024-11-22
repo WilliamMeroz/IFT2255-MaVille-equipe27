@@ -119,6 +119,16 @@ public class ResidentController implements IController {
                 case 5:
                     choice = residentView.promptRequeteTravail();
                     break;
+                case 51:
+                    RequeteTravail newRequete = residentView.promptSoumettreRequete();
+                    Boolean store = requeteTravail(newRequete);
+                    if(store == true) {System.out.println("Votre requête à été soumit");}
+                    if(store == false) {System.out.println("Votre requête n'a pas été soumit");}
+                    choice = 5;
+                    break;
+                case 52:
+                    choice = 5;
+                    break;
                 case 6:
                 case 8:
                     System.exit(0);
