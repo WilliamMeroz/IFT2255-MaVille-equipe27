@@ -18,6 +18,7 @@ public class ResidentController implements IController {
     public ResidentController(ResidentView residentView) {
         this.residentView = residentView;
         this.httpRequestsHelper = new HTTPRequestsHelper();
+        this.requeteStore = new RequeteTravailStore("ListRequetes.json");
     }
 
     public void handleConnectionEvent(Resident resident) {
@@ -54,6 +55,10 @@ public class ResidentController implements IController {
 
     public List<Travail> consulterFutursTravauxParType(TravauxTypes type) {
         return this.httpRequestsHelper.getFutureTravauxByType(type.toString());
+    }
+
+    public boolean requeteTravail(RequeteTravail requete) {
+        return this.requeteStore.saveRequetes(requete);
     }
     @Override
     public void run() {
