@@ -32,6 +32,7 @@ public class IntervenantController implements IController {
                     choice = intervenantView.promptRechercheTravaux();
                     break;
                 case 3:
+                    afficherRequetesTravail();
                     choice = intervenantView.promptRequeteTravail();
                     break;
                 case 4:
@@ -44,6 +45,17 @@ public class IntervenantController implements IController {
                     System.exit(0);
                     break;
             }
+        }
+    }
+    private void afficherRequetesTravail() {
+        try {
+            JSONParser parser = new JSONParser();
+            Object file = parser.parse(new FileReader("requetes.json"));
+            JSONArray requetes = (JSONArray) file;
+
+            intervenantView.afficherRequetes(requetes);
+        } catch (Exception e) {
+            intervenantView.textIO.getTextTerminal().println("Erreur lors du chargement des requêtes : " + e.getMessage());
         }
     }
 }
