@@ -1,6 +1,14 @@
 package maville.equipe27.views;
 
 import org.beryx.textio.TextIO;
+import com.google.gson.Gson;
+import org.json.simple.JSONArray;
+
+import org.json.simple.JSONObject;
+
+import org.json.simple.parser.*;
+
+import java.io.FileReader;
 
 public class IntervenantView {
     TextIO textIO;
@@ -46,7 +54,31 @@ public class IntervenantView {
 
     public int promptRequeteTravail() {
         textIO.getTextTerminal().println("=== Requêtes de travail ===");
-        textIO.getTextTerminal().println("1. Soumettre sa candidature\n" +
+        try {
+            JSONParser parser = new JSONParser();
+            Object file = parser.parse(new FileReader("requetes.json"));
+
+            JSONArray requetes = (JSONArray) file;
+
+            textIO.getTextTerminal().println("Liste des requêtes disponibles :");
+            for (Object requeteObj : requetes) {
+                JSONObject requete = (JSONObject) requeteObj;
+                textIO.getTextTerminal().println("- Titre: " + requete.get("titre"));
+                textIO.getTextTerminal().println("  Description: " + requete.get("description"));
+                textIO.getTextTerminal().println("  Type: " + requete.get("type"));
+                textIO.getTextTerminal().println("  Date souhaitée: " + requete.get("date"));
+
+            }
+
+        } catch (Exception e) {
+            textIO.getTextTerminal().println("Erreur lors du chargement des requêtes : " + e.getMessage());
+        }
+
+        textIO.getTextTerminal().println("1. Soumettre sa candidature (pas implémenté)\n" +
+                "2. Filtrer par type (pas implémenté)\n" +
+                "3. Filtrer par quartier (pas implémenté)\n" +
+                "4. Filtrer par date de début (pas implémenté)\n" +
+                "5. Revenir en arrière");        textIO.getTextTerminal().println("1. Soumettre sa candidature\n" +
                 "2. Filtrer par type\n" +
                 "3. Filtrer par quartier\n" +
                 "4. Filtrer par date de début\n" +
