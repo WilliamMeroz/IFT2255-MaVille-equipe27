@@ -154,11 +154,6 @@ public class ResidentView {
     }
 
     public int promptRequeteTravail() {
-        System.out.println("Entrez le numero désiré");
-        System.out.println("1. Soumettre une requête de travaille");
-        System.out.println("2. Consulter votre requête(s)");
-        System.out.println("3. Retour");
-
         textIO.getTextTerminal().println("=== MENU DES REQUÊTES DE TRAVAIL (Pas implémenté encore) ===");
         textIO.getTextTerminal().println("1. Soumettre une requête de travaille (pas implémenté)\n" +
                 "2. Consulter votre requête(s) (pas implémenté)\n" +
