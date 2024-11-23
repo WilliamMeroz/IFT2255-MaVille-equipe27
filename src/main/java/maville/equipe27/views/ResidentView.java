@@ -109,11 +109,11 @@ public class ResidentView {
     }
 
     public int promptRechercheTravaux() {
-        textIO.getTextTerminal().println("=== Recherche de travaux (Pas implémenté encore) ===");
+        textIO.getTextTerminal().println("=== Recherche de travaux ===");
 
-        textIO.getTextTerminal().println("1. Recherche par titre (pas implémenté)\n" +
-                "2. Recherche par type de travaux (pas implémenté)\n" +
-                "3. Recherche par quartier (pas implémenté)\n" +
+        textIO.getTextTerminal().println("1. Recherche par titre\n" +
+                "2. Recherche par type de travaux\n" +
+                "3. Recherche par quartier\n" +
                 "4. Retour en arrière");
         int choice = textIO.newIntInputReader().withMaxVal(4).withMinVal(4).read("Entrez votre choix: ");
         if (choice == 4) return 1;
