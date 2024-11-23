@@ -39,21 +39,26 @@ class IntervenantControllerTest {
         verify(mockView).promptMainMenu();
     }
 
-//    void testAfficherRequetesTravail() throws Exception {
-//        IntervenantView mockView = Mockito.mock(IntervenantView.class);
-//        String mockJson = "[{\"titre\":\"Requete 1\",\"description\":\"Description 1\"}]";
-//        StringReader mockReader = new StringReader(mockJson);
-//
-//        IntervenantController controller = new IntervenantController(mockView, mockReader);
-//
-//        //controller.afficherRequetesTravail();
-//
-//        JSONArray expectedRequetes = new JSONArray();
-//        JSONObject requete = new JSONObject();
-//        requete.put("titre", "Requete 1");
-//        requete.put("description", "Description 1");
-//        expectedRequetes.add(requete);
-//
-//        verify(mockView).afficherRequetes(expectedRequetes);
-//    }
+    @Test
+    void testPromptMainMenuCalled() {
+        
+        IntervenantView mockView = Mockito.mock(IntervenantView.class);
+
+        IntervenantController controller = new IntervenantController(mockView);
+
+        Intervenant intervenant = new Intervenant(
+            "test@mail.com", "password", null, "John", "Doe", null, "123"
+        );
+        controller.handleConnectionEvent(intervenant);
+
+        Mockito.doAnswer(invocation -> {
+            
+            return 6; 
+        }).when(mockView).promptMainMenu();
+
+        controller.run();
+
+        verify(mockView).promptMainMenu();
+    }
+}
 }
