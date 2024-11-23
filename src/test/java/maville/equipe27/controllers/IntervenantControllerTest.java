@@ -6,6 +6,7 @@ import maville.equipe27.views.IntervenantView;
 import org.json.simple.JSONObject;
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
 import org.json.simple.JSONArray;
@@ -39,26 +40,21 @@ class IntervenantControllerTest {
         verify(mockView).promptMainMenu();
     }
 
-    @Test
-    void testPromptMainMenuCalled() {
-        
-        IntervenantView mockView = Mockito.mock(IntervenantView.class);
-
+        @Test
+    void testIntervenantIsSetAfterHandleConnectionEvent() {
+        // Création de la vue et du contrôleur
+        IntervenantView mockView = new IntervenantView(null);
         IntervenantController controller = new IntervenantController(mockView);
 
+        // Création d'un intervenant simulé
         Intervenant intervenant = new Intervenant(
-            "test@mail.com", "password", null, "John", "Doe", null, "123"
+                "test@mail.com", "password", null, "John", "Doe", null, "123"
         );
+
+        // Appel à la méthode pour connecter l'intervenant
         controller.handleConnectionEvent(intervenant);
 
-        Mockito.doAnswer(invocation -> {
-            
-            return 6; 
-        }).when(mockView).promptMainMenu();
-
-        controller.run();
-
-        verify(mockView).promptMainMenu();
+        // Vérification que l'intervenant est bien défini dans le contrôleur
+        assertNotNull(controller.getIntervenantEmail(), "L'email de l'intervenant ne devrait pas être null.");
     }
-}
 }
