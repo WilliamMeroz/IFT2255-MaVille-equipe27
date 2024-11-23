@@ -92,7 +92,7 @@ public class ResidentView {
     }
 
     public int promptTravauxAVenir() {
-        textIO.getTextTerminal().println("=== LISTE DES TRAVAUX À VENIR (Pas implémenté encore) ===");
+        textIO.getTextTerminal().println("=== LISTE DES TRAVAUX À VENIR ===");
 
         textIO.getTextTerminal().println("""
                 1. Filter par type de travaux
