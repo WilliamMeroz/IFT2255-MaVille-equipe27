@@ -19,38 +19,36 @@ public class IntervenantView {
 
     public int promptMainMenu() {
         textIO.getTextTerminal().println("=== MENU PRINCIPAL ===");
-        textIO.getTextTerminal().println("1. Consulter les travaux\n" +
-                "2. Rechercher des travaux\n" +
-                "3. Consulter la liste de requêtes de travail\n" +
-                "4. Soumettre un nouveau projet de travaux\n" +
-                "5. Mettre à jour les infos d'un chantier\n" +
-                "6. Déconnecter\n");
+        textIO.getTextTerminal().println("1. Consulter la liste de requêtes de travail\n" +
+                "2. Soumettre un nouveau projet de travaux\n" +
+                "3. Mettre à jour les infos d'un chantier\n" +
+                "4. Déconnecter\n");
 
-        return textIO.newIntInputReader().withMinVal(1).withMaxVal(6).read("Entrez votre choix: ");
+        return textIO.newIntInputReader().withMinVal(1).withMaxVal(4).read("Entrez votre choix: ");
     }
 
-    public int promptTravauxEnCours() {
-        textIO.getTextTerminal().println("=== LISTE DES TRAVAUX EN COURS (Pas implémenté encore) ===");
+    //public int promptTravauxEnCours() {
+        //textIO.getTextTerminal().println("=== LISTE DES TRAVAUX EN COURS (Pas implémenté encore) ===");
 
-        textIO.getTextTerminal().println("1. Filter par rue (pas implémenté)\n" +
-                "2. Filter par type de travaux (pas implémenté)\n" +
-                "3. Filter par quartier (pas implémenté)\n" +
-                "4. Retour en arrière");
-        int choice = textIO.newIntInputReader().withMaxVal(4).withMinVal(4).read("Entrez votre choix: ");
-        if (choice == 4) return 0;
-        return choice;
-    }
+        //textIO.getTextTerminal().println("1. Filter par rue (pas implémenté)\n" +
+                //"2. Filter par type de travaux (pas implémenté)\n" +
+                //"3. Filter par quartier (pas implémenté)\n" +
+                //"4. Retour en arrière");
+        //int choice = textIO.newIntInputReader().withMaxVal(4).withMinVal(4).read("Entrez votre choix: ");
+        //if (choice == 4) return 0;
+        //return choice;
+    //}
 
-    public int promptRechercheTravaux() {
-        textIO.getTextTerminal().println("=== Recherche de travaux ===");
-        textIO.getTextTerminal().println("1. Recherche par titre\n" +
-                "2. Recherche par type\n" +
-                "3. Recherche par quartier\n" +
-                "4. Retour en arrière");
-        int choice = textIO.newIntInputReader().withMaxVal(4).withMinVal(4).read("Entrez votre choix: ");
-        if (choice == 4) return 0;
-        return choice;
-    }
+    //public int promptRechercheTravaux() {
+        //textIO.getTextTerminal().println("=== Recherche de travaux (Pas implémenté encore) ==");
+        //textIO.getTextTerminal().println("1. Recherche par titre (pas implémenté)n" +
+                //"2. Recherche par type (pas implémenté)\n" +
+                //"3. Recherche par quartier (pas implémenté)\n" +
+                //"4. Retour en arrière");
+        //int choice = textIO.newIntInputReader().withMaxVal(4).withMinVal(4).read("Entrez votre choix: ");
+        //if (choice == 4) return 0;
+        //return choice;
+    //}
 
     public int promptRequeteTravail() {
         textIO.getTextTerminal().println("=== Requêtes de travail ===");
@@ -74,8 +72,8 @@ public class IntervenantView {
         }
     }
     public int promptNouveauProjet() {
-        textIO.getTextTerminal().println("=== Soumission de nouveau projet ===");
-        textIO.getTextTerminal().println("1. Consulter les préférences des résidents\n" +
+        textIO.getTextTerminal().println("=== Soumission de nouveau projet (pas implémenté) ==");
+        textIO.getTextTerminal().println("1. Consulter les préférences des résidents (pas implémenté)\n" +
                 "2. Revenir en arrière");
         int choice = textIO.newIntInputReader().withMaxVal(2).withMinVal(2).read("Entrez votre choix: ");
         if (choice == 2) return 0;
@@ -83,10 +81,10 @@ public class IntervenantView {
     }
 
     public int promptModifChantier() {
-        textIO.getTextTerminal().println("=== Modification de chantier ===");
-        textIO.getTextTerminal().println("1. Mettre à jour description du projet\n" +
-                "2. Mettre à jour la date de fin prévue\n" +
-                "3. Changer le statut du projet\n" +
+        textIO.getTextTerminal().println("=== Modification de chantier (pas implémenté) ===");
+        textIO.getTextTerminal().println("1. Mettre à jour description du projet (pas implémenté)\n" +
+                "2. Mettre à jour la date de fin prévue (pas implémenté)\n" +
+                "3. Changer le statut du projet (pas implémenté)\n" +
                 "4. Revenir en arrière");
         int choice = textIO.newIntInputReader().withMaxVal(4).withMinVal(4).read("Entrez votre choix: ");
         if (choice == 4) return 0;
