@@ -31,23 +31,23 @@ public class IntervenantController implements IController {
                 case 0:
                     choice = intervenantView.promptMainMenu();
                     break;
+                //case 1:
+                    //choice = intervenantView.promptTravauxEnCours();
+                    //break;
+                //case 2:
+                    //choice = intervenantView.promptRechercheTravaux();
+                    //break;
                 case 1:
-                    choice = intervenantView.promptTravauxEnCours();
-                    break;
-                case 2:
-                    choice = intervenantView.promptRechercheTravaux();
-                    break;
-                case 3:
                     afficherRequetesTravail();
                     choice = intervenantView.promptRequeteTravail();
                     break;
-                case 4:
+                case 2:
                     choice = intervenantView.promptNouveauProjet();
                     break;
-                case 5:
+                case 3:
                     choice = intervenantView.promptModifChantier();
                     break;
-                case 6:
+                case 4:
                     System.exit(0);
                     break;
             }
@@ -63,8 +63,5 @@ public class IntervenantController implements IController {
         } catch (Exception e) {
             intervenantView.textIO.getTextTerminal().println("Erreur lors du chargement des requêtes : " + e.getMessage());
         }
-    }
-    public String getIntervenantEmail() {
-        return intervenant.getEmail();
     }
 }
