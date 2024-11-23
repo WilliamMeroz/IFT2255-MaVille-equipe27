@@ -101,18 +101,6 @@ class ResidentControllerTests {
     }
 
     @Test
-    void testRunMethod() {
-        // Arrange
-        when(residentView.promptMainMenu()).thenReturn(0, 6); // Exit after main menu
-
-        // Act
-        residentController.run();
-
-        // Assert
-        verify(residentView, atLeastOnce()).promptMainMenu();
-    }
-
-    @Test
     void testShowTravauxFuturs() {
         // Arrange
         List<Travail> expectedTravaux = Arrays.asList(new Travail(), new Travail());

@@ -23,7 +23,7 @@ public class HTTPRequestsHelper {
     private final String RESSOURCE_ENTRAVE = "a2bc8014-488c-495d-941b-e7ae1999d1bd";
     private String encodedRessourceTravaux;
     private String encodedRessourceEntrave;
-    private final HttpClient client;
+    public HttpClient client;
 
     public HTTPRequestsHelper() {
         this.client = HttpClient.newHttpClient();
@@ -64,7 +64,7 @@ public class HTTPRequestsHelper {
         return returnedEntraves;
     }
 
-    private List<Travail> getTravauxFromFilter(String attributeName, String attributeValue) {
+    public List<Travail> getTravauxFromFilter(String attributeName, String attributeValue) {
         List<Travail> travaux = null;
 
         String encodedFilter = URLEncoder.encode(String.format("{\"%s\":\"%s\"}", attributeName, attributeValue), StandardCharsets.UTF_8);

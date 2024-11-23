@@ -53,7 +53,7 @@ public class IntervenantController implements IController {
             }
         }
     }
-    private void afficherRequetesTravail() {
+    public void afficherRequetesTravail() {
         try {
             JSONParser parser = new JSONParser();
             Object file = parser.parse(new FileReader("requetes.json"));
