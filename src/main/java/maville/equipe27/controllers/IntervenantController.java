@@ -31,12 +31,6 @@ public class IntervenantController implements IController {
                 case 0:
                     choice = intervenantView.promptMainMenu();
                     break;
-                //case 1:
-                    //choice = intervenantView.promptTravauxEnCours();
-                    //break;
-                //case 2:
-                    //choice = intervenantView.promptRechercheTravaux();
-                    //break;
                 case 1:
                     afficherRequetesTravail();
                     choice = intervenantView.promptRequeteTravail();
