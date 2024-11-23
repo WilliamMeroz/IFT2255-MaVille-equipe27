@@ -27,29 +27,6 @@ public class IntervenantView {
         return textIO.newIntInputReader().withMinVal(1).withMaxVal(4).read("Entrez votre choix: ");
     }
 
-    //public int promptTravauxEnCours() {
-        //textIO.getTextTerminal().println("=== LISTE DES TRAVAUX EN COURS (Pas implémenté encore) ===");
-
-        //textIO.getTextTerminal().println("1. Filter par rue (pas implémenté)\n" +
-                //"2. Filter par type de travaux (pas implémenté)\n" +
-                //"3. Filter par quartier (pas implémenté)\n" +
-                //"4. Retour en arrière");
-        //int choice = textIO.newIntInputReader().withMaxVal(4).withMinVal(4).read("Entrez votre choix: ");
-        //if (choice == 4) return 0;
-        //return choice;
-    //}
-
-    //public int promptRechercheTravaux() {
-        //textIO.getTextTerminal().println("=== Recherche de travaux (Pas implémenté encore) ==");
-        //textIO.getTextTerminal().println("1. Recherche par titre (pas implémenté)n" +
-                //"2. Recherche par type (pas implémenté)\n" +
-                //"3. Recherche par quartier (pas implémenté)\n" +
-                //"4. Retour en arrière");
-        //int choice = textIO.newIntInputReader().withMaxVal(4).withMinVal(4).read("Entrez votre choix: ");
-        //if (choice == 4) return 0;
-        //return choice;
-    //}
-
     public int promptRequeteTravail() {
         textIO.getTextTerminal().println("=== Requêtes de travail ===");
         textIO.getTextTerminal().println("1. Soumettre sa candidature (pas implémenté)\n" +
