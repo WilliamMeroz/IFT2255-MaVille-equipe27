@@ -27,7 +27,7 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <version>RELEASE</version>
+            <version>5.10.0</version>
             <scope>test</scope>
         </dependency>
         <dependency>
@@ -82,7 +82,6 @@
                             <addClasspath>true</addClasspath>
                             <mainClass>maville.equipe27.Main</mainClass>
                         </manifest>
-                        <testSourceDirectory>${basedir}/src/test/java</testSourceDirectory>
                     </archive>
                 </configuration>
 

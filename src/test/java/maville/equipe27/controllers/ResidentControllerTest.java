@@ -1,6 +1,5 @@
 package maville.equipe27.controllers;
 
-import maville.equipe27.controllers.ResidentController;
 import maville.equipe27.enums.TravauxTypes;
 import maville.equipe27.helpers.HTTPRequestsHelper;
 import maville.equipe27.helpers.RequeteTravailDataStore;

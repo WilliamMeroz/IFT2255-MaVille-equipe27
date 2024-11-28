@@ -1,19 +1,14 @@
 package maville.equipe27.controllers;
 
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import maville.equipe27.enums.TravauxTypes;
-import maville.equipe27.helpers.CustomTravauxJsonAdapter;
 import maville.equipe27.helpers.HTTPRequestsHelper;
 import maville.equipe27.models.Entrave;
 import maville.equipe27.models.Travail;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
 
-import java.net.URI;
 import java.net.URLEncoder;
 import java.net.http.HttpClient;
 import java.net.http.HttpRequest;
