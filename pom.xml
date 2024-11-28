@@ -82,6 +82,7 @@
                             <addClasspath>true</addClasspath>
                             <mainClass>maville.equipe27.Main</mainClass>
                         </manifest>
+                        <testSourceDirectory>${basedir}/src/test/java</testSourceDirectory>
                     </archive>
                 </configuration>
 
