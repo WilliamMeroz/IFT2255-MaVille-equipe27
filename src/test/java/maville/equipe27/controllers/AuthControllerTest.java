@@ -17,7 +17,7 @@ import java.beans.PropertyChangeSupport;
 import java.time.LocalDate;
 
 import static org.mockito.Mockito.*;
-
+// test
 class AuthControllerTest {
     @Mock
     private UserDataStore userDataStore; // Mock for UserDataStore
