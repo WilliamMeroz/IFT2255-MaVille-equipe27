@@ -177,7 +177,7 @@ public class ResidentView {
             try {
                 String dateDebutStr = textIO.newStringInputReader().read("Entrez la date de début espéré: ");
                 date = LocalDate.parse(dateDebutStr);
-            } catch (DateTimeParseException _) {
+            } catch (DateTimeParseException e) {
                 textIO.getTextTerminal().println("Entrez une date avec un format valide");
             }
 

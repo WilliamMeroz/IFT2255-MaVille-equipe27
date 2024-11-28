@@ -51,7 +51,7 @@ public class AuthView {
                 dateLiteral = textIO.newStringInputReader().read("Entrez votre date de naissance (YYYY-MM-DD)");
                 date = LocalDate.parse(dateLiteral);
                 break;
-            } catch (DateTimeParseException _) {
+            } catch (DateTimeParseException e) {
                 textIO.getTextTerminal().println("Entrez une date avec un format valide");
             }
         }
