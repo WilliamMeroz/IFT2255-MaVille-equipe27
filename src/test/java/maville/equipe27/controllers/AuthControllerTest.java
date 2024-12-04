@@ -43,7 +43,7 @@ class AuthControllerTest {
 
     @Test
     @DisplayName("Register with valid user object")
-    void register_with_valid_user() {
+    void attemptRegister_with_valid_user() {
         User validUser = new Resident("mail@mail.com",
                 "some-password",
                 RoleChoices.RÉSIDENT,
@@ -56,14 +56,14 @@ class AuthControllerTest {
         when(authHelper.register(validUser)).thenReturn(true);
 
         // sot
-        authController.register(validUser);
+        authController.attemptRegister(validUser);
 
         verify(view).registerSuccess(validUser.getFirstname());
         verify(view, never()).registerFailure();
     }
 
     @Test
-    void register_with_invalid_user() {
+    void attemptRegister_with_invalid_user() {
         User invalidUser = new Resident("mail@mail.com",
                 "some-password",
                 RoleChoices.RÉSIDENT,
@@ -75,7 +75,7 @@ class AuthControllerTest {
 
         when(authHelper.register(invalidUser)).thenReturn(false);
 
-        authController.register(invalidUser);
+        authController.attemptRegister(invalidUser);
 
         verify(view).registerFailure();
         verify(view, never()).registerSuccess(anyString());

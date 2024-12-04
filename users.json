@@ -17,5 +17,15 @@
     "lastname": "Potter",
     "companyChoices": "PARTICULIER",
     "cityIdentifier": "34543456"
+  },
+  {
+    "email": "bob2@mail.com",
+    "password": "$2a$10$CSjcYVlk3KxH.ab3/bEeoudPN8E.o5.IET/6z4Imx3rfIi48pDtWm",
+    "role": "1",
+    "firstname": "bob",
+    "lastname": "ggwg",
+    "dob": "2000-10-05",
+    "phone": "514-795-9342",
+    "address": "1,wjgkejgekgj,0,j5r0b2"
   }
 ]

@@ -51,7 +51,7 @@ public class AuthController implements IController {
         return authHelper.login(email, password);
     }
 
-    public void register(User user) {
+    public void attemptRegister(User user) {
         boolean success = authHelper.register(user);
         if(success) {
             view.registerSuccess(user.getFirstname());
@@ -59,6 +59,14 @@ public class AuthController implements IController {
         } else {
             view.registerFailure();
         }
+    }
+
+    public User register(User user) {
+        if (authHelper.register(user)) {
+            return user;
+        }
+
+        return null;
     }
 
     @Override
@@ -92,7 +100,7 @@ public class AuthController implements IController {
                 user = new Intervenant(email, password, role, firstname, lastname, companyChoice, cityIdentifier);
             }
 
-            register(user);
+            attemptRegister(user);
         }
         else attemptLogin(email, password);
     }

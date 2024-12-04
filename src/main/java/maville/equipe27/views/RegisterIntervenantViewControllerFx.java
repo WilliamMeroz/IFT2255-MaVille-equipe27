@@ -1,16 +1,29 @@
 package maville.equipe27.views;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import maville.equipe27.controllers.AuthController;
 import maville.equipe27.enums.CompanyChoices;
+import maville.equipe27.enums.RoleChoices;
+import maville.equipe27.helpers.ConnectedIntervenant;
+import maville.equipe27.models.Intervenant;
+import maville.equipe27.models.Resident;
+import maville.equipe27.models.User;
 import maville.equipe27.validators.AuthValidator;
 
 import javax.xml.validation.Validator;
+import java.io.IOException;
 
 public class RegisterIntervenantViewControllerFx {
+
+    private AuthController authController;
 
     @FXML
     private Button registerButtonIntervenant;
@@ -38,6 +51,7 @@ public class RegisterIntervenantViewControllerFx {
 
     @FXML
     public void initialize() {
+        authController = new AuthController();
         registerButtonIntervenant.setOnAction(event -> handleRegister());
     }
 
@@ -60,6 +74,9 @@ public class RegisterIntervenantViewControllerFx {
                 break;
             case "Particulier":
                 companyType = CompanyChoices.PARTICULIER;
+                break;
+            default:
+                companyType = null;
                 break;
         }
 
@@ -94,7 +111,29 @@ public class RegisterIntervenantViewControllerFx {
             registerIdentifierIntervenant.setStyle("-fx-border-color: red;");
         }
 
+        Intervenant user = new Intervenant(email, password, RoleChoices.INTERVENANT, firstName, lastName, companyType, identifier);
+        performRegister(user);
+    }
 
+    private void performRegister(Intervenant user) {
+        User returnedUser =  authController.register(user);
+        if (returnedUser != null) {
+            ConnectedIntervenant.getInstance().setIntervenant((Intervenant) returnedUser);
+            switchScene("/intervenantMenu.fxml", "Menu résident");
+        } else showAlert("Erreur lors de l'inscription", "Un compte evec les mêmes infos existe probablement déjà.");
+    }
+
+    private void switchScene(String resssource, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(resssource));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) registerIdentifierIntervenant.getScene().getWindow();
+            stage.setTitle(title);
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void showAlert(String title, String message) {

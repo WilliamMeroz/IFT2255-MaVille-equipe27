@@ -1,12 +1,25 @@
 package maville.equipe27.views;
 
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.stage.Stage;
+import maville.equipe27.controllers.AuthController;
+import maville.equipe27.enums.RoleChoices;
+import maville.equipe27.helpers.ConnectedResident;
+import maville.equipe27.models.Resident;
+import maville.equipe27.models.User;
 import maville.equipe27.validators.AuthValidator;
 
+import java.io.IOException;
 import java.time.LocalDate;
+import java.util.StringJoiner;
 
 public class RegisterResidentViewControllerFx {
+
+    private AuthController authController;
 
     @FXML
     private Button registerButtonResident;
@@ -43,6 +56,8 @@ public class RegisterResidentViewControllerFx {
 
     @FXML
     public void initialize() {
+        authController = new AuthController();
+
         registerButtonResident.setOnAction(event -> handleRegister());
     }
 
@@ -111,8 +126,8 @@ public class RegisterResidentViewControllerFx {
             return;
         }
 
+        int unit = 0;
         if (!unitStr.isEmpty()) {
-            int unit;
             try {
                 unit = Integer.parseInt(unitStr);
                 if (unit < 0) throw new IllegalArgumentException();
@@ -129,7 +144,32 @@ public class RegisterResidentViewControllerFx {
             return;
         }
 
+        StringJoiner joiner = new StringJoiner(",");
+        joiner.add(String.valueOf(civic)).add(street).add(String.valueOf(unit)).add(postalCode);
 
+        Resident user = new Resident(email, password, RoleChoices.RÉSIDENT, firstName, lastName, dob, phone, joiner.toString());
+        performRegister(user);
+    }
+
+    private void performRegister(Resident user) {
+        User returnedUser = authController.register(user);
+        if (returnedUser != null) {
+            ConnectedResident.getInstance().setResident((Resident) returnedUser);
+            switchScene("/residentMenu.fxml", "Menu résident");
+        } else showAlert("Erreur lors de l'inscription", "Un compte evec les mêmes infos existe probablement déjà.");
+    }
+
+    private void switchScene(String resssource, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(resssource));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) registerButtonResident.getScene().getWindow();
+            stage.setTitle(title);
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 
     private void showAlert(String title, String message) {
