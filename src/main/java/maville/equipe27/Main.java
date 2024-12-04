@@ -25,7 +25,7 @@ public class Main extends Application {
         // Configure the Stage
         Scene scene = new Scene(root);
         primaryStage.setScene(scene);
-        primaryStage.setTitle("JavaFX Maven Test");
+        primaryStage.setTitle("MaVille");
 
         primaryStage.show();
     }

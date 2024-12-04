@@ -20,6 +20,12 @@ public class AuthController implements IController {
     private final PropertyChangeSupport support;
 
 
+    public AuthController() {
+        this.view = null;
+        this.authHelper = new AuthHelper(new UserDataStore("users.json"));
+        this.support = new PropertyChangeSupport(this);
+    }
+
     public AuthController(AuthView view, AuthHelper authHelper) {
         this.view = view;
         this.authHelper = authHelper;
@@ -39,6 +45,10 @@ public class AuthController implements IController {
         else {
             view.loginFailure();
         }
+    }
+
+    public User login(String email, String password) {
+        return authHelper.login(email, password);
     }
 
     public void register(User user) {

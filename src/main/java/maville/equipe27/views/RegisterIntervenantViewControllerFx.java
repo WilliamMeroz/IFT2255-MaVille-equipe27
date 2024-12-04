@@ -70,7 +70,7 @@ public class RegisterIntervenantViewControllerFx {
         }
 
         if (password.length() < 6) {
-            showAlert("Mot de passe invalide", "Mot de passe invalide");
+            showAlert("Mot de passe invalide", "Mot de passe trop court");
             registerPasswordIntervenant.setStyle("-fx-border-color: red;");
         }
 

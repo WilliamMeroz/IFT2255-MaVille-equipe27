@@ -9,10 +9,18 @@ import javafx.scene.control.Button;
 import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
+import maville.equipe27.controllers.AuthController;
+import maville.equipe27.helpers.ConnectedIntervenant;
+import maville.equipe27.helpers.ConnectedResident;
+import maville.equipe27.models.Intervenant;
+import maville.equipe27.models.Resident;
+import maville.equipe27.models.User;
 
 import java.io.IOException;
 
 public class AuthViewControllerFx {
+
+    private AuthController authController;
 
     @FXML
     private TextField email;
@@ -28,6 +36,8 @@ public class AuthViewControllerFx {
 
     @FXML
     public void initialize() {
+        authController = new AuthController();
+
         // Add an action listener to the login button
         loginButton.setOnAction(event -> handleLogin());
         registerButton.setOnAction(event -> openRegisterPage());
@@ -60,16 +70,7 @@ public class AuthViewControllerFx {
     }
 
     private void openRegisterPage() {
-        try {
-            FXMLLoader loader = new FXMLLoader(getClass().getResource("/register.fxml"));
-            Parent root = loader.load();
-
-            Stage stage = (Stage) registerButton.getScene().getWindow();
-            stage.setTitle("Inscription");
-            stage.setScene(new Scene(root));
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        switchScene("/register.fxml", "Inscription");
     }
 
     private boolean isValidEmail(String email) {
@@ -89,12 +90,34 @@ public class AuthViewControllerFx {
     }
 
     private void performLogin(String email, String password) {
-        // Implement your login logic here
-        System.out.println("Logging in with email: " + email + " and password: " + password);
-        Alert alert = new Alert(Alert.AlertType.INFORMATION);
-        alert.setTitle("Login Successful");
-        alert.setHeaderText(null);
-        alert.setContentText("Welcome, " + email + "!");
-        alert.showAndWait();
+        User user = authController.login(email, password);
+        if (user == null) {
+            Alert alert = new Alert(Alert.AlertType.ERROR);
+            alert.setTitle("CONNEXION IMPOSSIBLE");
+            alert.setHeaderText(null);
+            alert.setContentText("Courriel ou mot de passse invalide.");
+            alert.showAndWait();
+        } else {
+            if (user instanceof Resident) {
+                ConnectedResident.getInstance().setResident((Resident) user);
+                switchScene("/residentMenu.fxml", "Menu résident");
+            } else if (user instanceof Intervenant) {
+                ConnectedIntervenant.getInstance().setIntervenant((Intervenant) user);
+                switchScene("/intervenantMenu.fxml", "Menu intervenant");
+            }
+        }
+    }
+
+    private void switchScene(String resssource, String title) {
+        try {
+            FXMLLoader loader = new FXMLLoader(getClass().getResource(resssource));
+            Parent root = loader.load();
+
+            Stage stage = (Stage) registerButton.getScene().getWindow();
+            stage.setTitle(title);
+            stage.setScene(new Scene(root));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
     }
 }
