@@ -1,5 +1,10 @@
 package maville.equipe27;
 
+import javafx.application.Application;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.fxml.FXMLLoader;
+import javafx.stage.Stage;
 import maville.equipe27.controllers.AuthEventHandler;
 import maville.equipe27.controllers.IntervenantController;
 import maville.equipe27.controllers.AuthController;
@@ -11,7 +16,21 @@ import maville.equipe27.views.IntervenantView;
 import maville.equipe27.views.ResidentView;
 import maville.equipe27.views.TextIOSingleton;
 
-public class Main {
+public class Main extends Application {
+    @Override
+    public void start(Stage primaryStage) throws Exception {
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/main.fxml"));
+        Parent root = loader.load();
+        
+        // Configure the Stage
+        Scene scene = new Scene(root);
+        primaryStage.setScene(scene);
+        primaryStage.setTitle("JavaFX Maven Test");
+
+        primaryStage.show();
+    }
+
+
     public static void main(String[] args) {
 
         // Initialize views.
@@ -35,8 +54,8 @@ public class Main {
         authController.addPropertyChangeListener(authEventHandler);
 
         // Run the first controller needed. The other controllers will be ran as needed from the auth event handler.
-        authController.run();
+        //authController.run();
 
-
+        launch(args);
     }
 }
