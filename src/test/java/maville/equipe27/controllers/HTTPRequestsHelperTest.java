@@ -172,9 +172,4 @@ class HTTPRequestsHelperTest {
         assertEquals(1, entraves.size());
         verify(mockHttpClient).send(any(HttpRequest.class), any(HttpResponse.BodyHandler.class));
     }
-
-    @Test
-    void test() {
-        assertEquals(1, 2);
-    }
 }
