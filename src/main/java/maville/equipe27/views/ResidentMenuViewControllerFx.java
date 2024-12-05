@@ -6,8 +6,12 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import maville.equipe27.controllers.ResidentController;
+import maville.equipe27.enums.TravauxTypes;
 import maville.equipe27.models.Entrave;
+import maville.equipe27.models.RequeteTravail;
 
+import java.text.Normalizer;
+import java.time.LocalDate;
 import java.util.List;
 
 public class ResidentMenuViewControllerFx {
@@ -51,10 +55,25 @@ public class ResidentMenuViewControllerFx {
     private ToggleGroup ta;
 
     @FXML
+    private TextArea requeteDesc;
+
+    @FXML
+    private TextField requeteTitre;
+
+    @FXML
+    private ComboBox<?> requeteType;
+
+    @FXML
+    private DatePicker requeteDateDebut;
+
+    @FXML
+    private Button boutonNouvelleRequete;
+
+    @FXML
     public void initialize() {
         residentController = new ResidentController();
 
-        entravesButton.setOnAction(event -> handleSearch());
+        entravesButton.setOnAction(event -> handleEntraveSearch());
         entravesRadioRue.setOnAction(event -> entravesTextBox.setPromptText("Nom de rue"));
         entravesRadioTravail.setOnAction(event -> entravesTextBox.setPromptText("numéro de travail"));
 
@@ -64,9 +83,12 @@ public class ResidentMenuViewControllerFx {
         tableStatusTroitCol.setCellValueFactory(new PropertyValueFactory<>("sidewalkStatus"));
         tableToCol.setCellValueFactory(new PropertyValueFactory<>("to"));
         tableTypeCol.setCellValueFactory(new PropertyValueFactory<>("impactType"));
+
+
+        boutonNouvelleRequete.setOnAction(event -> handleNouvelleRequete());
     }
 
-    private void handleSearch() {
+    private void handleEntraveSearch() {
         String text = entravesTextBox.getText();
         if (text.isEmpty()) {
             showAlert("Recherche invalide", "Entrez une valeur de recherche");
@@ -86,8 +108,50 @@ public class ResidentMenuViewControllerFx {
         }
     }
 
+    private void handleNouvelleRequete() {
+        String requestTitle = requeteTitre.getText();
+        String requeteTypeStr = (String) requeteType.getSelectionModel().getSelectedItem();
+        String requeteDescStr = requeteDesc.getText().replaceAll("\n", System.lineSeparator());
+        LocalDate dateDebut = requeteDateDebut.getValue();
+
+        String normalizedType = Normalizer.normalize(requeteTypeStr, Normalizer.Form.NFD).replaceAll("\\p{M}", "");
+        TravauxTypes type = TravauxTypes.valueOf(normalizedType.toUpperCase());
+
+        if (requestTitle.isEmpty()) {
+            showAlert("Titre invalide", "Le titre de la requête ne peut pas être vide.");
+            entravesTextBox.setStyle("-fx-border-color: red;");
+        }
+
+        if (requeteDescStr.isEmpty()) {
+            showAlert("Description invalide", "La description de la requête ne peut pas être vide.");
+            entravesTextBox.setStyle("-fx-border-color: red;");
+        }
+
+        if (dateDebut.isBefore(LocalDate.now())) {
+            showAlert("Date de début invalide", "La date de début doit être dans le futur.");
+            entravesTextBox.setStyle("-fx-border-color: red;");
+        }
+
+        RequeteTravail requeteTravail = new RequeteTravail(requestTitle, requeteDescStr, type, dateDebut);
+        if (residentController.saveRequest(requeteTravail)) {
+            requeteTitre.setText("");
+            requeteDesc.setText("");
+            showAlertSuccess("Requête créée avec succès", "Les intervenants seront notifiées");
+        } else {
+            showAlert("Erreur durant la création", "Un erreur est survenue durant la création de la requête");
+        }
+    }
+
     private void showAlert(String title, String message) {
         Alert alert = new Alert(Alert.AlertType.ERROR);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
+    private void showAlertSuccess(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
         alert.setTitle(title);
         alert.setHeaderText(null);
         alert.setContentText(message);

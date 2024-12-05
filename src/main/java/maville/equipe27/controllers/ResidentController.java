@@ -66,6 +66,10 @@ public class ResidentController implements IController {
         return this.httpRequestsHelper.getFutureTravauxByType(type.toString());
     }
 
+    public boolean saveRequest(RequeteTravail requeteTravail) {
+        return requeteTravailDataStore.saveRequete(requeteTravail);
+    }
+
     @Override
     public void run() {
         System.out.println("Résident: " + this.resident.getEmail());

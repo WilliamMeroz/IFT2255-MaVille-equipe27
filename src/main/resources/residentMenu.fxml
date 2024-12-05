@@ -1,11 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
 <?import javafx.scene.control.RadioButton?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TabPane?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -14,6 +17,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
 <AnchorPane prefHeight="900.0" prefWidth="1183.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maville.equipe27.views.ResidentMenuViewControllerFx">
    <children>
       <TabPane layoutX="7.0" layoutY="7.0" prefHeight="886.0" prefWidth="1171.0" tabClosingPolicy="UNAVAILABLE">
@@ -67,7 +72,51 @@
                   </Pane>
                </content>
             </Tab>
-            <Tab text="Req. Travail" />
+            <Tab text="Req. Travail">
+               <content>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Text layoutX="471.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Requêtes de travail" wrappingWidth="312.2162780761719">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Text>
+                        <VBox layoutX="47.0" layoutY="110.0" prefHeight="487.0" prefWidth="496.0" spacing="50.0">
+                           <children>
+                              <TextField id="requeteTitre" fx:id="requeteTitre" prefHeight="26.0" prefWidth="345.0" promptText="Titre de la requête" />
+                              <ComboBox id="requeteType" fx:id="requeteType" prefWidth="150.0" promptText="Type de requête">
+                                  <items>
+                                      <FXCollections fx:factory="observableArrayList">
+                                          <String fx:value="Routier"/>
+                                          <String fx:value="Énergie"/>
+                                          <String fx:value="Construction"/>
+                                          <String fx:value="Paysager"/>
+                                          <String fx:value="Transports"/>
+                                          <String fx:value="Signalisation"/>
+                                          <String fx:value="Souterrains"/>
+                                          <String fx:value="Résidentiel"/>
+                                          <String fx:value="Urbain"/>
+                                          <String fx:value="Telecoms"/>
+                                          <String fx:value="Autre"/>
+                                      </FXCollections>
+                                  </items>
+                                  <value>
+                                      <String fx:value="Routier"/>
+                                  </value>
+                              </ComboBox>
+                              <DatePicker id="requeteDateDebut" fx:id="requeteDateDebut" promptText="Date de début" />
+                              <TextArea id="requeteDesc" fx:id="requeteDesc" prefHeight="200.0" prefWidth="200.0" promptText="Description de la requête..." />
+                              <Button id="boutonNouvelleRequete" fx:id="boutonNouvelleRequete" mnemonicParsing="false" prefHeight="63.0" prefWidth="496.0" text="Envoyer nouvelle requête" />
+                           </children>
+                        </VBox>
+                        <Text layoutX="81.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Créer nouvelle requête">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+               </content></Tab>
         </tabs>
       </TabPane>
    </children>
