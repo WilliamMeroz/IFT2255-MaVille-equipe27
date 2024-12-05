@@ -9,6 +9,7 @@ import maville.equipe27.controllers.ResidentController;
 import maville.equipe27.enums.TravauxTypes;
 import maville.equipe27.models.Entrave;
 import maville.equipe27.models.RequeteTravail;
+import maville.equipe27.models.Travail;
 
 import java.text.Normalizer;
 import java.time.LocalDate;
@@ -17,6 +18,9 @@ import java.util.List;
 public class ResidentMenuViewControllerFx {
 
     private ResidentController residentController;
+
+    @FXML
+    private Button boutonNouvelleRequete;
 
     @FXML
     private Button entravesButton;
@@ -29,6 +33,30 @@ public class ResidentMenuViewControllerFx {
 
     @FXML
     private TableView<Entrave> entravesTableView;
+
+    @FXML
+    private TextField entravesTextBox;
+
+    @FXML
+    private ComboBox<?> rechercheTravauxComboBox;
+
+    @FXML
+    private DatePicker requeteDateDebut;
+
+    @FXML
+    private TextArea requeteDesc;
+
+    @FXML
+    private TextField requeteTitre;
+
+    @FXML
+    private ComboBox<?> requeteType;
+
+    @FXML
+    private ToggleGroup t1;
+
+    @FXML
+    private ToggleGroup ta;
 
     @FXML
     private TableColumn<Entrave, String> tableFromCol;
@@ -49,25 +77,67 @@ public class ResidentMenuViewControllerFx {
     private TableColumn<Entrave, String> tableTypeCol;
 
     @FXML
-    private TextField entravesTextBox;
+    private RadioButton travauxParQuartierRadio;
 
     @FXML
-    private ToggleGroup ta;
+    private RadioButton travauxParTitreRadio;
 
     @FXML
-    private TextArea requeteDesc;
+    private RadioButton travauxParTypeRadio;
 
     @FXML
-    private TextField requeteTitre;
+    private Button travauxRechercheButton;
 
     @FXML
-    private ComboBox<?> requeteType;
+    private TextField travauxRechercheTextBox;
 
     @FXML
-    private DatePicker requeteDateDebut;
+    private TableView<Travail> travauxTableView;
 
     @FXML
-    private Button boutonNouvelleRequete;
+    private TableColumn<Travail, LocalDate> colTravailDe;
+
+    @FXML
+    private TableColumn<Travail, LocalDate> colTravailA;
+
+    @FXML
+    private TableColumn<Travail, String> colTravailId;
+
+    @FXML
+    private TableColumn<Travail, String> colTravailIntervenant;
+
+    @FXML
+    private TableColumn<Travail, String> colTravailQuartier;
+
+    @FXML
+    private TableColumn<Travail, String> colTravailTitre;
+
+    @FXML
+    private TableColumn<Travail, TravauxTypes> colTravailType;
+
+    @FXML
+    private RadioButton radioTravauxCourrants;
+
+    @FXML
+    private RadioButton radioTravauxFuturs;
+
+    @FXML
+    private RadioButton radioTravauxTous;
+
+    @FXML
+    private RadioButton radioTravauxParType;
+
+    @FXML
+    private RadioButton radioTravauxParQuartier;
+
+    @FXML
+    private TextField voirTravauxTextBox;
+
+    @FXML
+    private ComboBox<?> voirTravauxComboBox;
+
+    @FXML
+    private Button voirTravauxButton;
 
     @FXML
     public void initialize() {
@@ -84,8 +154,57 @@ public class ResidentMenuViewControllerFx {
         tableToCol.setCellValueFactory(new PropertyValueFactory<>("to"));
         tableTypeCol.setCellValueFactory(new PropertyValueFactory<>("impactType"));
 
-
         boutonNouvelleRequete.setOnAction(event -> handleNouvelleRequete());
+        travauxParTitreRadio.setOnAction(event -> {
+            rechercheTravauxComboBox.setDisable(true);
+            travauxRechercheTextBox.setDisable(false);
+        });
+
+        travauxParQuartierRadio.setOnAction(event -> {
+            rechercheTravauxComboBox.setDisable(true);
+            travauxRechercheTextBox.setDisable(false);
+        });
+
+        travauxParTypeRadio.setOnAction(event -> {
+            rechercheTravauxComboBox.setDisable(false);
+            travauxRechercheTextBox.setDisable(true);
+        });
+
+        travauxRechercheButton.setOnAction(event -> handleRechercheTravaux());
+
+        ToggleGroup toggleGroupTravauxCourrantsFuturs = new ToggleGroup();
+        radioTravauxCourrants.setToggleGroup(toggleGroupTravauxCourrantsFuturs);
+        radioTravauxFuturs.setToggleGroup(toggleGroupTravauxCourrantsFuturs);
+
+        ToggleGroup toggleGroupRechecheTravauxType = new ToggleGroup();
+        radioTravauxTous.setToggleGroup(toggleGroupRechecheTravauxType);
+        radioTravauxParQuartier.setToggleGroup(toggleGroupRechecheTravauxType);
+        radioTravauxParType.setToggleGroup(toggleGroupRechecheTravauxType);
+
+        radioTravauxTous.setOnAction(event -> {
+            voirTravauxTextBox.setDisable(true);
+            voirTravauxComboBox.setDisable(true);
+        });
+
+        radioTravauxParType.setOnAction(event -> {
+            voirTravauxTextBox.setDisable(true);
+            voirTravauxComboBox.setDisable(false);
+        });
+
+        radioTravauxParQuartier.setOnAction(event -> {
+            voirTravauxTextBox.setDisable(false);
+            voirTravauxComboBox.setDisable(true);
+        });
+
+        colTravailId.setCellValueFactory(new PropertyValueFactory<>("id"));
+        colTravailIntervenant.setCellValueFactory(new PropertyValueFactory<>("nomIntervenant"));
+        colTravailQuartier.setCellValueFactory(new PropertyValueFactory<>("quartier"));
+        colTravailType.setCellValueFactory(new PropertyValueFactory<>("type"));
+        colTravailTitre.setCellValueFactory(new PropertyValueFactory<>("titre"));
+        colTravailDe.setCellValueFactory(new PropertyValueFactory<>("debut"));
+        colTravailA.setCellValueFactory(new PropertyValueFactory<>("fin"));
+
+        voirTravauxButton.setOnAction(event -> handleVoirTravaux());
     }
 
     private void handleEntraveSearch() {
@@ -139,6 +258,60 @@ public class ResidentMenuViewControllerFx {
             showAlertSuccess("Requête créée avec succès", "Les intervenants seront notifiées");
         } else {
             showAlert("Erreur durant la création", "Un erreur est survenue durant la création de la requête");
+        }
+    }
+
+    private void handleVoirTravaux() {
+        boolean isFutur = radioTravauxFuturs.isSelected();
+        int typeRecherche = 1;
+        String filtre = "";
+
+        if (radioTravauxTous.isSelected()) {
+            typeRecherche = 1;
+        }
+
+        if (radioTravauxParType.isSelected()) {
+            String s = (String) voirTravauxComboBox.getSelectionModel().getSelectedItem();
+            String normalizedType = Normalizer.normalize(s, Normalizer.Form.NFD).replaceAll("\\p{M}", "");
+            TravauxTypes t = TravauxTypes.valueOf(normalizedType.toUpperCase());
+            typeRecherche = 2;
+            filtre = t.toString();
+        }
+        if (radioTravauxParQuartier.isSelected()){
+            typeRecherche = 3;
+            if (voirTravauxTextBox.getText().isEmpty()) {
+                showAlert("Recherche invalide", "Entrez un nom de quartier");
+                voirTravauxTextBox.setStyle("-fx-border-color: red;");
+            } else {
+                filtre = voirTravauxTextBox.getText();
+            }
+        }
+
+        List<Travail> travaux = residentController.consulterTravaux(isFutur, typeRecherche, filtre);
+
+        if (!travaux.isEmpty()) {
+            ObservableList<Travail> data = FXCollections.observableArrayList(travaux);
+            travauxTableView.setItems(data);
+        }
+    }
+
+    private void handleRechercheTravaux() {
+        if (travauxParTitreRadio.isSelected()) {
+            String rechercheTitre = travauxRechercheTextBox.getText();
+            if (rechercheTitre.isEmpty()) {
+                travauxRechercheTextBox.setStyle("-fx-border-color: red;");
+                showAlert("Recherche vide", "La recherche ne peut pas être vide");
+            } else {
+
+            }
+        }
+
+        if (travauxParTypeRadio.isSelected()) {
+
+        }
+
+        if (travauxParQuartierRadio.isSelected()) {
+
         }
     }
 

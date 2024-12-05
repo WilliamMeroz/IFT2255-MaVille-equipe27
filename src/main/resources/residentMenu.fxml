@@ -1,5 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
 <?import javafx.scene.control.Button?>
 <?import javafx.scene.control.ComboBox?>
 <?import javafx.scene.control.DatePicker?>
@@ -12,13 +14,12 @@
 <?import javafx.scene.control.TextField?>
 <?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<?import javafx.collections.FXCollections?>
-<?import java.lang.String?>
 <AnchorPane prefHeight="900.0" prefWidth="1183.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maville.equipe27.views.ResidentMenuViewControllerFx">
    <children>
       <TabPane layoutX="7.0" layoutY="7.0" prefHeight="886.0" prefWidth="1171.0" tabClosingPolicy="UNAVAILABLE">
@@ -27,14 +28,97 @@
                <content>
                   <Pane prefHeight="200.0" prefWidth="200.0">
                      <children>
-                        <RadioButton layoutX="14.0" layoutY="38.0" mnemonicParsing="false" text="en cours">
-                           <toggleGroup>
-                              <ToggleGroup fx:id="ta" />
-                           </toggleGroup>
-                        </RadioButton>
-                        <RadioButton layoutX="113.0" layoutY="38.0" mnemonicParsing="false" text="à venir" />
-                        <RadioButton layoutX="14.0" layoutY="86.0" mnemonicParsing="false" text="Tous les travaux" />
-                        <RadioButton layoutX="14.0" layoutY="123.0" mnemonicParsing="false" text="RadioButton" />
+                        <Text layoutX="24.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recherche de travaux" wrappingWidth="172.18701171875">
+                           <font>
+                              <Font size="18.0" />
+                           </font></Text>
+                        <HBox layoutX="24.0" layoutY="455.0" prefHeight="27.0" prefWidth="290.0" spacing="20.0">
+                           <children>
+                              <RadioButton id="travauxParTitreRadio" fx:id="travauxParTitreRadio" mnemonicParsing="false" selected="true" text="par titre" toggleGroup="$t1">
+                                 <toggleGroup>
+                                     <ToggleGroup fx:id="t1" />
+                                 </toggleGroup></RadioButton>
+                              <RadioButton id="travauxParTypeRadio" fx:id="travauxParTypeRadio" mnemonicParsing="false" text="par type" toggleGroup="$t1" />
+                              <RadioButton id="travauxParQuartierRadio" fx:id="travauxParQuartierRadio" mnemonicParsing="false" text="par quartier" toggleGroup="$t1" />
+                           </children>
+                        </HBox>
+                        <TextField id="travauxRechercheTextBox" fx:id="travauxRechercheTextBox" layoutX="24.0" layoutY="496.0" promptText="Entrez le titre" />
+                        <ComboBox id="rechercheTravauxComboBox" fx:id="rechercheTravauxComboBox" disable="true" layoutX="24.0" layoutY="547.0" prefWidth="150.0">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Routier" />
+                                    <String fx:value="Énergie" />
+                                    <String fx:value="Construction" />
+                                    <String fx:value="Paysager" />
+                                    <String fx:value="Transports" />
+                                    <String fx:value="Signalisation" />
+                                    <String fx:value="Souterrains" />
+                                    <String fx:value="Résidentiel" />
+                                    <String fx:value="Urbain" />
+                                    <String fx:value="Telecoms" />
+                                    <String fx:value="Autre" />
+                                </FXCollections>
+                            </items>
+                            <value>
+                                <String fx:value="Routier" />
+                            </value>
+                        </ComboBox>
+                        <Button id="travauxRechercheButton" fx:id="travauxRechercheButton" layoutX="24.0" layoutY="608.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Rechercher" />
+                        <TableView id="travauxTableView" fx:id="travauxTableView" layoutX="350.0" layoutY="8.0" prefHeight="811.0" prefWidth="812.0">
+                          <columns>
+                            <TableColumn id="colTravailId" fx:id="colTravailId" prefWidth="132.66665649414062" text="ID" />
+                            <TableColumn id="colTravailIntervenant" fx:id="colTravailIntervenant" minWidth="0.0" prefWidth="148.5" text="Intervenant" />
+                              <TableColumn id="colTravailTitre" fx:id="colTravailTitre" minWidth="0.0" prefWidth="110.8333740234375" text="Titre" />
+                              <TableColumn id="colTravailQuartier" fx:id="colTravailQuartier" minWidth="0.0" prefWidth="116.6666259765625" text="Quartier" />
+                              <TableColumn id="colTravailType" fx:id="colTravailType" minWidth="0.0" prefWidth="144.5" text="Type" />
+                              <TableColumn id="colTravailDe" fx:id="colTravailDe" minWidth="0.0" prefWidth="68.5" text="De" />
+                              <TableColumn id="colTravailA" fx:id="colTravailA" minWidth="0.0" prefWidth="92.49993896484375" text="À" />
+                          </columns>
+                        </TableView>
+                        <Text layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voir les travaux" wrappingWidth="143.4599609375">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <VBox layoutX="14.0" layoutY="48.0" prefHeight="76.0" prefWidth="239.0">
+                           <children>
+                              <HBox prefHeight="58.0" prefWidth="239.0" spacing="10.0">
+                                 <children>
+                                    <RadioButton id="radioTravauxCourrants" fx:id="radioTravauxCourrants" mnemonicParsing="false" selected="true" text="Courrants" textAlignment="JUSTIFY" />
+                                    <RadioButton id="radioTravauxFuturs" fx:id="radioTravauxFuturs" mnemonicParsing="false" text="Futurs (3 mois)" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="37.0" prefWidth="239.0" spacing="10.0">
+                                 <children>
+                                    <RadioButton id="radioTravauxTous" fx:id="radioTravauxTous" mnemonicParsing="false" selected="true" text="Tous" />
+                                    <RadioButton id="radioTravauxParType" fx:id="radioTravauxParType" mnemonicParsing="false" text="Par type" />
+                                    <RadioButton id="radioTravauxParQuartier" fx:id="radioTravauxParQuartier" mnemonicParsing="false" text="Par quartier" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <TextField id="voirTravauxTextBox" fx:id="voirTravauxTextBox" disable="true" layoutX="19.0" layoutY="143.0" promptText="Nom quartier" />
+                         <ComboBox id="voirTravauxComboBox" fx:id="voirTravauxComboBox" disable="true" layoutX="19.0" layoutY="186.0" prefWidth="150.0">
+                             <items>
+                                 <FXCollections fx:factory="observableArrayList">
+                                     <String fx:value="Routier" />
+                                     <String fx:value="Énergie" />
+                                     <String fx:value="Construction" />
+                                     <String fx:value="Paysager" />
+                                     <String fx:value="Transports" />
+                                     <String fx:value="Signalisation" />
+                                     <String fx:value="Souterrains" />
+                                     <String fx:value="Résidentiel" />
+                                     <String fx:value="Urbain" />
+                                     <String fx:value="Telecoms" />
+                                     <String fx:value="Autre" />
+                                 </FXCollections>
+                             </items>
+                             <value>
+                                 <String fx:value="Routier" />
+                             </value>
+                         </ComboBox>
+                        <Button id="voirTravauxButton" fx:id="voirTravauxButton" layoutX="20.0" layoutY="230.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="148.0" text="Voir travaux" />
                      </children>
                   </Pane>
                </content>
@@ -47,7 +131,10 @@
                      <children>
                         <VBox layoutX="14.0" layoutY="55.0" prefHeight="347.0" prefWidth="205.0" spacing="30.0">
                            <children>
-                              <RadioButton id="entravesRadioTravail" fx:id="entravesRadioTravail" mnemonicParsing="false" selected="true" text="par travail" toggleGroup="$ta" />
+                              <RadioButton id="entravesRadioTravail" fx:id="entravesRadioTravail" mnemonicParsing="false" selected="true" text="par travail" toggleGroup="$ta">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="ta" />
+                                 </toggleGroup></RadioButton>
                               <RadioButton id="entravesRadioRue" fx:id="entravesRadioRue" mnemonicParsing="false" text="par rue" toggleGroup="$ta" />
                               <TextField id="entravesTextBox" fx:id="entravesTextBox" promptText="numéro de travail" />
                               <Button id="entravesButton" fx:id="entravesButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="153.0" text="Recherche" />
@@ -87,21 +174,21 @@
                               <ComboBox id="requeteType" fx:id="requeteType" prefWidth="150.0" promptText="Type de requête">
                                   <items>
                                       <FXCollections fx:factory="observableArrayList">
-                                          <String fx:value="Routier"/>
-                                          <String fx:value="Énergie"/>
-                                          <String fx:value="Construction"/>
-                                          <String fx:value="Paysager"/>
-                                          <String fx:value="Transports"/>
-                                          <String fx:value="Signalisation"/>
-                                          <String fx:value="Souterrains"/>
-                                          <String fx:value="Résidentiel"/>
-                                          <String fx:value="Urbain"/>
-                                          <String fx:value="Telecoms"/>
-                                          <String fx:value="Autre"/>
+                                          <String fx:value="Routier" />
+                                          <String fx:value="Énergie" />
+                                          <String fx:value="Construction" />
+                                          <String fx:value="Paysager" />
+                                          <String fx:value="Transports" />
+                                          <String fx:value="Signalisation" />
+                                          <String fx:value="Souterrains" />
+                                          <String fx:value="Résidentiel" />
+                                          <String fx:value="Urbain" />
+                                          <String fx:value="Telecoms" />
+                                          <String fx:value="Autre" />
                                       </FXCollections>
                                   </items>
                                   <value>
-                                      <String fx:value="Routier"/>
+                                      <String fx:value="Routier" />
                                   </value>
                               </ComboBox>
                               <DatePicker id="requeteDateDebut" fx:id="requeteDateDebut" promptText="Date de début" />

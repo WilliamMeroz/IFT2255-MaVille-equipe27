@@ -1,5 +1,6 @@
 package maville.equipe27.controllers;
 
+import javafx.scene.Parent;
 import maville.equipe27.enums.TravauxTypes;
 import maville.equipe27.helpers.HTTPRequestsHelper;
 import maville.equipe27.helpers.RequeteTravailDataStore;
@@ -10,6 +11,7 @@ import maville.equipe27.models.Travail;
 import maville.equipe27.views.ResidentView;
 import maville.equipe27.models.RequeteTravail;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ResidentController implements IController {
@@ -52,6 +54,38 @@ public class ResidentController implements IController {
 
     public List<Travail> consulterTravauxParType(TravauxTypes type) {
         return this.httpRequestsHelper.getTravauxByType(type.toString());
+    }
+
+    public List<Travail> consulterTravaux(boolean isFutur, int typeRecherche, String filtre) {
+        List<Travail> travaux = new ArrayList<>();
+
+        System.out.println(isFutur);
+
+        // Tous les travaux
+        if (typeRecherche == 1) {
+            if (isFutur)
+                travaux = httpRequestsHelper.getFutureTravaux();
+            else
+                travaux = httpRequestsHelper.getCurrentTravaux();
+        }
+
+        // Les travaux par type
+        if (typeRecherche == 2) {
+            if (isFutur)
+                travaux = httpRequestsHelper.getFutureTravauxByType(filtre);
+            else
+                travaux = httpRequestsHelper.getTravauxByType(filtre);
+        }
+
+        // Les travaux par quartier
+        if (typeRecherche == 3) {
+            if (isFutur)
+                travaux = httpRequestsHelper.getFutureTravauxByQuartier(filtre);
+            else
+                travaux = httpRequestsHelper.getTravauxByQuartier(filtre);
+        }
+
+        return travaux;
     }
 
     public List<Travail> consulterFutursTravaux() {

@@ -165,7 +165,6 @@ public class ResidentView {
         if (choice == 2) return 52;
         if (choice == 3) return 0;
         return choice;
-
     }
 
     public RequeteTravail promptSoumettreRequete() {
