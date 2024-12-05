@@ -18,6 +18,12 @@ public class ResidentController implements IController {
     private ResidentView residentView;
     public HTTPRequestsHelper httpRequestsHelper;
     public RequeteTravailDataStore requeteTravailDataStore;
+
+    public ResidentController() {
+        this.httpRequestsHelper = new HTTPRequestsHelper();
+        this.requeteTravailDataStore = new RequeteTravailDataStore("requetes.json");
+    }
+
     public ResidentController(ResidentView residentView) {
         this.residentView = residentView;
         this.httpRequestsHelper = new HTTPRequestsHelper();
