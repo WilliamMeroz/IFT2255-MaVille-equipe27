@@ -1,6 +1,9 @@
 package maville.equipe27.controllers;
 
+import com.google.gson.Gson;
+import maville.equipe27.helpers.RequeteTravailDataStore;
 import maville.equipe27.models.Intervenant;
+import maville.equipe27.models.RequeteTravail;
 import maville.equipe27.views.IntervenantView;
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -8,13 +11,20 @@ import org.json.simple.parser.JSONParser;
 
 import org.beryx.textio.TextIO;
 import java.io.FileReader;
+import java.util.List;
 
 public class IntervenantController implements IController {
     private Intervenant intervenant;
     private IntervenantView intervenantView;
+    private RequeteTravailDataStore requeteTravailDataStore;
+
+    public IntervenantController() {
+        this.requeteTravailDataStore = new RequeteTravailDataStore("requetes.json");
+    }
 
     public IntervenantController(IntervenantView intervenantView) {
         this.intervenantView = intervenantView;
+        this.requeteTravailDataStore = new RequeteTravailDataStore("requetes.json");
     }
 
     public void handleConnectionEvent(Intervenant intervenant) {
@@ -47,6 +57,11 @@ public class IntervenantController implements IController {
             }
         }
     }
+
+    public List<RequeteTravail> consulterRequetes() {
+        return this.requeteTravailDataStore.getRequetes();
+    }
+
     public void afficherRequetesTravail() {
         try {
             JSONParser parser = new JSONParser();
