@@ -3,16 +3,15 @@ package maville.equipe27.controllers;
 import javafx.scene.Parent;
 import maville.equipe27.enums.TravauxTypes;
 import maville.equipe27.helpers.HTTPRequestsHelper;
+import maville.equipe27.helpers.PrefHoraireDataStore;
 import maville.equipe27.helpers.RequeteTravailDataStore;
-import maville.equipe27.models.Entrave;
-import maville.equipe27.models.RequeteTravail;
-import maville.equipe27.models.Resident;
-import maville.equipe27.models.Travail;
+import maville.equipe27.models.*;
 import maville.equipe27.views.ResidentView;
 import maville.equipe27.models.RequeteTravail;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class ResidentController implements IController {
 
@@ -20,10 +19,12 @@ public class ResidentController implements IController {
     private ResidentView residentView;
     public HTTPRequestsHelper httpRequestsHelper;
     public RequeteTravailDataStore requeteTravailDataStore;
+    public PrefHoraireDataStore prefHoraireDataStore;
 
     public ResidentController() {
         this.httpRequestsHelper = new HTTPRequestsHelper();
         this.requeteTravailDataStore = new RequeteTravailDataStore("requetes.json");
+        this.prefHoraireDataStore = new PrefHoraireDataStore("horaires.json");
     }
 
     public ResidentController(ResidentView residentView) {
@@ -102,6 +103,18 @@ public class ResidentController implements IController {
 
     public boolean saveRequest(RequeteTravail requeteTravail) {
         return requeteTravailDataStore.saveRequete(requeteTravail);
+    }
+
+    public boolean saveNewHoraire(PrefHoraire prefHoraire) {
+        return prefHoraireDataStore.saveHoraire(prefHoraire);
+    }
+
+    public List<PrefHoraire> getHorairesByQuartier(String quartier) {
+        return prefHoraireDataStore.getHorairesByQuartier(quartier);
+    }
+
+    public Optional<PrefHoraire> getHoraireFromUser(String email) {
+        return prefHoraireDataStore.getHoraireFromEmail(email);
     }
 
     @Override

@@ -5,15 +5,21 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import maville.equipe27.controllers.ResidentController;
 import maville.equipe27.enums.TravauxTypes;
+import maville.equipe27.helpers.ConnectedResident;
 import maville.equipe27.models.Entrave;
+import maville.equipe27.models.PrefHoraire;
 import maville.equipe27.models.RequeteTravail;
 import maville.equipe27.models.Travail;
+import maville.equipe27.models.PrefHoraire;
 
 import java.text.Normalizer;
 import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
+import java.util.Optional;
 
 public class ResidentMenuViewControllerFx {
 
@@ -140,6 +146,36 @@ public class ResidentMenuViewControllerFx {
     private Button voirTravauxButton;
 
     @FXML
+    private Button residentPlanifButton;
+
+    @FXML
+    private Spinner<Integer> residentPrefDeHeure;
+
+    @FXML
+    private Spinner<Integer> residentPrefDeMin;
+
+    @FXML
+    private Spinner<Integer> residentPrefAHeure;
+
+    @FXML
+    private Spinner<Integer> residentPrefAMin;
+
+    @FXML
+    private TableColumn<PrefHoraire, LocalDate> residentPlanifTableA;
+
+    @FXML
+    private TableColumn<PrefHoraire, LocalDate> residentPlanifTableDe;
+
+    @FXML
+    private TableView<PrefHoraire> residentPlanifTableView;
+
+    @FXML
+    private Text residentPrefActuelleAText;
+
+    @FXML
+    private Text residentPrefActuelleDeText;
+
+    @FXML
     public void initialize() {
         residentController = new ResidentController();
 
@@ -205,6 +241,35 @@ public class ResidentMenuViewControllerFx {
         colTravailA.setCellValueFactory(new PropertyValueFactory<>("fin"));
 
         voirTravauxButton.setOnAction(event -> handleVoirTravaux());
+
+        residentPlanifButton.setOnAction(event -> handleNewPref());
+        SpinnerValueFactory<Integer> heureFactDe = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 24, 1);
+        SpinnerValueFactory<Integer> minFactDe = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 59, 1);
+        SpinnerValueFactory<Integer> heureFactA = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 24, 1);
+        SpinnerValueFactory<Integer> minFactA = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 59, 1);
+        residentPrefDeHeure.setValueFactory(heureFactDe);
+        residentPrefDeMin.setValueFactory(minFactDe);
+        residentPrefAHeure.setValueFactory(heureFactA);
+        residentPrefAMin.setValueFactory(minFactA);
+
+        residentPlanifTableDe.setCellValueFactory(new PropertyValueFactory<>("de"));
+        residentPlanifTableA.setCellValueFactory(new PropertyValueFactory<>("a"));
+
+        String[] parts = ConnectedResident.getInstance().getResident().getAddress().split(",");
+        String quartier = parts[parts.length - 1].substring(0, 3).toUpperCase();
+        List<PrefHoraire> prefsTable = residentController.getHorairesByQuartier(quartier).stream().filter(prefHoraire -> !prefHoraire.getEmail().equals(ConnectedResident.getInstance().getResident().getEmail())).toList();
+
+        if (!prefsTable.isEmpty()) {
+            ObservableList<PrefHoraire> dataHoraires = FXCollections.observableArrayList(prefsTable);
+            residentPlanifTableView.setItems(dataHoraires);
+        }
+
+        Optional<PrefHoraire> horaireUser = residentController.getHoraireFromUser(ConnectedResident.getInstance().getResident().getEmail());
+        if (horaireUser.isPresent()) {
+            residentPrefActuelleDeText.setText(horaireUser.get().getDe().getHour() + "h" + horaireUser.get().getDe().getMinute());
+            residentPrefActuelleAText.setText(horaireUser.get().getA().getHour() + "h" + horaireUser.get().getA().getMinute());
+
+        }
     }
 
     private void handleEntraveSearch() {
@@ -312,6 +377,32 @@ public class ResidentMenuViewControllerFx {
 
         if (travauxParQuartierRadio.isSelected()) {
 
+        }
+    }
+
+    private void handleNewPref() {
+        int deHeure = residentPrefDeHeure.getValue();
+        int deMin = residentPrefDeMin.getValue();
+        int aHeure = residentPrefAHeure.getValue();
+        int aMin = residentPrefAMin.getValue();
+
+        if (deHeure > aHeure) {
+            showAlert("Erreur horaires", "Assurez-vous que les heures et minutes soient valides.");
+        } else {
+            String[] parts = ConnectedResident.getInstance().getResident().getAddress().split(",");
+            String quartier = parts[parts.length - 1].substring(0, 3);
+            PrefHoraire prefHoraire = new PrefHoraire(ConnectedResident.getInstance().getResident().getEmail(),
+                    LocalTime.of(deHeure, deMin),
+                    LocalTime.of(aHeure, aMin),
+                    quartier.toUpperCase());
+
+            if (residentController.saveNewHoraire(prefHoraire)) {
+                showAlertSuccess("Horaire ajoutée avec succès", "Tout va bien!");
+                residentPrefActuelleDeText.setText(deHeure + "h" + deMin + "min");
+                residentPrefActuelleAText.setText(aHeure + "h" + aMin + "min");
+            } else {
+                showAlert("Erreur inconnue pour horaire", "Woops");
+            }
         }
     }
 
