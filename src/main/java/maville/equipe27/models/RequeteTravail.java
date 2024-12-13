@@ -12,12 +12,24 @@ public class RequeteTravail {
     private String description;
     private TravauxTypes typeTravail;
     private LocalDate dateDebut;
+    private String status = "INCHANGÉ";
+    private String owner;
 
-    public RequeteTravail(String titreTravail, String description, TravauxTypes typeTravail, LocalDate dateDebut) {
+    public RequeteTravail(String owner, String titreTravail, String description, TravauxTypes typeTravail, LocalDate dateDebut) {
         this.titreTravail = titreTravail;
         this.description = description;
         this.typeTravail = typeTravail;
         this.dateDebut = dateDebut;
+        this.owner = owner;
+    }
+
+    public RequeteTravail(String owner, String titreTravail, String description, TravauxTypes typeTravail, LocalDate dateDebut, String status) {
+        this.titreTravail = titreTravail;
+        this.description = description;
+        this.typeTravail = typeTravail;
+        this.dateDebut = dateDebut;
+        this.status = status;
+        this.owner = owner;
     }
 
     public String getTitreTravail() {
@@ -50,5 +62,21 @@ public class RequeteTravail {
 
     public void setDateDebut(LocalDate dateDebut) {
         this.dateDebut = dateDebut;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 }

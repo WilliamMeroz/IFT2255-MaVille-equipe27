@@ -185,7 +185,7 @@ public class ResidentView {
         }
 
         String description = textIO.newStringInputReader().read("Entrez une description du travail:\n");
-        RequeteTravail newRequete = new RequeteTravail(titreTravail, description, typeTravail, date);
+        RequeteTravail newRequete = new RequeteTravail("fefe",titreTravail, description, typeTravail, date);
         return newRequete;
     }
 

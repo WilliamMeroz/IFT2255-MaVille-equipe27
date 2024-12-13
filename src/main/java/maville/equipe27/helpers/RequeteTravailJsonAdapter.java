@@ -25,7 +25,9 @@ public class RequeteTravailJsonAdapter implements JsonDeserializer<List<RequeteT
                 TravauxTypes travailType = TravauxTypes.valueOf(typeDesc);
                 String dateStr = newObject.get("date").getAsString();
                 LocalDate debut = LocalDate.parse(dateStr);
-                requeteTravails.add(new RequeteTravail(titre, desc, travailType, debut));
+                String status = newObject.get("status").getAsString();
+                String owner = newObject.get("owner").getAsString();
+                requeteTravails.add(new RequeteTravail(owner, titre, desc, travailType, debut, status));
             }
         }
         return requeteTravails;
@@ -41,6 +43,8 @@ public class RequeteTravailJsonAdapter implements JsonDeserializer<List<RequeteT
             jsonObject.addProperty("description", t.getDescription());
             jsonObject.addProperty("type", t.getTypeTravail().toString());
             jsonObject.addProperty("date", t.getDateDebut().toString());
+            jsonObject.addProperty("status", t.getStatus());
+            jsonObject.addProperty("owner", t.getOwner());
 
             jsonArray.add(jsonObject);
         }

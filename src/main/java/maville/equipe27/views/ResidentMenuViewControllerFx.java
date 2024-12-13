@@ -176,6 +176,24 @@ public class ResidentMenuViewControllerFx {
     private Text residentPrefActuelleDeText;
 
     @FXML
+    private TableColumn<ResidentController, LocalDate> ResidentReqColDebut;
+
+    @FXML
+    private TableColumn<RequeteTravail, String> ResidentReqColDesc;
+
+    @FXML
+    private TableColumn<RequeteTravail, String> ResidentReqColStatus;
+
+    @FXML
+    private TableColumn<RequeteTravail, String> ResidentReqColTitre;
+
+    @FXML
+    private TableColumn<RequeteTravail, TravauxTypes> ResidentReqColType;
+
+    @FXML
+    private TableView<RequeteTravail> residentRequtesTableView;
+
+    @FXML
     public void initialize() {
         residentController = new ResidentController();
 
@@ -268,8 +286,15 @@ public class ResidentMenuViewControllerFx {
         if (horaireUser.isPresent()) {
             residentPrefActuelleDeText.setText(horaireUser.get().getDe().getHour() + "h" + horaireUser.get().getDe().getMinute());
             residentPrefActuelleAText.setText(horaireUser.get().getA().getHour() + "h" + horaireUser.get().getA().getMinute());
-
         }
+
+        ResidentReqColDebut.setCellValueFactory(new PropertyValueFactory<>("debut"));
+        ResidentReqColDesc.setCellValueFactory(new PropertyValueFactory<>("description"));
+        ResidentReqColStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        ResidentReqColTitre.setCellValueFactory(new PropertyValueFactory<>("titreTravail"));
+        ResidentReqColType.setCellValueFactory(new PropertyValueFactory<>("typeTravail"));
+        ResidentReqColDebut.setCellValueFactory(new PropertyValueFactory<>("dateDebut"));
+        updateRequestTable();
     }
 
     private void handleEntraveSearch() {
@@ -316,13 +341,22 @@ public class ResidentMenuViewControllerFx {
             entravesTextBox.setStyle("-fx-border-color: red;");
         }
 
-        RequeteTravail requeteTravail = new RequeteTravail(requestTitle, requeteDescStr, type, dateDebut);
+        RequeteTravail requeteTravail = new RequeteTravail(ConnectedResident.getInstance().getResident().getEmail(), requestTitle, requeteDescStr, type, dateDebut);
         if (residentController.saveRequest(requeteTravail)) {
             requeteTitre.setText("");
             requeteDesc.setText("");
             showAlertSuccess("Requête créée avec succès", "Les intervenants seront notifiées");
+            updateRequestTable();
         } else {
             showAlert("Erreur durant la création", "Un erreur est survenue durant la création de la requête");
+        }
+    }
+
+    private void updateRequestTable() {
+        List<RequeteTravail> userRequests = residentController.getUserRequests(ConnectedResident.getInstance().getResident().getEmail());
+        if (!userRequests.isEmpty()) {
+            ObservableList<RequeteTravail> dataRequetes = FXCollections.observableArrayList(userRequests);
+            residentRequtesTableView.setItems(dataRequetes);
         }
     }
 

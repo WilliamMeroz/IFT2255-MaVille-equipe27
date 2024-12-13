@@ -117,6 +117,10 @@ public class ResidentController implements IController {
         return prefHoraireDataStore.getHoraireFromEmail(email);
     }
 
+    public List<RequeteTravail> getUserRequests(String email) {
+        return this.requeteTravailDataStore.getRequetesByEmail(email);
+    }
+
     @Override
     public void run() {
         System.out.println("Résident: " + this.resident.getEmail());

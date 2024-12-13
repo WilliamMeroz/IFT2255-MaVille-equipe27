@@ -321,6 +321,20 @@
                               <Font size="24.0" />
                            </font>
                         </Text>
+                        <TableView id="residentRequtesTableView" fx:id="residentRequtesTableView" layoutX="588.0" layoutY="145.0" prefHeight="644.0" prefWidth="567.0">
+                          <columns>
+                            <TableColumn id="ResidentReqColTitre" fx:id="ResidentReqColTitre" prefWidth="157.66668701171875" text="titre" />
+                            <TableColumn id="ResidentReqColDesc" fx:id="ResidentReqColDesc" prefWidth="130.16668701171875" text="Description" />
+                              <TableColumn id="ResidentReqColType" fx:id="ResidentReqColType" minWidth="0.0" prefWidth="80.33331298828125" text="Type" />
+                              <TableColumn id="ResidentReqColDebut" fx:id="ResidentReqColDebut" minWidth="0.3333740234375" prefWidth="74.5" text="Début" />
+                              <TableColumn id="ResidentReqColDebut" fx:id="ResidentReqColStatus" minWidth="0.0" prefWidth="123.33331298828125" text="Status" />
+                          </columns>
+                        </TableView>
+                        <Text layoutX="800.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vos requêtes">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Text>
                      </children>
                   </Pane>
                </content></Tab>

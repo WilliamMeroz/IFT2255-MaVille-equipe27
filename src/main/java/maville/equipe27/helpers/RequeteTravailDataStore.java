@@ -54,4 +54,8 @@ public class RequeteTravailDataStore {
 
         return requeteTravailList;
     }
+
+    public List<RequeteTravail> getRequetesByEmail(String email) {
+        return getRequetes().stream().filter(requeteTravail -> requeteTravail.getOwner().equals(email)).toList();
+    }
 }
