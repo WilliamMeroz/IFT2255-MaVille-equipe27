@@ -39,6 +39,14 @@ public class IntervenantController implements IController {
         return this.projectDataStore.saveProject(projet);
     }
 
+    public List<Projet> getUserProjects() {
+        return this.projectDataStore.getUserProjects();
+    }
+
+    public boolean updateProject(Projet projet, String newTitle) {
+        return this.projectDataStore.updateProject(projet, newTitle);
+    }
+
     @Override
     public void run() {
         System.out.println("Intervenant:" + this.intervenant.getEmail());

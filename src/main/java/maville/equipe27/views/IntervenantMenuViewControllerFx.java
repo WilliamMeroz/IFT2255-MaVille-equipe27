@@ -74,9 +74,26 @@ public class IntervenantMenuViewControllerFx {
     @FXML
     private Button nouveauProjetRetirerButton;
 
+    @FXML
+    private Button updateProjectButton;
+
+    @FXML
+    private TextArea updateProjectDesc;
+
+    @FXML
+    private ComboBox<String> updateProjectList;
+
+    @FXML
+    private TextField updateProjectTitre;
+
+    @FXML
+    private ComboBox<ProjetStatus> updateProjectType;
+
     private ArrayList<String> quartiers = new ArrayList<>(Arrays.asList("Plateau-Mont-Royal", "Mile End", "Vieux-Montréal", "Centre-ville", "Petite Italie", "Griffintown", "Hochelaga-Maisonneuve", "Saint-Henri", "Outremont", "Westmount", "Côte-des-Neiges", "Notre-Dame-de-Grâce", "Le Village", "Villeray", "Rosemont–La Petite-Patrie", "Pointe-Saint-Charles", "Lachine", "LaSalle", "Ahuntsic", "Verdun"));
     private ObservableList<String> quartiersSelects;
     private Set<String> selectedQuartiers = new HashSet<>();
+
+    private List<Projet> userProjects;
 
     @FXML
     public void initialize() {
@@ -111,6 +128,30 @@ public class IntervenantMenuViewControllerFx {
 
         nouveauProjetAjouterButton.setOnAction(event -> handleAjouterQuartier());
         nouveauProjetRetirerButton.setOnAction(event -> handleRemoveQuartier());
+
+        // Update project page.
+        ObservableList<ProjetStatus> projetTypesStr = FXCollections.observableArrayList(ProjetStatus.values());
+        updateProjectType.setItems(projetTypesStr);
+        userProjects = intervenantController.getUserProjects();
+        List<String> titres = userProjects.stream().map(Projet::getTitre).toList();
+        ObservableList<String> projectsUpdates = FXCollections.observableArrayList(titres);
+        updateProjectList.setItems(projectsUpdates);
+
+
+        if (!titres.isEmpty()) {
+            updateProjectList.setValue(titres.getFirst());
+        } else {
+            updateProjectList.setValue("Aucune project");
+        }
+
+        updateProjectList.setOnAction(event -> {
+            String selectedTitle = updateProjectList.getSelectionModel().getSelectedItem();
+            Projet selectedProject = userProjects.stream().filter(p -> p.getTitre().equals(selectedTitle)).toList().getFirst();
+            updateProjectTitre.setText(selectedProject.getTitre());
+            updateProjectDesc.setText(selectedProject.getDesc());
+            updateProjectType.setValue(selectedProject.getStatus());
+        });
+        updateProjectButton.setOnAction(event -> handleProjectUpdate());
     }
 
     private void handleNewProjet() {
@@ -151,7 +192,8 @@ public class IntervenantMenuViewControllerFx {
                 String[] returnedQuartiers = Arrays.stream(selectedQuartiers.toArray()).map(q -> q.toString().substring(0, q.toString().length() - 2)).toArray(String[]::new);
                 Projet projet = new Projet(ConnectedIntervenant.getInstance().getIntervenant().getCityIdentifier(),
                         projetTitre, projetDesc, nouveauProjetType.getValue(), returnedQuartiers, projetDebut, projetFin, projetAHour, projetDeHour, ProjetStatus.PRÉVUE, rues);
-                intervenantController.createNewProject(projet);
+                if(!intervenantController.createNewProject(projet))
+                    showAlert("Erreur durant la création du projet", "Le projet n'a pas de nom unique ou une autre erreur est survenue", nouveauProjetAjouterButton);
             }
         }
     }
@@ -172,6 +214,26 @@ public class IntervenantMenuViewControllerFx {
         if (selectedItem.charAt(selectedItem.length() - 1) == '*') {
             selectedQuartiers.remove(selectedItem);
             quartiersSelects.set(selectedIndex, selectedItem.substring(0, selectedItem.length() - 1));
+        }
+    }
+
+    private void handleProjectUpdate() {
+        String updatedProjectTitre = updateProjectList.getSelectionModel().getSelectedItem();
+        String updateProjectNewTitre = updateProjectTitre.getText();
+        ProjetStatus updateProjectNewStatus = updateProjectType.getValue();
+        String updateProjectNewDesc = updateProjectDesc.getText();
+
+        Projet foundProject = userProjects.stream().filter(p -> p.getTitre().equals(updatedProjectTitre)).findFirst().get();
+
+        foundProject.setStatus(updateProjectNewStatus);
+        foundProject.setDesc(updateProjectNewDesc);
+
+        String newTitre = "";
+        if (!updatedProjectTitre.equals(updateProjectNewTitre))
+            newTitre = updateProjectNewTitre;
+
+        if (!intervenantController.updateProject(foundProject, newTitre)) {
+            showAlert("Erreur durant update", "Le projet que vous mettez à jour n'existe sûrement pas", updateProjectButton);
         }
     }
 
