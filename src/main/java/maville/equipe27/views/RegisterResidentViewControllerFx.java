@@ -55,9 +55,14 @@ public class RegisterResidentViewControllerFx {
     private TextField registerUnitResident;
 
     @FXML
+    private ComboBox<String> registerQuartierResident;
+
+    @FXML
     public void initialize() {
         authController = new AuthController();
 
+        registerQuartierResident.getItems().addAll("Plateau-Mont-Royal", "Mile End", "Vieux-Montréal", "Centre-ville", "Petite Italie", "Griffintown", "Hochelaga-Maisonneuve", "Saint-Henri", "Outremont", "Westmount", "Côte-des-Neiges", "Notre-Dame-de-Grâce", "Le Village", "Villeray", "Rosemont–La Petite-Patrie", "Pointe-Saint-Charles", "Lachine", "LaSalle", "Ahuntsic", "Verdun");
+        registerQuartierResident.setValue("Plateau-Mont-Royal");
         registerButtonResident.setOnAction(event -> handleRegister());
     }
 
@@ -70,6 +75,7 @@ public class RegisterResidentViewControllerFx {
         String phone = registerPhoneResident.getText();
         String civicStr = registerCivicResident.getText();
         String street = registerStreetResident.getText();
+        String quartier = registerQuartierResident.getValue();
         String unitStr = registerUnitResident.getText();
         String postalCode = registerPostalCodeResident.getText();
 
@@ -145,7 +151,7 @@ public class RegisterResidentViewControllerFx {
         }
 
         StringJoiner joiner = new StringJoiner(",");
-        joiner.add(String.valueOf(civic)).add(street).add(String.valueOf(unit)).add(postalCode);
+        joiner.add(String.valueOf(civic)).add(street).add(quartier).add(String.valueOf(unit)).add(postalCode);
 
         Resident user = new Resident(email, password, RoleChoices.RÉSIDENT, firstName, lastName, dob, phone, joiner.toString());
         performRegister(user);

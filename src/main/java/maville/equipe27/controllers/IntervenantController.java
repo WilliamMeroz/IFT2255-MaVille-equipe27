@@ -1,8 +1,10 @@
 package maville.equipe27.controllers;
 
 import com.google.gson.Gson;
+import maville.equipe27.helpers.ProjectDataStore;
 import maville.equipe27.helpers.RequeteTravailDataStore;
 import maville.equipe27.models.Intervenant;
+import maville.equipe27.models.Projet;
 import maville.equipe27.models.RequeteTravail;
 import maville.equipe27.views.IntervenantView;
 import org.json.simple.JSONArray;
@@ -17,9 +19,11 @@ public class IntervenantController implements IController {
     private Intervenant intervenant;
     private IntervenantView intervenantView;
     private RequeteTravailDataStore requeteTravailDataStore;
+    private ProjectDataStore projectDataStore;
 
     public IntervenantController() {
         this.requeteTravailDataStore = new RequeteTravailDataStore("requetes.json");
+        this.projectDataStore = new ProjectDataStore("projets.json");
     }
 
     public IntervenantController(IntervenantView intervenantView) {
@@ -29,6 +33,10 @@ public class IntervenantController implements IController {
 
     public void handleConnectionEvent(Intervenant intervenant) {
         this.intervenant = intervenant;
+    }
+
+    public boolean createNewProject(Projet projet) {
+        return this.projectDataStore.saveProject(projet);
     }
 
     @Override

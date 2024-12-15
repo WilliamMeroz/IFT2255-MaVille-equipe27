@@ -7,7 +7,7 @@
     "lastname": "Liddell",
     "dob": "1852-05-04",
     "phone": "",
-    "address": "3,Rue des merveilles,8,H3Y 2S5"
+    "address": "3,Rue des merveilles,Plateau-Mont-Royal,8,H3Y 2S5"
   },
   {
     "email": "intervenant@gmail.com",
@@ -27,5 +27,15 @@
     "dob": "2000-10-05",
     "phone": "514-795-9342",
     "address": "1,wjgkejgekgj,0,j5r0b2"
+  },
+  {
+    "email": "resident2@gmail.com",
+    "password": "$2a$10$8jUixEKTTvK6wKBlSAS1f.myiYx8FlU1mUaZG7YfG0x/UKSJvGzRS",
+    "role": "1",
+    "firstname": "wfwf",
+    "lastname": "fwfwf",
+    "dob": "2017-12-12",
+    "phone": "514-564-5345",
+    "address": "3,bob graton,Plateau-Mont-Royal,3,j5r0b3"
   }
 ]
