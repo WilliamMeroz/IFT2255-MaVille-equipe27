@@ -20,6 +20,12 @@ public class AuthController implements IController {
     private final PropertyChangeSupport support;
 
 
+    public AuthController() {
+        this.view = null;
+        this.authHelper = new AuthHelper(new UserDataStore("users.json"));
+        this.support = new PropertyChangeSupport(this);
+    }
+
     public AuthController(AuthView view, AuthHelper authHelper) {
         this.view = view;
         this.authHelper = authHelper;
@@ -41,7 +47,11 @@ public class AuthController implements IController {
         }
     }
 
-    public void register(User user) {
+    public User login(String email, String password) {
+        return authHelper.login(email, password);
+    }
+
+    public void attemptRegister(User user) {
         boolean success = authHelper.register(user);
         if(success) {
             view.registerSuccess(user.getFirstname());
@@ -49,6 +59,14 @@ public class AuthController implements IController {
         } else {
             view.registerFailure();
         }
+    }
+
+    public User register(User user) {
+        if (authHelper.register(user)) {
+            return user;
+        }
+
+        return null;
     }
 
     @Override
@@ -82,7 +100,7 @@ public class AuthController implements IController {
                 user = new Intervenant(email, password, role, firstname, lastname, companyChoice, cityIdentifier);
             }
 
-            register(user);
+            attemptRegister(user);
         }
         else attemptLogin(email, password);
     }

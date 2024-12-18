@@ -88,7 +88,7 @@ class ResidentControllerTest {
     @Test
     void testSubmitRequeteTravail() {
         // Arrange
-        RequeteTravail requeteTravail = new RequeteTravail("test", "test", TravauxTypes.ROUTIER, LocalDate.now());
+        RequeteTravail requeteTravail = new RequeteTravail("resident@gmail.com", "test", "test", TravauxTypes.ROUTIER, LocalDate.now());
         when(requeteTravailDataStore.saveRequete(requeteTravail)).thenReturn(true);
 
         // Act

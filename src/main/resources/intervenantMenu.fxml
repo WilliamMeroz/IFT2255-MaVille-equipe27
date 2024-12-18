@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="532.0" prefWidth="796.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maville.equipe27.views.IntervenantMenuViewControllerFx">
+   <children>
+      <TabPane layoutX="7.0" layoutY="8.0" prefHeight="518.0" prefWidth="780.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Requêtes">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane layoutX="7.0" layoutY="7.0" prefHeight="474.0" prefWidth="764.0">
+                           <children>
+                              <TableView id="tableViewRequetes" fx:id="tableViewRequetes" layoutX="22.0" layoutY="12.0" prefHeight="453.0" prefWidth="733.0">
+                                <columns>
+                                  <TableColumn id="colRequetesTitre" fx:id="colRequetesTitre" prefWidth="160.0" text="Titre" />
+                                  <TableColumn id="colRequetesDesc" fx:id="colRequetesDesc" minWidth="0.0" prefWidth="248.0" text="Description" />
+                                    <TableColumn id="colRequetesType" fx:id="colRequetesType" minWidth="0.0" prefWidth="154.0" text="Type" />
+                                    <TableColumn id="colRequetesDate" fx:id="colRequetesDate" minWidth="6.33331298828125" prefWidth="170.16665649414062" text="Date" />
+                                </columns>
+                              </TableView>
+                           </children></Pane>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab text="Nouveau projet">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane prefHeight="483.0" prefWidth="779.0">
+                           <children>
+                              <Text layoutX="284.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Créer nouveau projet">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <VBox layoutX="145.0" layoutY="88.0" prefHeight="342.0" prefWidth="510.0" spacing="10.0">
+                                 <children>
+                                    <TextField id="nouveauProjetTitre" fx:id="nouveauProjetTitre" promptText="Titre du projet" />
+                                    <TextField id="nouveauProjetDesc" fx:id="nouveauProjetDesc" promptText="Description du projet" />
+                                    <ComboBox id="nouveauProjetType" fx:id="nouveauProjetType" prefWidth="150.0" promptText="Type de travaux" />
+                                    <HBox prefHeight="27.0" prefWidth="510.0">
+                                       <children>
+                                          <ComboBox id="nouveauProjetQuartier" fx:id="nouveauProjetQuartier" prefWidth="150.0" promptText="Quartier affectés" />
+                                          <Button id="nouveauProjetAjouterButton" fx:id="nouveauProjetAjouterButton" mnemonicParsing="false" text="Ajouter">
+                                             <HBox.margin>
+                                                <Insets left="20.0" />
+                                             </HBox.margin>
+                                          </Button>
+                                          <Button id="nouveauProjetRetirerButton" fx:id="nouveauProjetRetirerButton" mnemonicParsing="false" text="Retirer">
+                                             <HBox.margin>
+                                                <Insets left="10.0" />
+                                             </HBox.margin>
+                                          </Button>
+                                       </children>
+                                    </HBox>
+                                    <TextField id="nouveauProjetRues" fx:id="nouveauProjetRues" promptText="Rues affectées (séparées par ,)" />
+                                    <DatePicker id="nouveauProjetDebut" fx:id="nouveauProjetDebut" promptText="Date de début" />
+                                    <DatePicker id="nouveauProjetFin" fx:id="nouveauProjetFin" prefHeight="26.0" prefWidth="185.0" promptText="Date de fin" />
+                                    <Pane prefHeight="200.0" prefWidth="200.0">
+                                       <children>
+                                          <Spinner id="nouveauProjetDe" fx:id="nouveauProjetDe" editable="true" layoutX="165.0" layoutY="32.0" prefHeight="26.0" prefWidth="87.0" />
+                                          <Spinner id="nouveauProjetA" fx:id="nouveauProjetA" editable="true" layoutX="314.0" layoutY="33.0" prefHeight="26.0" prefWidth="87.0" />
+                                          <Text layoutX="224.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Horaire (heures) ">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="135.0" layoutY="51.0" strokeType="OUTSIDE" strokeWidth="0.0" text="De:">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                          <Text layoutX="289.0" layoutY="52.0" strokeType="OUTSIDE" strokeWidth="0.0" text="À:">
+                                             <font>
+                                                <Font size="18.0" />
+                                             </font>
+                                          </Text>
+                                       </children>
+                                    </Pane>
+                                 </children>
+                              </VBox>
+                              <Button id="nouveauProjetButton" fx:id="nouveauProjetButton" layoutX="362.0" layoutY="434.0" mnemonicParsing="false" text="Créer projet" />
+                           </children></Pane>
+                     </children></AnchorPane>
+            </content>
+          </Tab>
+            <Tab text="Projets créés">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Pane layoutX="5.0" layoutY="5.0" prefHeight="474.0" prefWidth="771.0">
+                           <children>
+                              <Text layoutX="277.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Modification de projet">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <ComboBox id="updateProjectList" fx:id="updateProjectList" layoutX="311.0" layoutY="53.0" prefWidth="150.0" promptText="Choisir projet" />
+                              <TextField id="updateProjectTitre" fx:id="updateProjectTitre" layoutX="306.0" layoutY="102.0" />
+                              <ComboBox id="updateProjectType" fx:id="updateProjectType" layoutX="311.0" layoutY="152.0" prefWidth="150.0" />
+                              <TextArea id="updateProjectDesc" fx:id="updateProjectDesc" layoutX="286.0" layoutY="201.0" prefHeight="200.0" prefWidth="200.0" />
+                              <Button id="updateProjectButton" fx:id="updateProjectButton" layoutX="358.0" layoutY="424.0" mnemonicParsing="false" text="Modifier" />
+                           </children>
+                        </Pane>
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>

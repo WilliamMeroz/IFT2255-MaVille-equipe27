@@ -165,7 +165,6 @@ public class ResidentView {
         if (choice == 2) return 52;
         if (choice == 3) return 0;
         return choice;
-
     }
 
     public RequeteTravail promptSoumettreRequete() {
@@ -186,7 +185,7 @@ public class ResidentView {
         }
 
         String description = textIO.newStringInputReader().read("Entrez une description du travail:\n");
-        RequeteTravail newRequete = new RequeteTravail(titreTravail, description, typeTravail, date);
+        RequeteTravail newRequete = new RequeteTravail("fefe",titreTravail, description, typeTravail, date);
         return newRequete;
     }
 

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<?import javafx.collections.FXCollections?>
+<?import java.lang.String?>
+<AnchorPane minWidth="-Infinity" prefHeight="800.0" prefWidth="800.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maville.equipe27.views.RegisterIntervenantViewControllerFx">
+   <children>
+      <Text layoutX="247.0" layoutY="66.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Inscription Intervenant">
+         <font>
+            <Font size="36.0" />
+         </font>
+      </Text>
+      <VBox layoutX="272.0" layoutY="102.0" prefHeight="363.0" prefWidth="273.0" spacing="30.0">
+         <children>
+            <TextField id="registerEmailIntervenant" fx:id="registerEmailIntervenant" promptText="courriel" />
+            <TextField id="registerPasswordIntervenant" fx:id="registerPasswordIntervenant" promptText="mot de passe" />
+            <TextField id="registerFirstNameIntervenant" fx:id="registerFirstNameIntervenant" promptText="prénom" />
+            <TextField id="registerLastNameIntervenant" fx:id="registerLastNameIntervenant" promptText="nom de famille" />
+            <TextField id="registerCompanyNameIntervenant" fx:id="registerCompanyNameIntervenant" promptText="Nom entreprise" />
+            <ComboBox id="registerCompanyTypeIntervenant" fx:id="registerCompanyTypeIntervenant" prefWidth="150.0" promptText="Type d'entreprise">
+               <items>
+                  <FXCollections fx:factory="observableArrayList">
+                     <String fx:value="Public"/>
+                     <String fx:value="Privé"/>
+                     <String fx:value="Particulier"/>
+                  </FXCollections>
+               </items>
+               <value>
+                  <String fx:value="Public"/>
+               </value>
+            </ComboBox>
+            <TextField id="registerIdentifierIntervenant" fx:id="registerIdentifierIntervenant" promptText="Identifiant" />
+         </children>
+      </VBox>
+      <Button id="registerButtonIntervenant" fx:id="registerButtonIntervenant" layoutX="344.0" layoutY="540.0" mnemonicParsing="false" prefHeight="63.0" prefWidth="106.0" text="Inscription" />
+   </children>
+</AnchorPane>

@@ -1,0 +1,344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.String?>
+<?import javafx.collections.FXCollections?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.DatePicker?>
+<?import javafx.scene.control.RadioButton?>
+<?import javafx.scene.control.Spinner?>
+<?import javafx.scene.control.Tab?>
+<?import javafx.scene.control.TabPane?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextArea?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane prefHeight="900.0" prefWidth="1183.0" xmlns="http://javafx.com/javafx/23.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="maville.equipe27.views.ResidentMenuViewControllerFx">
+   <children>
+      <TabPane layoutX="7.0" layoutY="7.0" prefHeight="886.0" prefWidth="1171.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab text="Travaux">
+               <content>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Text layoutX="24.0" layoutY="434.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recherche de travaux" wrappingWidth="172.18701171875">
+                           <font>
+                              <Font size="18.0" />
+                           </font></Text>
+                        <HBox layoutX="24.0" layoutY="455.0" prefHeight="27.0" prefWidth="290.0" spacing="20.0">
+                           <children>
+                              <RadioButton id="travauxParTitreRadio" fx:id="travauxParTitreRadio" mnemonicParsing="false" selected="true" text="par titre" toggleGroup="$t1">
+                                 <toggleGroup>
+                                     <ToggleGroup fx:id="t1" />
+                                 </toggleGroup></RadioButton>
+                              <RadioButton id="travauxParTypeRadio" fx:id="travauxParTypeRadio" mnemonicParsing="false" text="par type" toggleGroup="$t1" />
+                              <RadioButton id="travauxParQuartierRadio" fx:id="travauxParQuartierRadio" mnemonicParsing="false" text="par quartier" toggleGroup="$t1" />
+                           </children>
+                        </HBox>
+                        <TextField id="travauxRechercheTextBox" fx:id="travauxRechercheTextBox" layoutX="24.0" layoutY="496.0" promptText="Entrez le titre" />
+                        <ComboBox id="rechercheTravauxComboBox" fx:id="rechercheTravauxComboBox" disable="true" layoutX="24.0" layoutY="547.0" prefWidth="150.0">
+                            <items>
+                                <FXCollections fx:factory="observableArrayList">
+                                    <String fx:value="Routier" />
+                                    <String fx:value="Énergie" />
+                                    <String fx:value="Construction" />
+                                    <String fx:value="Paysager" />
+                                    <String fx:value="Transports" />
+                                    <String fx:value="Signalisation" />
+                                    <String fx:value="Souterrains" />
+                                    <String fx:value="Résidentiel" />
+                                    <String fx:value="Urbain" />
+                                    <String fx:value="Telecoms" />
+                                    <String fx:value="Autre" />
+                                </FXCollections>
+                            </items>
+                            <value>
+                                <String fx:value="Routier" />
+                            </value>
+                        </ComboBox>
+                        <Button id="travauxRechercheButton" fx:id="travauxRechercheButton" layoutX="24.0" layoutY="608.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="150.0" text="Rechercher" />
+                        <TableView id="travauxTableView" fx:id="travauxTableView" layoutX="350.0" layoutY="8.0" prefHeight="811.0" prefWidth="812.0">
+                          <columns>
+                            <TableColumn id="colTravailId" fx:id="colTravailId" prefWidth="132.66665649414062" text="ID" />
+                            <TableColumn id="colTravailIntervenant" fx:id="colTravailIntervenant" minWidth="0.0" prefWidth="148.5" text="Intervenant" />
+                              <TableColumn id="colTravailTitre" fx:id="colTravailTitre" minWidth="0.0" prefWidth="110.8333740234375" text="Titre" />
+                              <TableColumn id="colTravailQuartier" fx:id="colTravailQuartier" minWidth="0.0" prefWidth="116.6666259765625" text="Quartier" />
+                              <TableColumn id="colTravailType" fx:id="colTravailType" minWidth="0.0" prefWidth="144.5" text="Type" />
+                              <TableColumn id="colTravailDe" fx:id="colTravailDe" minWidth="0.0" prefWidth="68.5" text="De" />
+                              <TableColumn id="colTravailA" fx:id="colTravailA" minWidth="0.0" prefWidth="92.49993896484375" text="À" />
+                          </columns>
+                        </TableView>
+                        <Text layoutX="14.0" layoutY="31.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Voir les travaux" wrappingWidth="143.4599609375">
+                           <font>
+                              <Font size="18.0" />
+                           </font>
+                        </Text>
+                        <VBox layoutX="14.0" layoutY="48.0" prefHeight="76.0" prefWidth="239.0">
+                           <children>
+                              <HBox prefHeight="58.0" prefWidth="239.0" spacing="10.0">
+                                 <children>
+                                    <RadioButton id="radioTravauxCourrants" fx:id="radioTravauxCourrants" mnemonicParsing="false" selected="true" text="Courrants" textAlignment="JUSTIFY" />
+                                    <RadioButton id="radioTravauxFuturs" fx:id="radioTravauxFuturs" mnemonicParsing="false" text="Futurs (3 mois)" />
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="37.0" prefWidth="239.0" spacing="10.0">
+                                 <children>
+                                    <RadioButton id="radioTravauxTous" fx:id="radioTravauxTous" mnemonicParsing="false" selected="true" text="Tous" />
+                                    <RadioButton id="radioTravauxParType" fx:id="radioTravauxParType" mnemonicParsing="false" text="Par type" />
+                                    <RadioButton id="radioTravauxParQuartier" fx:id="radioTravauxParQuartier" mnemonicParsing="false" text="Par quartier" />
+                                 </children>
+                              </HBox>
+                           </children>
+                        </VBox>
+                        <TextField id="voirTravauxTextBox" fx:id="voirTravauxTextBox" disable="true" layoutX="19.0" layoutY="143.0" promptText="Nom quartier" />
+                         <ComboBox id="voirTravauxComboBox" fx:id="voirTravauxComboBox" disable="true" layoutX="19.0" layoutY="186.0" prefWidth="150.0">
+                             <items>
+                                 <FXCollections fx:factory="observableArrayList">
+                                     <String fx:value="Routier" />
+                                     <String fx:value="Énergie" />
+                                     <String fx:value="Construction" />
+                                     <String fx:value="Paysager" />
+                                     <String fx:value="Transports" />
+                                     <String fx:value="Signalisation" />
+                                     <String fx:value="Souterrains" />
+                                     <String fx:value="Résidentiel" />
+                                     <String fx:value="Urbain" />
+                                     <String fx:value="Telecoms" />
+                                     <String fx:value="Autre" />
+                                 </FXCollections>
+                             </items>
+                             <value>
+                                 <String fx:value="Routier" />
+                             </value>
+                         </ComboBox>
+                        <Button id="voirTravauxButton" fx:id="voirTravauxButton" layoutX="20.0" layoutY="230.0" mnemonicParsing="false" prefHeight="26.0" prefWidth="148.0" text="Voir travaux" />
+                     </children>
+                  </Pane>
+               </content>
+          </Tab>
+          <Tab text="Notifications" />
+            <Tab text="Planif. Participative">
+               <content>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Text layoutX="50.0" layoutY="43.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Préférences horaire" wrappingWidth="226.28778076171875">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Text>
+                        <VBox layoutX="55.0" layoutY="53.0" prefHeight="422.0" prefWidth="304.0" spacing="20.0">
+                           <children>
+                              <HBox prefHeight="49.0" prefWidth="292.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="De:">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Heure" wrappingWidth="58.0546875">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets top="10.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                    <Spinner id="residentPrefDeHeure" fx:id="residentPrefDeHeure" editable="true" prefHeight="26.0" prefWidth="87.0">
+                                       <HBox.margin>
+                                          <Insets right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Spinner>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Min">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets top="10.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                    <Spinner id="residentPrefDeHeure" fx:id="residentPrefDeMin" editable="true" prefHeight="26.0" prefWidth="84.0">
+                                       <HBox.margin>
+                                          <Insets left="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Spinner>
+                                 </children>
+                              </HBox>
+                              <HBox prefHeight="49.0" prefWidth="227.0">
+                                 <children>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="À:">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Heure">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets top="10.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                    <Spinner id="residentPrefAHeure" fx:id="residentPrefAHeure" editable="true" prefHeight="26.0" prefWidth="90.0">
+                                       <HBox.margin>
+                                          <Insets right="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Spinner>
+                                    <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Min">
+                                       <font>
+                                          <Font size="18.0" />
+                                       </font>
+                                       <HBox.margin>
+                                          <Insets top="10.0" />
+                                       </HBox.margin>
+                                    </Text>
+                                    <Spinner id="residentPrefAMin" fx:id="residentPrefAMin" editable="true" prefHeight="26.0" prefWidth="78.0">
+                                       <HBox.margin>
+                                          <Insets left="10.0" top="10.0" />
+                                       </HBox.margin>
+                                    </Spinner>
+                                 </children>
+                              </HBox>
+                              <Button id="residentPlanifButton" fx:id="residentPlanifButton" mnemonicParsing="false" prefHeight="26.0" prefWidth="228.0" text="Envoyer nouvelles préférences" />
+                              <Text strokeType="OUTSIDE" strokeWidth="0.0" text="Préférences actuelle" wrappingWidth="226.28778076171875">
+                                 <font>
+                                    <Font size="24.0" />
+                                 </font>
+                              </Text>
+                              <Text id="residentPrefActuelleDeText" fx:id="residentPrefActuelleDeText" strokeType="OUTSIDE" strokeWidth="0.0" text="De: ">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Text>
+                              <Text id="residentPrefActuelleAText" fx:id="residentPrefActuelleAText" strokeType="OUTSIDE" strokeWidth="0.0" text="À:">
+                                 <font>
+                                    <Font size="18.0" />
+                                 </font>
+                              </Text>
+                           </children>
+                        </VBox>
+                        <Text layoutX="659.0" layoutY="42.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Préférences du reste du quartier" wrappingWidth="351.62109375">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Text>
+                        <TableView id="residentPlanifTableView" fx:id="residentPlanifTableView" layoutX="658.0" layoutY="80.0" prefHeight="405.0" prefWidth="328.0">
+                          <columns>
+                            <TableColumn id="residentPlanifTableDe" fx:id="residentPlanifTableDe" prefWidth="164.6666259765625" text="De" />
+                            <TableColumn id="residentPlanifTableA" fx:id="residentPlanifTableA" minWidth="0.0" prefWidth="162.3333740234375" text="À" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </Pane>
+               </content></Tab>
+            <Tab text="Entraves">
+               <content>
+                  <Pane>
+                     <children>
+                        <VBox layoutX="14.0" layoutY="55.0" prefHeight="347.0" prefWidth="205.0" spacing="30.0">
+                           <children>
+                              <RadioButton id="entravesRadioTravail" fx:id="entravesRadioTravail" mnemonicParsing="false" selected="true" text="par travail" toggleGroup="$ta">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="ta" />
+                                 </toggleGroup></RadioButton>
+                              <RadioButton id="entravesRadioRue" fx:id="entravesRadioRue" mnemonicParsing="false" text="par rue" toggleGroup="$ta" />
+                              <TextField id="entravesTextBox" fx:id="entravesTextBox" promptText="numéro de travail" />
+                              <Button id="entravesButton" fx:id="entravesButton" mnemonicParsing="false" prefHeight="40.0" prefWidth="153.0" text="Recherche" />
+                           </children>
+                        </VBox>
+                        <Text layoutX="14.0" layoutY="37.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Recherche d'entraves">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Text>
+                        <TableView id="entravesTableView" fx:id="entravesTableView" layoutX="244.0" layoutY="14.0" prefHeight="684.0" prefWidth="915.0">
+                          <columns>
+                            <TableColumn id="tableLargObCol" fx:id="tableLargObCol" prefWidth="129.0" text="largeur obstruction" />
+                            <TableColumn id="tableTypeCol" fx:id="tableTypeCol" prefWidth="114.0" text="Type" />
+                              <TableColumn id="tableStatusTroitCol" fx:id="tableStatusTroitCol" prefWidth="94.0" text="status troitoir" />
+                              <TableColumn id="tableStatusPisteCol" fx:id="tableStatusPisteCol" prefWidth="152.1666259765625" text="status pistes" />
+                              <TableColumn id="tableFromCol" fx:id="tableFromCol" prefWidth="200.3333740234375" text="De" />
+                              <TableColumn id="tableToCol" fx:id="tableToCol" prefWidth="221.33331298828125" text="a" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </Pane>
+               </content>
+            </Tab>
+            <Tab text="Req. Travail">
+               <content>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Text layoutX="471.0" layoutY="58.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Requêtes de travail" wrappingWidth="312.2162780761719">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Text>
+                        <VBox layoutX="47.0" layoutY="110.0" prefHeight="487.0" prefWidth="496.0" spacing="50.0">
+                           <children>
+                              <TextField id="requeteTitre" fx:id="requeteTitre" prefHeight="26.0" prefWidth="345.0" promptText="Titre de la requête" />
+                              <ComboBox id="requeteType" fx:id="requeteType" prefWidth="150.0" promptText="Type de requête">
+                                  <items>
+                                      <FXCollections fx:factory="observableArrayList">
+                                          <String fx:value="Routier" />
+                                          <String fx:value="Énergie" />
+                                          <String fx:value="Construction" />
+                                          <String fx:value="Paysager" />
+                                          <String fx:value="Transports" />
+                                          <String fx:value="Signalisation" />
+                                          <String fx:value="Souterrains" />
+                                          <String fx:value="Résidentiel" />
+                                          <String fx:value="Urbain" />
+                                          <String fx:value="Telecoms" />
+                                          <String fx:value="Autre" />
+                                      </FXCollections>
+                                  </items>
+                                  <value>
+                                      <String fx:value="Routier" />
+                                  </value>
+                              </ComboBox>
+                              <DatePicker id="requeteDateDebut" fx:id="requeteDateDebut" promptText="Date de début" />
+                              <TextArea id="requeteDesc" fx:id="requeteDesc" prefHeight="200.0" prefWidth="200.0" promptText="Description de la requête..." />
+                              <Button id="boutonNouvelleRequete" fx:id="boutonNouvelleRequete" mnemonicParsing="false" prefHeight="63.0" prefWidth="496.0" text="Envoyer nouvelle requête" />
+                           </children>
+                        </VBox>
+                        <Text layoutX="81.0" layoutY="72.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Créer nouvelle requête">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Text>
+                        <TableView id="residentRequtesTableView" fx:id="residentRequtesTableView" layoutX="588.0" layoutY="145.0" prefHeight="644.0" prefWidth="567.0">
+                          <columns>
+                            <TableColumn id="ResidentReqColTitre" fx:id="ResidentReqColTitre" prefWidth="157.66668701171875" text="titre" />
+                            <TableColumn id="ResidentReqColDesc" fx:id="ResidentReqColDesc" prefWidth="130.16668701171875" text="Description" />
+                              <TableColumn id="ResidentReqColType" fx:id="ResidentReqColType" minWidth="0.0" prefWidth="80.33331298828125" text="Type" />
+                              <TableColumn id="ResidentReqColDebut" fx:id="ResidentReqColDebut" minWidth="0.3333740234375" prefWidth="74.5" text="Début" />
+                              <TableColumn id="ResidentReqColDebut" fx:id="ResidentReqColStatus" minWidth="0.0" prefWidth="123.33331298828125" text="Status" />
+                          </columns>
+                        </TableView>
+                        <Text layoutX="800.0" layoutY="117.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Vos requêtes">
+                           <font>
+                              <Font size="24.0" />
+                           </font>
+                        </Text>
+                     </children>
+                  </Pane>
+               </content></Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
