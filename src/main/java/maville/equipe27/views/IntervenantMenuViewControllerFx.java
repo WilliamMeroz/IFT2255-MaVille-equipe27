@@ -190,10 +190,32 @@ public class IntervenantMenuViewControllerFx {
                 showAlert("Horaire des travaux invalide", "La première heure ne doit pas être après la deuxième heure", nouveauProjetDe);
             } else {
                 String[] returnedQuartiers = Arrays.stream(selectedQuartiers.toArray()).map(q -> q.toString().substring(0, q.toString().length() - 2)).toArray(String[]::new);
-                Projet projet = new Projet(ConnectedIntervenant.getInstance().getIntervenant().getCityIdentifier(),
-                        projetTitre, projetDesc, nouveauProjetType.getValue(), returnedQuartiers, projetDebut, projetFin, projetAHour, projetDeHour, ProjetStatus.PRÉVUE, rues);
-                if(!intervenantController.createNewProject(projet))
-                    showAlert("Erreur durant la création du projet", "Le projet n'a pas de nom unique ou une autre erreur est survenue", nouveauProjetAjouterButton);
+
+                if (returnedQuartiers.length == 0) {
+                    showAlert("Quartiers manquants", "Il faut choisir au moins un quartier", nouveauProjetQuartier);
+                } else {
+                    Projet projet = new Projet(ConnectedIntervenant.getInstance().getIntervenant().getCityIdentifier(),
+                            projetTitre, projetDesc, nouveauProjetType.getValue(), returnedQuartiers, projetDebut, projetFin, projetAHour, projetDeHour, ProjetStatus.PRÉVUE, rues);
+                    if(!intervenantController.createNewProject(projet)) {
+                        showAlert("Erreur durant la création du projet", "Le projet n'a pas de nom unique ou une autre erreur est survenue", nouveauProjetAjouterButton);
+                    }
+                    else {
+                        showAlertSuccess("Projet ajouté avec succès!", "Merci");
+                        nouveauProjetTitre.setText("");
+                        nouveauProjetTitre.setStyle("");
+                        nouveauProjetDesc.setText("");
+                        nouveauProjetDesc.setStyle("");
+                        nouveauProjetRues.setText("");
+                        nouveauProjetRues.setStyle("");
+                        nouveauProjetQuartier.setStyle("");
+                        selectedQuartiers.clear();
+                        quartiersSelects = FXCollections.observableArrayList(quartiers);
+                        nouveauProjetQuartier.setItems(quartiersSelects);
+                        nouveauProjetQuartier.setValue("Plateau-Mont-Royal");
+                    }
+                }
+
+
             }
         }
     }
@@ -245,6 +267,14 @@ public class IntervenantMenuViewControllerFx {
 
         control.setStyle("-fx-border-color: red;");
 
+        alert.showAndWait();
+    }
+
+    private void showAlertSuccess(String title, String message) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
         alert.showAndWait();
     }
 }
