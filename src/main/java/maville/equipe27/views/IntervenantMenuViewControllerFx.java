@@ -93,7 +93,8 @@ public class IntervenantMenuViewControllerFx {
     private ObservableList<String> quartiersSelects;
     private Set<String> selectedQuartiers = new HashSet<>();
 
-    private List<Projet> userProjects;
+    private ArrayList<Projet> userProjects;
+    private ObservableList<String> projectsUpdates;
 
     @FXML
     public void initialize() {
@@ -134,7 +135,7 @@ public class IntervenantMenuViewControllerFx {
         updateProjectType.setItems(projetTypesStr);
         userProjects = intervenantController.getUserProjects();
         List<String> titres = userProjects.stream().map(Projet::getTitre).toList();
-        ObservableList<String> projectsUpdates = FXCollections.observableArrayList(titres);
+        projectsUpdates = FXCollections.observableArrayList(titres);
         updateProjectList.setItems(projectsUpdates);
 
 
@@ -212,6 +213,8 @@ public class IntervenantMenuViewControllerFx {
                         quartiersSelects = FXCollections.observableArrayList(quartiers);
                         nouveauProjetQuartier.setItems(quartiersSelects);
                         nouveauProjetQuartier.setValue("Plateau-Mont-Royal");
+                        projectsUpdates.add(projet.getTitre());
+                        userProjects.add(projet);
                     }
                 }
 
@@ -256,6 +259,9 @@ public class IntervenantMenuViewControllerFx {
 
         if (!intervenantController.updateProject(foundProject, newTitre)) {
             showAlert("Erreur durant update", "Le projet que vous mettez à jour n'existe sûrement pas", updateProjectButton);
+        } else {
+            showAlertSuccess("Projet mis à jour avec succès", "Tout va bien");
+            
         }
     }
 

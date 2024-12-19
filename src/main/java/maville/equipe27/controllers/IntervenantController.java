@@ -13,6 +13,7 @@ import org.json.simple.parser.JSONParser;
 
 import org.beryx.textio.TextIO;
 import java.io.FileReader;
+import java.util.ArrayList;
 import java.util.List;
 
 public class IntervenantController implements IController {
@@ -39,7 +40,7 @@ public class IntervenantController implements IController {
         return this.projectDataStore.saveProject(projet);
     }
 
-    public List<Projet> getUserProjects() {
+    public ArrayList<Projet> getUserProjects() {
         return this.projectDataStore.getUserProjects();
     }
 

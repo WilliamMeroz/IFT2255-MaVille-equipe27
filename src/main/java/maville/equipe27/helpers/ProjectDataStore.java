@@ -10,6 +10,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 public class ProjectDataStore {
     private final String FILE_NAME;
@@ -74,14 +75,14 @@ public class ProjectDataStore {
         return success;
     }
 
-    public List<Projet> getProjets() {
-        List<Projet> projets = null;
+    public ArrayList<Projet> getProjets() {
+        ArrayList<Projet> projets = null;
 
         try (FileReader reader = new FileReader(FILE_NAME)) {
             GsonBuilder builder = new GsonBuilder();
             builder.registerTypeHierarchyAdapter(List.class, new ProjetJsonAdapter());
             Gson gson = builder.create();
-            projets = gson.fromJson(reader, List.class);
+            projets = gson.fromJson(reader, ArrayList.class);
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -89,8 +90,8 @@ public class ProjectDataStore {
         return projets;
     }
 
-    public List<Projet> getUserProjects() {
+    public ArrayList<Projet> getUserProjects() {
         String id = ConnectedIntervenant.getInstance().getIntervenant().getCityIdentifier();
-        return getProjets().stream().filter(p -> p.getIntervenantCityIdentifier().equals(id)).toList();
+        return (ArrayList<Projet>) getProjets().stream().filter(p -> p.getIntervenantCityIdentifier().equals(id)).collect(Collectors.toCollection(ArrayList::new));
     }
 }
