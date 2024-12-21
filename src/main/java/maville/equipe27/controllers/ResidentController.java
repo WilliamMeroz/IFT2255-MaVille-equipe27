@@ -11,6 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+/**
+ * Le contrôleur pour la gestion des actions d'un résident.
+ * Cette classe permet de gérer les travaux, les requêtes, les entraves, les horaires,
+ * et les notifications du résident en interagissant avec les modèles et les vues.
+ */
 public class ResidentController implements IController {
 
     private Resident resident;
@@ -20,6 +25,10 @@ public class ResidentController implements IController {
     public PrefHoraireDataStore prefHoraireDataStore;
     public NotifcationEmitter notificationEmitter;
 
+    /**
+     * Constructeur par défaut du contrôleur du résident.
+     * Initialise les objets nécessaires à la gestion des données et des notifications.
+     */
     public ResidentController() {
         this.httpRequestsHelper = new HTTPRequestsHelper();
         this.requeteTravailDataStore = new RequeteTravailDataStore("requetes.json");
@@ -27,40 +36,85 @@ public class ResidentController implements IController {
         this.notificationEmitter = new NotifcationEmitter("notifications.json");
     }
 
+    /**
+     * Constructeur du contrôleur du résident avec la vue associée.
+     *
+     * @param residentView La vue associée au résident
+     */
     public ResidentController(ResidentView residentView) {
         this.residentView = residentView;
         this.httpRequestsHelper = new HTTPRequestsHelper();
         this.requeteTravailDataStore = new RequeteTravailDataStore("requetes.json");
     }
 
+    /**
+     * Gère l'événement de connexion du résident.
+     *
+     * @param resident Le résident qui se connecte
+     */
     public void handleConnectionEvent(Resident resident) {
         this.resident = resident;
     }
 
+    /**
+     * Consulte les entraves de la rue spécifiée.
+     *
+     * @param rue Le nom de la rue
+     * @return La liste des entraves sur la rue
+     */
     public List<Entrave> consulterEntravesRue(String rue) {
         return this.httpRequestsHelper.getEntravesByStreet(rue);
     }
 
+    /**
+     * Consulte les entraves liées à un travail spécifique.
+     *
+     * @param id L'identifiant de la requête de travail
+     * @return La liste des entraves liées à ce travail
+     */
     public List<Entrave> consulterEntravesTravail(String id) {
         return this.httpRequestsHelper.getEntravesByIdRequest(id);
     }
 
+    /**
+     * Consulte tous les travaux courants.
+     *
+     * @return La liste de tous les travaux en cours
+     */
     public List<Travail> consulterTousLesTravauxCourrants() {
         return this.httpRequestsHelper.getCurrentTravaux();
     }
 
+    /**
+     * Consulte les travaux par quartier.
+     *
+     * @param quartier Le nom du quartier
+     * @return La liste des travaux dans ce quartier
+     */
     public List<Travail> consulterTravauxParQuartier(String quartier) {
         return this.httpRequestsHelper.getTravauxByQuartier(quartier);
     }
 
+    /**
+     * Consulte les travaux par type spécifié.
+     *
+     * @param type Le type de travail
+     * @return La liste des travaux de ce type
+     */
     public List<Travail> consulterTravauxParType(TravauxTypes type) {
         return this.httpRequestsHelper.getTravauxByType(type.toString());
     }
 
+    /**
+     * Consulte les travaux en fonction de critères de recherche.
+     *
+     * @param isFutur Indique si on cherche des travaux futurs (true) ou en cours (false)
+     * @param typeRecherche Le type de recherche (1 = Tous les travaux, 2 = Par type, 3 = Par quartier)
+     * @param filtre Le filtre pour la recherche (type de travail, quartier, etc.)
+     * @return La liste des travaux correspondant aux critères
+     */
     public List<Travail> consulterTravaux(boolean isFutur, int typeRecherche, String filtre) {
         List<Travail> travaux = new ArrayList<>();
-
-        System.out.println(isFutur);
 
         // Tous les travaux
         if (typeRecherche == 1) {
@@ -89,42 +143,97 @@ public class ResidentController implements IController {
         return travaux;
     }
 
+    /**
+     * Consulte les travaux futurs.
+     *
+     * @return La liste des travaux futurs
+     */
     public List<Travail> consulterFutursTravaux() {
         return this.httpRequestsHelper.getFutureTravaux();
     }
 
+    /**
+     * Consulte les travaux futurs dans un quartier donné.
+     *
+     * @param quartier Le nom du quartier
+     * @return La liste des travaux futurs dans ce quartier
+     */
     public List<Travail> consulterFutursTravauxParQuartier(String quartier) {
         return this.httpRequestsHelper.getFutureTravauxByQuartier(quartier);
     }
 
+    /**
+     * Consulte les travaux futurs d'un type spécifié.
+     *
+     * @param type Le type de travail
+     * @return La liste des travaux futurs de ce type
+     */
     public List<Travail> consulterFutursTravauxParType(TravauxTypes type) {
         return this.httpRequestsHelper.getFutureTravauxByType(type.toString());
     }
 
+    /**
+     * Sauvegarde une nouvelle requête de travail.
+     *
+     * @param requeteTravail La requête de travail à sauvegarder
+     * @return true si la requête est sauvegardée avec succès, false sinon
+     */
     public boolean saveRequest(RequeteTravail requeteTravail) {
         return requeteTravailDataStore.saveRequete(requeteTravail);
     }
 
+    /**
+     * Sauvegarde un nouvel horaire de préférence.
+     *
+     * @param prefHoraire L'horaire de préférence à sauvegarder
+     * @return true si l'horaire est sauvegardé avec succès, false sinon
+     */
     public boolean saveNewHoraire(PrefHoraire prefHoraire) {
         return prefHoraireDataStore.saveHoraire(prefHoraire);
     }
 
+    /**
+     * Récupère les horaires de préférence pour un quartier donné.
+     *
+     * @param quartier Le nom du quartier
+     * @return La liste des horaires de préférence pour ce quartier
+     */
     public List<PrefHoraire> getHorairesByQuartier(String quartier) {
         return prefHoraireDataStore.getHorairesByQuartier(quartier);
     }
 
+    /**
+     * Récupère l'horaire de préférence pour un utilisateur donné par son email.
+     *
+     * @param email L'email de l'utilisateur
+     * @return Un horaire de préférence, s'il existe
+     */
     public Optional<PrefHoraire> getHoraireFromUser(String email) {
         return prefHoraireDataStore.getHoraireFromEmail(email);
     }
 
+    /**
+     * Récupère les requêtes de travail d'un utilisateur donné par son email.
+     *
+     * @param email L'email de l'utilisateur
+     * @return La liste des requêtes de travail de cet utilisateur
+     */
     public List<RequeteTravail> getUserRequests(String email) {
         return this.requeteTravailDataStore.getRequetesByEmail(email);
     }
 
+    /**
+     * Récupère les notifications pour l'utilisateur connecté.
+     *
+     * @return La liste des notifications pour l'utilisateur connecté
+     */
     public List<Notification> getNotifications() {
         return this.notificationEmitter.getNotificationsForUser(ConnectedResident.getInstance().getResident());
     }
 
+    /**
+     * Exécute la logique principale du contrôleur en affichant les menus et gérant les choix de l'utilisateur.
+     */
     @Override
     public void run() {
         System.out.println("Résident: " + this.resident.getEmail());
