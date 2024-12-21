@@ -9,19 +9,34 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * {@code ProjectDataStore} est une classe responsable de la gestion de la persistance des projets dans un fichier JSON.
+ * Elle offre des méthodes pour sauvegarder, mettre à jour et récupérer des projets depuis un fichier.
+ */
 public class ProjectDataStore {
     private final String FILE_NAME;
 
+    /**
+     * Constructeur qui initialise le nom du fichier où les projets seront stockés.
+     *
+     * @param filename Le nom du fichier JSON où les projets seront stockés.
+     */
     public ProjectDataStore(String filename) {
         this.FILE_NAME = filename;
     }
 
+    /**
+     * Sauvegarde un nouveau projet dans le fichier JSON. Si un projet avec le même titre existe déjà, il ne sera pas ajouté.
+     *
+     * @param projet Le projet à sauvegarder.
+     * @return {@code true} si le projet a été sauvegardé avec succès, {@code false} si un projet avec le même titre existe déjà.
+     */
     public boolean saveProject(Projet projet) {
         ArrayList<Projet> projets = new ArrayList<>(getProjets());
 
+        // Vérifie si un projet avec le même titre existe déjà
         if (!projets.stream().filter(p -> p.getTitre().equals(projet.getTitre())).toList().isEmpty())
             return false;
 
@@ -43,6 +58,13 @@ public class ProjectDataStore {
         return success;
     }
 
+    /**
+     * Met à jour un projet existant en changeant son titre. Si le nouveau titre est vide, le projet ne sera pas mis à jour.
+     *
+     * @param project Le projet à mettre à jour.
+     * @param newTitle Le nouveau titre du projet.
+     * @return {@code true} si la mise à jour a réussi, {@code false} si aucun projet correspondant n'a été trouvé.
+     */
     public boolean updateProject(Projet project, String newTitle) {
         ArrayList<Projet> projets = new ArrayList<>(getProjets());
 
@@ -75,6 +97,11 @@ public class ProjectDataStore {
         return success;
     }
 
+    /**
+     * Récupère tous les projets stockés dans le fichier JSON.
+     *
+     * @return Une liste contenant tous les projets.
+     */
     public ArrayList<Projet> getProjets() {
         ArrayList<Projet> projets = null;
 
@@ -90,6 +117,11 @@ public class ProjectDataStore {
         return projets;
     }
 
+    /**
+     * Récupère tous les projets associés à l'identifiant de la ville de l'utilisateur actuellement connecté.
+     *
+     * @return Une liste des projets liés à l'utilisateur connecté.
+     */
     public ArrayList<Projet> getUserProjects() {
         String id = ConnectedIntervenant.getInstance().getIntervenant().getCityIdentifier();
         return (ArrayList<Projet>) getProjets().stream().filter(p -> p.getIntervenantCityIdentifier().equals(id)).collect(Collectors.toCollection(ArrayList::new));

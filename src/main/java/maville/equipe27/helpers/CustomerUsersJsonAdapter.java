@@ -12,7 +12,26 @@ import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 
+/**
+ * {@code CustomerUsersJsonAdapter} est une classe qui implémente l'interface {@link JsonDeserializer}
+ * et {@link JsonSerializer} de la bibliothèque Gson, permettant de personnaliser la manière dont les
+ * objets {@link User} (et ses sous-classes {@link Resident} et {@link Intervenant}) sont sérialisés
+ * et désérialisés vers/depuis le format JSON. Nécéssaire par la librairie Gson.
+ */
 public class CustomerUsersJsonAdapter implements JsonDeserializer<List<User>>, JsonSerializer<List<User>> {
+
+    /**
+     * Désérialise un élément JSON en une liste d'objets {@link User}.
+     *
+     * <p>Ce processus différencie les types d'utilisateurs (résident ou intervenant)
+     * en fonction du champ "role" et crée l'objet correspondant.</p>
+     *
+     * @param jsonElement L'élément JSON à désérialiser.
+     * @param type Le type de retour, ici {@link List<User>}.
+     * @param jsonDeserializationContext Le contexte de désérialisation pour les objets imbriqués.
+     * @return La liste des objets {@link User} désérialisée.
+     * @throws JsonParseException Si le JSON est mal formé ou si un rôle inconnu est rencontré.
+     */
     @Override
     public List<User> deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
         List<User> users = new ArrayList<>();
@@ -46,6 +65,18 @@ public class CustomerUsersJsonAdapter implements JsonDeserializer<List<User>>, J
         return users;
     }
 
+    /**
+     * Sérialise une liste d'objets {@link User} en un élément JSON.
+     *
+     * <p>Lors de la sérialisation, les propriétés de chaque utilisateur sont ajoutées au format JSON
+     * en fonction de son rôle (résident ou intervenant). Les dates de naissance sont formatées au
+     * format {@code yyyy-MM-dd}.</p>
+     *
+     * @param users La liste des objets {@link User} à sérialiser.
+     * @param type Le type de l'objet à sérialiser, ici {@link List<User>}.
+     * @param jsonSerializationContext Le contexte de sérialisation pour les objets imbriqués.
+     * @return L'élément JSON représentant la liste d'utilisateurs.
+     */
     @Override
     public JsonElement serialize(List<User> users, Type type, JsonSerializationContext jsonSerializationContext) {
         JsonArray jsonArray = new JsonArray();

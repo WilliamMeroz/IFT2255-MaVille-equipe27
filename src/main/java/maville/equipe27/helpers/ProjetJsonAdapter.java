@@ -12,7 +12,21 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+/**
+ * {@code ProjetJsonAdapter} est un adaptateur JSON utilisé pour la sérialisation et la désérialisation des objets {@link Projet}.
+ * Il permet de convertir une liste de projets en format JSON et de la reconvertir en objets {@link Projet}. Utilisé par la librairie Gson.
+ */
 public class ProjetJsonAdapter implements JsonDeserializer<List<Projet>>, JsonSerializer<List<Projet>> {
+
+    /**
+     * Désérialise un élément JSON en une liste de projets.
+     *
+     * @param jsonElement L'élément JSON à désérialiser.
+     * @param type Le type attendu (ici une liste de projets).
+     * @param jsonDeserializationContext Le contexte de désérialisation.
+     * @return Une liste de projets désérialisée depuis le JSON.
+     * @throws JsonParseException Si le JSON ne peut pas être converti en objets {@link Projet}.
+     */
     @Override
     public List<Projet> deserialize(JsonElement jsonElement, Type type, JsonDeserializationContext jsonDeserializationContext) throws JsonParseException {
         List<Projet> projets = new ArrayList<>();
@@ -50,6 +64,14 @@ public class ProjetJsonAdapter implements JsonDeserializer<List<Projet>>, JsonSe
         return projets;
     }
 
+    /**
+     * Sérialise une liste de projets en un élément JSON.
+     *
+     * @param projets La liste de projets à sérialiser.
+     * @param type Le type des objets à sérialiser.
+     * @param jsonSerializationContext Le contexte de sérialisation.
+     * @return Un élément JSON représentant la liste de projets.
+     */
     @Override
     public JsonElement serialize(List<Projet> projets, Type type, JsonSerializationContext jsonSerializationContext) {
         JsonArray jsonArray = new JsonArray();

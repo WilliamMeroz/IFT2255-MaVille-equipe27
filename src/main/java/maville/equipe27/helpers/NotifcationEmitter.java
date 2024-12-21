@@ -8,7 +8,6 @@ import maville.equipe27.models.Notification;
 import maville.equipe27.models.Projet;
 import maville.equipe27.models.Resident;
 import maville.equipe27.models.User;
-import org.mockito.internal.matchers.Not;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -18,17 +17,36 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+/**
+ * {@code NotifcationEmitter} est une classe responsable de la gestion et de l'émission de notifications
+ * pour les projets dans un quartier spécifique. Elle filtre les utilisateurs de type {@link Resident} et
+ * leur envoie des notifications en fonction de leur quartier d'habitation.
+ */
 public class NotifcationEmitter {
     private final String FILE_NAME;
     private List<User> residents;
     private UserDataStore userDataStore;
 
+    /**
+     * Constructeur qui initialise la classe avec le nom du fichier où les notifications seront stockées
+     * et charge les résidents depuis le fichier de données utilisateur.
+     *
+     * @param fileName Le nom du fichier où les notifications seront enregistrées.
+     */
     public NotifcationEmitter(String fileName) {
         this.FILE_NAME = fileName;
         this.userDataStore = new UserDataStore("users.json");
-        this.residents = this.userDataStore.getUserList().stream().filter(u -> u.getRole().equals(RoleChoices.RÉSIDENT)).toList();
+        this.residents = this.userDataStore.getUserList().stream()
+                .filter(u -> u.getRole().equals(RoleChoices.RÉSIDENT))
+                .toList();
     }
 
+    /**
+     * Émet des notifications pour les résidents en fonction des quartiers associés à un projet.
+     *
+     * @param projet Le projet pour lequel les notifications doivent être envoyées.
+     * @return {@code true} si les notifications ont été enregistrées avec succès, {@code false} sinon.
+     */
     public boolean emit(Projet projet) {
         String[] quartiers = projet.getQuartiers();
         ArrayList<Notification> notifications = new ArrayList<>();
@@ -39,15 +57,24 @@ public class NotifcationEmitter {
                 String residentQuartier = resident.getAddress().split(",")[2];
 
                 if (residentQuartier.equals(quartier)) {
-                    notifications.add(new Notification("Nouveau projet: " + projet.getTitre() + " dans votre quartier!", resident.getEmail(), new Date()));
+                    notifications.add(new Notification(
+                            "Nouveau projet: " + projet.getTitre() + " dans votre quartier!",
+                            resident.getEmail(),
+                            new Date()
+                    ));
                 }
             }
         }
 
-
         return storeNotifications(notifications);
     }
 
+    /**
+     * Stocke les notifications dans le fichier JSON spécifié.
+     *
+     * @param notifications La liste des notifications à stocker.
+     * @return {@code true} si les notifications ont été stockées avec succès, {@code false} sinon.
+     */
     private boolean storeNotifications(List<Notification> notifications) {
         boolean success;
         ArrayList<Notification> allNotifs = getNotifications();
@@ -64,10 +91,23 @@ public class NotifcationEmitter {
         return success;
     }
 
+    /**
+     * Récupère toutes les notifications associées à un résident particulier.
+     *
+     * @param resident Le résident pour lequel récupérer les notifications.
+     * @return Une liste de {@link Notification} correspondant au résident spécifié.
+     */
     public List<Notification> getNotificationsForUser(Resident resident) {
-        return getNotifications().stream().filter(n -> n.getAssociatedEmail().equals(resident.getEmail())).toList();
+        return getNotifications().stream()
+                .filter(n -> n.getAssociatedEmail().equals(resident.getEmail()))
+                .toList();
     }
 
+    /**
+     * Charge toutes les notifications existantes à partir du fichier JSON.
+     *
+     * @return Une liste des notifications enregistrées.
+     */
     private ArrayList<Notification> getNotifications() {
         ArrayList<Notification> notifications = null;
 
