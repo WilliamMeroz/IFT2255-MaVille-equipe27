@@ -16,7 +16,7 @@ public class UserDataStore {
         this.FILE_NAME = filename;
     }
 
-    private List<User> getUserList() {
+    public List<User> getUserList() {
         List<User> users = null;
         try (Reader reader = new FileReader(FILE_NAME)) {
             GsonBuilder builder = new GsonBuilder();

@@ -2,9 +2,7 @@ package maville.equipe27.controllers;
 
 import javafx.scene.Parent;
 import maville.equipe27.enums.TravauxTypes;
-import maville.equipe27.helpers.HTTPRequestsHelper;
-import maville.equipe27.helpers.PrefHoraireDataStore;
-import maville.equipe27.helpers.RequeteTravailDataStore;
+import maville.equipe27.helpers.*;
 import maville.equipe27.models.*;
 import maville.equipe27.views.ResidentView;
 import maville.equipe27.models.RequeteTravail;
@@ -20,11 +18,13 @@ public class ResidentController implements IController {
     public HTTPRequestsHelper httpRequestsHelper;
     public RequeteTravailDataStore requeteTravailDataStore;
     public PrefHoraireDataStore prefHoraireDataStore;
+    public NotifcationEmitter notificationEmitter;
 
     public ResidentController() {
         this.httpRequestsHelper = new HTTPRequestsHelper();
         this.requeteTravailDataStore = new RequeteTravailDataStore("requetes.json");
         this.prefHoraireDataStore = new PrefHoraireDataStore("horaires.json");
+        this.notificationEmitter = new NotifcationEmitter("notifications.json");
     }
 
     public ResidentController(ResidentView residentView) {
@@ -119,6 +119,10 @@ public class ResidentController implements IController {
 
     public List<RequeteTravail> getUserRequests(String email) {
         return this.requeteTravailDataStore.getRequetesByEmail(email);
+    }
+
+    public List<Notification> getNotifications() {
+        return this.notificationEmitter.getNotificationsForUser(ConnectedResident.getInstance().getResident());
     }
 
     @Override

@@ -125,7 +125,24 @@
                   </Pane>
                </content>
           </Tab>
-          <Tab text="Notifications" />
+          <Tab text="Notifications">
+               <content>
+                  <Pane prefHeight="200.0" prefWidth="200.0">
+                     <children>
+                        <Text layoutX="485.0" layoutY="55.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Notifications">
+                           <font>
+                              <Font size="36.0" />
+                           </font>
+                        </Text>
+                        <TableView id="notificationsTableView" fx:id="notificationsTableView" layoutX="62.0" layoutY="81.0" prefHeight="675.0" prefWidth="1057.0">
+                          <columns>
+                            <TableColumn id="colNotificationsMessage" fx:id="colNotificationsMessage" prefWidth="912.5" text="Message" />
+                            <TableColumn id="colNotificationsDate" fx:id="colNotificationsDate" prefWidth="144.0" text="Date" />
+                          </columns>
+                        </TableView>
+                     </children>
+                  </Pane>
+               </content></Tab>
             <Tab text="Planif. Participative">
                <content>
                   <Pane prefHeight="200.0" prefWidth="200.0">

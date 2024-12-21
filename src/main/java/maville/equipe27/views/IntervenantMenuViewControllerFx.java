@@ -261,7 +261,7 @@ public class IntervenantMenuViewControllerFx {
             showAlert("Erreur durant update", "Le projet que vous mettez à jour n'existe sûrement pas", updateProjectButton);
         } else {
             showAlertSuccess("Projet mis à jour avec succès", "Tout va bien");
-            
+
         }
     }
 

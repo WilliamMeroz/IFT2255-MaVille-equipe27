@@ -9,10 +9,7 @@ import javafx.scene.text.Text;
 import maville.equipe27.controllers.ResidentController;
 import maville.equipe27.enums.TravauxTypes;
 import maville.equipe27.helpers.ConnectedResident;
-import maville.equipe27.models.Entrave;
-import maville.equipe27.models.PrefHoraire;
-import maville.equipe27.models.RequeteTravail;
-import maville.equipe27.models.Travail;
+import maville.equipe27.models.*;
 import maville.equipe27.models.PrefHoraire;
 
 import java.text.Normalizer;
@@ -194,12 +191,26 @@ public class ResidentMenuViewControllerFx {
     private TableView<RequeteTravail> residentRequtesTableView;
 
     @FXML
+    private TableView<Notification> notificationsTableView;
+
+    @FXML
+    private TableColumn<Notification, String> colNotificationsMessage;
+
+    @FXML
+    private TableColumn<Notification, String> colNotificationsDate;
+
+    @FXML
     public void initialize() {
         residentController = new ResidentController();
 
         entravesButton.setOnAction(event -> handleEntraveSearch());
         entravesRadioRue.setOnAction(event -> entravesTextBox.setPromptText("Nom de rue"));
         entravesRadioTravail.setOnAction(event -> entravesTextBox.setPromptText("numéro de travail"));
+
+        colNotificationsMessage.setCellValueFactory(new PropertyValueFactory<>("message"));
+        colNotificationsDate.setCellValueFactory(new PropertyValueFactory<>("dateEmitted"));
+        ObservableList<Notification> dataNotifications = FXCollections.observableArrayList(residentController.getNotifications());
+        notificationsTableView.setItems(dataNotifications);
 
         tableFromCol.setCellValueFactory(new PropertyValueFactory<>("from"));
         tableLargObCol.setCellValueFactory(new PropertyValueFactory<>("impactWidth"));

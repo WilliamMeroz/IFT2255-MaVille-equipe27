@@ -1,6 +1,7 @@
 package maville.equipe27.controllers;
 
 import com.google.gson.Gson;
+import maville.equipe27.helpers.NotifcationEmitter;
 import maville.equipe27.helpers.ProjectDataStore;
 import maville.equipe27.helpers.RequeteTravailDataStore;
 import maville.equipe27.models.Intervenant;
@@ -21,10 +22,12 @@ public class IntervenantController implements IController {
     private IntervenantView intervenantView;
     private RequeteTravailDataStore requeteTravailDataStore;
     private ProjectDataStore projectDataStore;
+    private NotifcationEmitter notifcationEmitter;
 
     public IntervenantController() {
         this.requeteTravailDataStore = new RequeteTravailDataStore("requetes.json");
         this.projectDataStore = new ProjectDataStore("projets.json");
+        this.notifcationEmitter = new NotifcationEmitter("notifications.json");
     }
 
     public IntervenantController(IntervenantView intervenantView) {
@@ -37,7 +40,14 @@ public class IntervenantController implements IController {
     }
 
     public boolean createNewProject(Projet projet) {
-        return this.projectDataStore.saveProject(projet);
+        boolean successNewProject = this.projectDataStore.saveProject(projet);
+        boolean successNotifications = false;
+
+        if (successNewProject) {
+            successNotifications = this.notifcationEmitter.emit(projet);
+        }
+
+        return (successNewProject && successNotifications);
     }
 
     public ArrayList<Projet> getUserProjects() {
