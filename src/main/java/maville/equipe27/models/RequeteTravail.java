@@ -3,6 +3,8 @@ package maville.equipe27.models;
 import maville.equipe27.enums.TravauxTypes;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * La classe {@code RequeteTravail} représente une requête de travail soumise par un résident.
@@ -10,6 +12,8 @@ import java.time.LocalDate;
  * le statut actuel de la requête et le courriel du résident qui a fait la requête.
  */
 public class RequeteTravail {
+
+    private List<String> candidates;
 
     /**
      * Le titre de la requête de travail.
@@ -58,6 +62,7 @@ public class RequeteTravail {
         this.typeTravail = typeTravail;
         this.dateDebut = dateDebut;
         this.owner = owner;
+        this.candidates = new ArrayList<>();
     }
 
     /**
@@ -77,6 +82,7 @@ public class RequeteTravail {
         this.dateDebut = dateDebut;
         this.status = status;
         this.owner = owner;
+        this.candidates = new ArrayList<>();
     }
 
     // Méthodes getter et setter
@@ -187,5 +193,13 @@ public class RequeteTravail {
      */
     public void setOwner(String owner) {
         this.owner = owner;
+    }
+
+    public void addCandidature(String courrielIntervenant) {
+        this.candidates.add(courrielIntervenant);
+    }
+
+    public List<String> getCandidates() {
+        return candidates;
     }
 }

@@ -7,6 +7,7 @@ import maville.equipe27.models.RequeteTravail;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.sql.Array;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -82,5 +83,32 @@ public class RequeteTravailDataStore {
         return getRequetes().stream()
                 .filter(requeteTravail -> requeteTravail.getOwner().equals(email))
                 .toList();
+    }
+
+    public boolean addCandidate(RequeteTravail requete, String candidature) {
+        ArrayList<RequeteTravail> requetes = new ArrayList<>(getRequetes());
+        boolean success = false;
+
+        for (RequeteTravail r : requetes) {
+            if (r.getOwner().equals(requete.getOwner()) && r.getTitreTravail().equals(requete.getTitreTravail())) {
+                r.getCandidates().add(candidature);
+                success = true;
+                break;
+            }
+        }
+
+        try (FileWriter fileWriter = new FileWriter(FILE_NAME)) {
+            GsonBuilder builder = new GsonBuilder();
+            builder.registerTypeHierarchyAdapter(List.class, new RequeteTravailJsonAdapter());
+            builder.setPrettyPrinting();
+            Gson gson = builder.create();
+            gson.toJson(requetes, fileWriter);
+            success = true;
+        } catch (IOException e) {
+            success = false;
+            e.printStackTrace();
+        }
+
+        return success;
     }
 }

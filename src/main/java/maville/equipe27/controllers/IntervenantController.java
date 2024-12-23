@@ -1,6 +1,7 @@
 package maville.equipe27.controllers;
 
 import com.google.gson.Gson;
+import maville.equipe27.helpers.ConnectedIntervenant;
 import maville.equipe27.helpers.NotifcationEmitter;
 import maville.equipe27.helpers.ProjectDataStore;
 import maville.equipe27.helpers.RequeteTravailDataStore;
@@ -69,7 +70,8 @@ public class IntervenantController implements IController {
         boolean successNotifications = false;
 
         if (successNewProject) {
-            successNotifications = this.notifcationEmitter.emit(projet);
+            String message = "Nouveau projet " + projet.getTitre() + " dans votre quartier!";
+            successNotifications = this.notifcationEmitter.emit(projet, message);
         }
 
         return (successNewProject && successNotifications);
@@ -92,7 +94,19 @@ public class IntervenantController implements IController {
      * @return true si la mise à jour est réussie, false sinon
      */
     public boolean updateProject(Projet projet, String newTitle) {
-        return this.projectDataStore.updateProject(projet, newTitle);
+        boolean successUpdateProjet = this.projectDataStore.updateProject(projet, newTitle);
+        boolean successNotification = false;
+
+        if (successUpdateProjet) {
+            String message = "Mise à jour de projet " + projet.getTitre() + " effectuée!";
+            successNotification = this.notifcationEmitter.emit(projet, message);
+        }
+
+        return (successUpdateProjet && successNotification);
+    }
+
+    public boolean soumettreCandiatureRequete(RequeteTravail requete) {
+        return requeteTravailDataStore.addCandidate(requete, ConnectedIntervenant.getInstance().getIntervenant().getEmail());
     }
 
     /**

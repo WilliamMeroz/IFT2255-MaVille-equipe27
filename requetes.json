@@ -1,18 +1,13 @@
 [
   {
-    "titre": "fewfqew",
-    "description": "fewfewqf",
-    "type": "TRANSPORTS",
-    "date": "2024-12-27",
+    "titre": "Requete 1",
+    "description": "Une descripotion",
+    "type": "PAYSAGER",
+    "date": "2024-12-24",
     "status": "INCHANGÉ",
-    "owner": "resident@gmail.com"
-  },
-  {
-    "titre": "ffwfwfwe",
-    "description": "fwfew",
-    "type": "SIGNALISATION",
-    "date": "2025-01-04",
-    "status": "INCHANGÉ",
-    "owner": "resident@gmail.com"
+    "owner": "resident@gmail.com",
+    "candidates": [
+      "intervenant@gmail.com"
+    ]
   }
 ]

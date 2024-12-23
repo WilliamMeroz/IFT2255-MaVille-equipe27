@@ -109,6 +109,28 @@ public class IntervenantMenuViewControllerFx {
         if (!requetes.isEmpty()) {
             ObservableList<RequeteTravail> data = FXCollections.observableArrayList(requetes);
             tableViewRequetes.setItems(data);
+
+            tableViewRequetes.setRowFactory(tv -> {
+                TableRow<RequeteTravail> row = new TableRow<>();
+                row.setOnMouseClicked(event -> {
+                    if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                        RequeteTravail rowData = row.getItem();
+                        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+                        alert.setTitle("Soumission candiature");
+                        alert.setHeaderText("Êtes-vous certain de vouloir soumettre votre candiature (OK pour oui) ?");
+                        Optional<ButtonType> result = alert.showAndWait();
+                        if (result.get().equals(ButtonType.OK)) {
+                            if (intervenantController.soumettreCandiatureRequete(rowData)) {
+                                alert.close();
+                                showAlertSuccess("Candidature envoyée avec succès", "merci");
+                            }
+                        } else {
+                            alert.close();
+                        }
+                    }
+                });
+                return row;
+            });
         }
 
         // Nouveau projet logique et setup

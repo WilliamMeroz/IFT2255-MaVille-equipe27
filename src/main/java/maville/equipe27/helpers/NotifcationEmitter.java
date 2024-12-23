@@ -47,7 +47,7 @@ public class NotifcationEmitter {
      * @param projet Le projet pour lequel les notifications doivent être envoyées.
      * @return {@code true} si les notifications ont été enregistrées avec succès, {@code false} sinon.
      */
-    public boolean emit(Projet projet) {
+    public boolean emit(Projet projet, String message) {
         String[] quartiers = projet.getQuartiers();
         ArrayList<Notification> notifications = new ArrayList<>();
 
@@ -58,7 +58,7 @@ public class NotifcationEmitter {
 
                 if (residentQuartier.equals(quartier)) {
                     notifications.add(new Notification(
-                            "Nouveau projet: " + projet.getTitre() + " dans votre quartier!",
+                            message,
                             resident.getEmail(),
                             new Date()
                     ));
