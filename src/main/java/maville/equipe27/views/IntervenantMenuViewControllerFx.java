@@ -145,7 +145,7 @@ public class IntervenantMenuViewControllerFx {
             if (chosenAcceptedRequete != null) {
                 candidatureAcceptLabel.setText("Requête: ");
                 chosenAcceptedRequete = null;
-                
+
             }
         });
 

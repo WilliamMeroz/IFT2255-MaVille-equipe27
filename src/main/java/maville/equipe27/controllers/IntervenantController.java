@@ -25,9 +25,9 @@ import java.util.List;
 public class IntervenantController implements IController {
     private Intervenant intervenant;
     private IntervenantView intervenantView;
-    private RequeteTravailDataStore requeteTravailDataStore;
-    private ProjectDataStore projectDataStore;
-    private NotifcationEmitter notifcationEmitter;
+    public RequeteTravailDataStore requeteTravailDataStore;
+    public ProjectDataStore projectDataStore;
+    public NotifcationEmitter notifcationEmitter;
 
     /**
      * Constructeur de la classe IntervenantController.

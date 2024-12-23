@@ -1,9 +1,8 @@
-package maville.equipe27.controllers;
+package maville.equipe27.helpers;
 
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import maville.equipe27.enums.TravauxTypes;
-import maville.equipe27.helpers.HTTPRequestsHelper;
 import maville.equipe27.models.Entrave;
 import maville.equipe27.models.Travail;
 import org.junit.jupiter.api.BeforeEach;

@@ -1,0 +1,22 @@
+[
+  {
+    "email": "newuser@example.com",
+    "password": "securepass",
+    "role": "1",
+    "firstname": "Alice",
+    "lastname": "Smith",
+    "dob": "1985-05-20",
+    "phone": "9876543210",
+    "address": "456 Another St, City, Quartier2"
+  },
+  {
+    "email": "newuser@example.com",
+    "password": "securepass",
+    "role": "1",
+    "firstname": "Alice",
+    "lastname": "Smith",
+    "dob": "1985-05-20",
+    "phone": "9876543210",
+    "address": "456 Another St, City, Quartier2"
+  }
+]

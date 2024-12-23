@@ -1,8 +1,6 @@
-package maville.equipe27.controllers;
+package maville.equipe27.helpers;
 
-import com.google.gson.annotations.SerializedName;
 import maville.equipe27.enums.CompanyChoices;
-import maville.equipe27.helpers.ConnectedIntervenant;
 import maville.equipe27.models.Intervenant;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;

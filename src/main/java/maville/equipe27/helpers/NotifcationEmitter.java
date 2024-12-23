@@ -25,7 +25,7 @@ import java.util.List;
 public class NotifcationEmitter {
     private final String FILE_NAME;
     private List<User> residents;
-    private UserDataStore userDataStore;
+    UserDataStore userDataStore;
 
     /**
      * Constructeur qui initialise la classe avec le nom du fichier où les notifications seront stockées
