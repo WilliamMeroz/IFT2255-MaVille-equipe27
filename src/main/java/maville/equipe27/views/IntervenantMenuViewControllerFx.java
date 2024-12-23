@@ -3,9 +3,13 @@ package maville.equipe27.views;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.text.Text;
+import maville.equipe27.App;
 import maville.equipe27.controllers.IntervenantController;
 import maville.equipe27.enums.ProjetStatus;
 import maville.equipe27.enums.TravauxTypes;
@@ -13,6 +17,7 @@ import maville.equipe27.helpers.ConnectedIntervenant;
 import maville.equipe27.models.Projet;
 import maville.equipe27.models.RequeteTravail;
 
+import java.io.IOException;
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.*;
@@ -110,6 +115,9 @@ public class IntervenantMenuViewControllerFx {
 
     @FXML
     private Button confirmerCandidatureButton;
+
+    @FXML
+    private Button disconnectButton;
 
     private ArrayList<String> quartiers = new ArrayList<>(Arrays.asList("Plateau-Mont-Royal", "Mile End", "Vieux-Montréal", "Centre-ville", "Petite Italie", "Griffintown", "Hochelaga-Maisonneuve", "Saint-Henri", "Outremont", "Westmount", "Côte-des-Neiges", "Notre-Dame-de-Grâce", "Le Village", "Villeray", "Rosemont–La Petite-Patrie", "Pointe-Saint-Charles", "Lachine", "LaSalle", "Ahuntsic", "Verdun"));
     private ObservableList<String> quartiersSelects;

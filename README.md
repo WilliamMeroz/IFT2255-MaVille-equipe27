@@ -36,6 +36,10 @@ Pour exécuter le programme, il faut s'assurer d'avoir les fichiers:
 - `users.json`
 - `requetes.json`
 - `travaux_categories_mapping.json`
+- `projets.json`
+- `notifications.json`
+- `horaires.json`
+- `test_users.json`
 
 dans le même répertoire que l'exécutable en .JAR. Des comptes préconfigurés sont mis à la disposition de l'utilisateur.
 
@@ -44,8 +48,11 @@ dans le même répertoire que l'exécutable en .JAR. Des comptes préconfigurés
 | Résident    | resident@gmail.com    | pomme123     |
 | Intervenant | intervenant@gmail.com | pomme123     |
 
+De plus, une version de Maven 4.0.0 et Java 21 seront nécessaires. Il n'est pas nécessaire d'installer les librairies
+vous-mêmes puisque Maven le fera pour vous.
+
 ## Tests unitaires
-Les tests unitaires sont séparés par ficher. Chaque fichier de test est nommé par le nom du fichier original qu'il faut tester + `Tests`.
+Les tests unitaires sont séparés par ficher. Chaque fichier de test est nommé par le nom du fichier original qu'il faut tester + `Test`.
 Les tests unitaires font l'utilisation des librairies [JUnit](https://junit.org/junit5/) mais également [Mockito](https://site.mockito.org/) afin de faire des mocks, stubs et spies plus facilement.
 
 Les fichiers de tests se trouvent dans le répertoire `/src/test/java/maville/equipe27` et sont séparés dans des répertoires de la même façon que les fichiers sources.
@@ -66,3 +73,5 @@ Le projet fait l'utilisation de certaines librairies de programmation externes.
 - [JUnit 5](https://junit.org/junit5/): Pour créer et exécuter des tests unitaires.
 
 - [Mockito](https://site.mockito.org/): Pour aider à la création de mocks, stubs et spies.
+
+- [JavaFX](https://openjfx.io/) Pour l'interface graphique.
