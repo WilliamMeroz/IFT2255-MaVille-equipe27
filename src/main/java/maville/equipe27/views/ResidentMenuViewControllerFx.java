@@ -387,7 +387,8 @@ public class ResidentMenuViewControllerFx {
                 row.setOnMouseClicked(event -> {
                     if (event.getClickCount() == 2 && (!row.isEmpty())) {
                         RequeteTravail rowData = row.getItem();
-                        if (rowData.getStatus().equals("Candidatures soumises")) {
+                        System.out.println(rowData);
+                        if (rowData.getStatus().equals("Candidatures en attente")) {
                             ArrayList<String> candidates = new ArrayList<>(rowData.getCandidates());
                             ObservableList<String> options = FXCollections.observableArrayList(candidates);
                             choisirIntervenantComboBox.setItems(options);

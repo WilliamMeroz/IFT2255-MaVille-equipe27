@@ -4,11 +4,22 @@
     "description": "Une descripotion",
     "type": "PAYSAGER",
     "date": "2024-12-24",
-    "status": "Candidatures en attente",
+    "status": "Requête confirmée",
     "owner": "resident@gmail.com",
-    "chosenCandidate": "",
+    "chosenCandidate": "intervenant@gmail.com",
     "candidates": [
-      "intervenant@gmail.com",
+      "intervenant@gmail.com"
+    ]
+  },
+  {
+    "titre": "Test",
+    "description": "ww",
+    "type": "TRANSPORTS",
+    "date": "2024-12-18",
+    "status": "Candidature acceptée",
+    "owner": "resident@gmail.com",
+    "chosenCandidate": "intervenant@gmail.com",
+    "candidates": [
       "intervenant@gmail.com"
     ]
   }

@@ -5,6 +5,7 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.text.Text;
 import maville.equipe27.controllers.IntervenantController;
 import maville.equipe27.enums.ProjetStatus;
 import maville.equipe27.enums.TravauxTypes;
@@ -89,6 +90,27 @@ public class IntervenantMenuViewControllerFx {
     @FXML
     private ComboBox<ProjetStatus> updateProjectType;
 
+    @FXML
+    private TableView<RequeteTravail> candidaturesAcceptTableView;
+
+    @FXML
+    private TableColumn<RequeteTravail, String> colCandidatureAcceptTitre;
+
+    @FXML
+    private TableColumn<RequeteTravail, String> colCandidatureAcceptStatus;
+
+    @FXML
+    private TableColumn<RequeteTravail, String> colCandidatureAcceptResident;
+
+    @FXML
+    private Text candidatureAcceptLabel;
+
+    @FXML
+    private Button refuserCandidatureButton;
+
+    @FXML
+    private Button confirmerCandidatureButton;
+
     private ArrayList<String> quartiers = new ArrayList<>(Arrays.asList("Plateau-Mont-Royal", "Mile End", "Vieux-Montréal", "Centre-ville", "Petite Italie", "Griffintown", "Hochelaga-Maisonneuve", "Saint-Henri", "Outremont", "Westmount", "Côte-des-Neiges", "Notre-Dame-de-Grâce", "Le Village", "Villeray", "Rosemont–La Petite-Patrie", "Pointe-Saint-Charles", "Lachine", "LaSalle", "Ahuntsic", "Verdun"));
     private ObservableList<String> quartiersSelects;
     private Set<String> selectedQuartiers = new HashSet<>();
@@ -96,16 +118,57 @@ public class IntervenantMenuViewControllerFx {
     private ArrayList<Projet> userProjects;
     private ObservableList<String> projectsUpdates;
 
+    private RequeteTravail chosenAcceptedRequete;
+
     @FXML
     public void initialize() {
         intervenantController = new IntervenantController();
+
+        List<RequeteTravail> requetes = intervenantController.consulterRequetes();
+
+        colCandidatureAcceptTitre.setCellValueFactory(new PropertyValueFactory<>("titreTravail"));
+        colCandidatureAcceptStatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+        colCandidatureAcceptResident.setCellValueFactory(new PropertyValueFactory<>("owner"));
+
+        ArrayList<RequeteTravail> requetesCandidatures = new ArrayList<>();
+        if (!requetes.isEmpty()) {
+            for (RequeteTravail r : requetes) {
+                if (r.getChosenCandidate().equals(ConnectedIntervenant.getInstance().getIntervenant().getEmail())) {
+                    if (r.getStatus().equals("Candidature acceptée")) {
+                        requetesCandidatures.add(r);
+                    }
+                }
+            }
+        }
+
+        refuserCandidatureButton.setOnAction(evt -> {
+            if (chosenAcceptedRequete != null) {
+                candidatureAcceptLabel.setText("Requête: ");
+                chosenAcceptedRequete = null;
+                
+            }
+        });
+
+        if (!requetesCandidatures.isEmpty()) {
+            ObservableList<RequeteTravail> data = FXCollections.observableArrayList(requetesCandidatures);
+            candidaturesAcceptTableView.setItems(data);
+            candidaturesAcceptTableView.setRowFactory(tv -> {
+                TableRow<RequeteTravail> row = new TableRow<>();
+                row.setOnMouseClicked(event -> {
+                    if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                        candidatureAcceptLabel.setText("Requête: " + row.getItem().getTitreTravail());
+                        acceptRequete(row.getItem());
+                    }
+                });
+                return row;
+            });
+        }
 
         colRequetesTitre.setCellValueFactory(new PropertyValueFactory<>("titreTravail"));
         colRequetesDesc.setCellValueFactory(new PropertyValueFactory<>("description"));
         colRequetesType.setCellValueFactory(new PropertyValueFactory<>("typeTravail"));
         colRequetesDate.setCellValueFactory(new PropertyValueFactory<>("dateDebut"));
 
-        List<RequeteTravail> requetes = intervenantController.consulterRequetes();
         if (!requetes.isEmpty()) {
             ObservableList<RequeteTravail> data = FXCollections.observableArrayList(requetes);
             tableViewRequetes.setItems(data);
@@ -175,6 +238,12 @@ public class IntervenantMenuViewControllerFx {
             updateProjectType.setValue(selectedProject.getStatus());
         });
         updateProjectButton.setOnAction(event -> handleProjectUpdate());
+    }
+
+    private void acceptRequete(RequeteTravail requeteTravail) {
+        if (intervenantController.acceptRequete(requeteTravail)) {
+
+        }
     }
 
     private void handleNewProjet() {

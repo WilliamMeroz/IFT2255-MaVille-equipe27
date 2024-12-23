@@ -109,6 +109,10 @@ public class IntervenantController implements IController {
         return requeteTravailDataStore.addCandidate(requete, ConnectedIntervenant.getInstance().getIntervenant().getEmail());
     }
 
+    public boolean acceptRequete(RequeteTravail requeteTravail) {
+        return requeteTravailDataStore.acceptRequete(requeteTravail, ConnectedIntervenant.getInstance().getIntervenant());
+    }
+
     /**
      * Méthode principale d'exécution du contrôleur.
      * Affiche le menu principal et gère les choix de l'utilisateur pour les différentes actions.

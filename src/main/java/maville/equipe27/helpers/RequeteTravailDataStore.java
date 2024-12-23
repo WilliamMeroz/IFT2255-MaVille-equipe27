@@ -2,6 +2,7 @@ package maville.equipe27.helpers;
 
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import maville.equipe27.models.Intervenant;
 import maville.equipe27.models.RequeteTravail;
 
 import java.io.FileReader;
@@ -121,11 +122,37 @@ public class RequeteTravailDataStore {
             for (String candidate : r.getCandidates()) {
                 if (candidate.equals(email)) {
                     r.setChosenCandidate(email);
-                    r.setStatus("Candidature confirmée");
+                    r.setStatus("Candidature acceptée");
                     success = true;
                     break;
                 }
             }
+        }
+
+        try (FileWriter fileWriter = new FileWriter(FILE_NAME)) {
+            GsonBuilder builder = new GsonBuilder();
+            builder.registerTypeHierarchyAdapter(List.class, new RequeteTravailJsonAdapter());
+            builder.setPrettyPrinting();
+            Gson gson = builder.create();
+            gson.toJson(requetes, fileWriter);
+            success = true;
+        } catch (IOException e) {
+            success = false;
+            e.printStackTrace();
+        }
+
+        return success;
+    }
+
+    public boolean acceptRequete(RequeteTravail requeteTravail, Intervenant intervenant) {
+        ArrayList<RequeteTravail> requetes = new ArrayList<>(getRequetes());
+        boolean success = false;
+        for (RequeteTravail r : requetes) {
+           if (r.getTitreTravail().equals(requeteTravail.getTitreTravail()) && r.getChosenCandidate().equals(intervenant.getEmail())) {
+               r.setStatus("Requête confirmée");
+               success = true;
+               break;
+           }
         }
 
         try (FileWriter fileWriter = new FileWriter(FILE_NAME)) {
