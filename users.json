@@ -1,41 +1,31 @@
 [
   {
     "email": "resident@gmail.com",
-    "password": "$2a$10$9yBcOxG6bM9vad3q7bbvluYlBInRovkyLkKZfOUBmaqjYJ.cj3I/q",
+    "password": "$2a$10$DAAbBPgHIk2OBLJsJxYGt.coHSl0vo3n8WxG3V.ty5uu405sTzfju",
     "role": "1",
-    "firstname": "Alice",
-    "lastname": "Liddell",
-    "dob": "1852-05-04",
-    "phone": "",
-    "address": "3,Rue des merveilles,Plateau-Mont-Royal,8,H3Y 2S5"
+    "firstname": "William",
+    "lastname": "Meroz-Moreau",
+    "dob": "2024-10-15",
+    "phone": "514-795-9132",
+    "address": "1,rue de Test,Plateau-Mont-Royal,0,J5R 0B3"
   },
   {
     "email": "intervenant@gmail.com",
-    "password": "$2a$10$NMOQaLp31iZUNXrxCqQo8uzUp/1Nygq3CMrSbYH3/CZd7VTDgag7a",
+    "password": "$2a$10$w6lcTswH8OnFfmbMi5dYPOz9EbFWgF8Jia89DScCSpypJrMjzGLBS",
     "role": "2",
-    "firstname": "Harry",
-    "lastname": "Potter",
-    "companyChoices": "PARTICULIER",
-    "cityIdentifier": "34543456"
+    "firstname": "William",
+    "lastname": "meroz-Moreau",
+    "companyChoices": "PUBLIC",
+    "cityIdentifier": "12345678"
   },
   {
-    "email": "bob2@mail.com",
-    "password": "$2a$10$CSjcYVlk3KxH.ab3/bEeoudPN8E.o5.IET/6z4Imx3rfIi48pDtWm",
+    "email": "bob@gmail.com",
+    "password": "$2a$10$/akco3nOlTOVMWmMo0vLeO8Czliok0rr.UmGWyf8HMNcTxrbHGTSO",
     "role": "1",
-    "firstname": "bob",
-    "lastname": "ggwg",
-    "dob": "2000-10-05",
-    "phone": "514-795-9342",
-    "address": "1,wjgkejgekgj,0,j5r0b2"
-  },
-  {
-    "email": "resident2@gmail.com",
-    "password": "$2a$10$8jUixEKTTvK6wKBlSAS1f.myiYx8FlU1mUaZG7YfG0x/UKSJvGzRS",
-    "role": "1",
-    "firstname": "wfwf",
-    "lastname": "fwfwf",
-    "dob": "2017-12-12",
-    "phone": "514-564-5345",
-    "address": "3,bob graton,Plateau-Mont-Royal,3,j5r0b3"
+    "firstname": "Bob",
+    "lastname": "Graton",
+    "dob": "2016-12-20",
+    "phone": "514-134-3456",
+    "address": "12,rue du test,Plateau-Mont-Royal,0,J5C 2A3"
   }
 ]

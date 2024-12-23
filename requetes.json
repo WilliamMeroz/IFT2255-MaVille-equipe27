@@ -1,24 +1,22 @@
 [
   {
-    "titre": "Requete 1",
-    "description": "Une descripotion",
-    "type": "PAYSAGER",
-    "date": "2024-12-24",
-    "status": "Requête confirmée",
+    "titre": "Test",
+    "description": "Description 1",
+    "type": "TRANSPORTS",
+    "date": "2025-01-01",
+    "status": "INCHANGÉ",
     "owner": "resident@gmail.com",
-    "chosenCandidate": "intervenant@gmail.com",
-    "candidates": [
-      "intervenant@gmail.com"
-    ]
+    "chosenCandidate": "",
+    "candidates": []
   },
   {
-    "titre": "Test",
-    "description": "ww",
-    "type": "TRANSPORTS",
-    "date": "2024-12-18",
-    "status": "Candidature acceptée",
-    "owner": "resident@gmail.com",
-    "chosenCandidate": "intervenant@gmail.com",
+    "titre": "Test Demo",
+    "description": "Description",
+    "type": "CONSTRUCTION",
+    "date": "2025-01-01",
+    "status": "Candidatures en attente",
+    "owner": "bob@gmail.com",
+    "chosenCandidate": "",
     "candidates": [
       "intervenant@gmail.com"
     ]

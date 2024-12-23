@@ -10,6 +10,9 @@ import java.util.List;
  * La classe {@code RequeteTravail} représente une requête de travail soumise par un résident.
  * Elle contient des informations sur le titre du travail, la description, le type de travail, la date de début,
  * le statut actuel de la requête et le courriel du résident qui a fait la requête.
+ *
+ * Cette classe permet de gérer les différentes requêtes de travail, y compris l'ajout de candidats pour effectuer le travail
+ * et le choix du candidat sélectionné pour la tâche.
  */
 public class RequeteTravail {
 
@@ -197,18 +200,38 @@ public class RequeteTravail {
         this.owner = owner;
     }
 
+    /**
+     * Ajoute une candidature pour un intervenant à la requête de travail.
+     *
+     * @param courrielIntervenant Le courriel de l'intervenant candidat.
+     */
     public void addCandidature(String courrielIntervenant) {
         this.candidates.add(courrielIntervenant);
     }
 
+    /**
+     * Retourne la liste des candidats pour la requête de travail.
+     *
+     * @return La liste des candidats.
+     */
     public List<String> getCandidates() {
         return candidates;
     }
 
+    /**
+     * Définit le candidat choisi pour effectuer le travail.
+     *
+     * @param candidate Le courriel du candidat choisi.
+     */
     public void setChosenCandidate(String candidate) {
         this.chosenCandidate = candidate;
     }
 
+    /**
+     * Retourne le candidat choisi pour effectuer le travail.
+     *
+     * @return Le courriel du candidat choisi.
+     */
     public String getChosenCandidate() {
         return this.chosenCandidate;
     }
