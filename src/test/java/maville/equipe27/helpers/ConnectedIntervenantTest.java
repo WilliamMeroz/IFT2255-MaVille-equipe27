@@ -11,7 +11,7 @@ import static org.junit.jupiter.api.Assertions.*;
 /**
  * Classe de tests pour {@code ConnectedIntervenant}.
  */
-public class ConnectedIntervenantTests {
+public class ConnectedIntervenantTest {
 
     @BeforeEach
     void resetSingleton() {

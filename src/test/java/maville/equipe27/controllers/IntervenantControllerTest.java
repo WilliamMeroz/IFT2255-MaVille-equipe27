@@ -1,6 +1,5 @@
 package maville.equipe27.controllers;
 
-import com.google.gson.Gson;
 import maville.equipe27.helpers.ConnectedIntervenant;
 import maville.equipe27.helpers.NotifcationEmitter;
 import maville.equipe27.helpers.ProjectDataStore;
@@ -20,7 +19,7 @@ import java.util.List;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-class IntervenantControllerTests {
+class IntervenantControllerTest {
 
     private IntervenantController intervenantController;
 
