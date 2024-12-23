@@ -726,7 +726,7 @@
                 </div>
                 <div class="activity">
                     <h4>Requête de travail</h4>
-                    <img class="activity-diagram" src="images/requete_de_travail.svg" alt="Diagramme d'activités">
+                    <img class="activity-diagram" src="images/requeteDeTravail.svg" alt="Diagramme d'activités">
                 </div>
                 <div class="activity">
                     <h4>Travaux</h4>
@@ -755,7 +755,7 @@
                 </div>
 
                 <div>
-                    <h3 class="subsection-title">Besoins non-fonctionnelles (mise à jour)</h3>
+                    <h3 class="subsection-title">Besoins non-fonctionnels (mise à jour)</h3>
                     <ol class="nf-requirements">
                         <li><b>Vitesse de mise à jour des informations présentées aux utilisateurs : </b>Les mises à jour des informations de travaux devraient se faire instantanément pour ne pas induire les utilisateurs en erreur avec de l'information désuette.</li>
                         <li><b>Facilité de maintenance : </b>Le système doit être conçu de façon à ne pas interrompre le service lors de maintenance ou l'ajout de nouvelles fonctionnalités.</li>
@@ -788,7 +788,7 @@
                 </div>
 
                 <div>
-                    <h3 class="subsection-title">Justification des choix du desgin</h3>
+                    <h3 class="subsection-title">Justification des choix du design</h3>
 
                     <p>
                         En adoptant l’architecture MVC, nous structurons le code en séparant clairement les vues, les contrôleurs et les modèles, ce qui permet une organisation modulaire et un faible couplage entre ces composants. Les modèles, correspondant aux entraves, aux travaux et aux utilisateurs, sont implémentés sous forme de classes distinctes qui interagissent uniquement avec les contrôleurs, tandis que les vues se limitent à communiquer avec ces derniers. Cette approche garantit une forte cohésion en assignant chaque fonctionnalité à un contrôleur spécifique, rendant le code plus lisible, compréhensible et bien structuré dans un nombre limité de fichiers. L’encapsulation est respectée grâce à l’usage de getters et setters, exposant uniquement les informations nécessaires, et les contrôleurs interagissent avec les modèles de manière suffisamment abstraite pour permettre une transition simple vers d’autres solutions de stockage, comme une base de données, sans affecter les autres parties du système. En outre, l’utilisation de fonctions privées génériques favorise la réutilisation et la flexibilité du code, facilitant par exemple le remplacement d’une API pour obtenir des données sur les entraves et les travaux sans impact majeur. Nous nous appuyons également sur des bibliothèques externes, (comme TextIO) pour simplifier la gestion des entrées et sorties utilisateur ou des outils de chiffrement pour renforcer la sécurité, ce qui nous permet de nous concentrer sur les fonctionnalités à forte valeur ajoutée pour l’utilisateur tout en garantissant un code maintenable, évolutif et efficace.
