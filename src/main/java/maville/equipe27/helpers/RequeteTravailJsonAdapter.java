@@ -41,12 +41,14 @@ public class RequeteTravailJsonAdapter implements JsonDeserializer<List<RequeteT
                 LocalDate debut = LocalDate.parse(dateStr);
                 String status = newObject.get("status").getAsString();
                 String owner = newObject.get("owner").getAsString();
+                String chosenCandidate = newObject.get("chosenCandidate").getAsString();
 
                 JsonArray candidatesJSON = newObject.getAsJsonArray("candidates");
                 RequeteTravail r = new RequeteTravail(owner, titre, desc, travailType, debut, status);
                 for (int i = 0; i < candidatesJSON.size(); i++)
                     r.addCandidature(candidatesJSON.get(i).getAsString());
 
+                r.setChosenCandidate(chosenCandidate);
 
                 requeteTravails.add(r);
             }
@@ -76,6 +78,7 @@ public class RequeteTravailJsonAdapter implements JsonDeserializer<List<RequeteT
             jsonObject.addProperty("date", t.getDateDebut().toString());
             jsonObject.addProperty("status", t.getStatus());
             jsonObject.addProperty("owner", t.getOwner());
+            jsonObject.addProperty("chosenCandidate", t.getChosenCandidate());
 
             JsonArray candidates = new JsonArray();
             for (String c : t.getCandidates())

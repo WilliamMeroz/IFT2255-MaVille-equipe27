@@ -231,6 +231,11 @@ public class ResidentController implements IController {
         return this.notificationEmitter.getNotificationsForUser(ConnectedResident.getInstance().getResident());
     }
 
+    public boolean acceptSubmission(String intervenantCourriel) {
+        this.requeteTravailDataStore.acceptRequest(intervenantCourriel);
+        return false;
+    }
+
     /**
      * Exécute la logique principale du contrôleur en affichant les menus et gérant les choix de l'utilisateur.
      */

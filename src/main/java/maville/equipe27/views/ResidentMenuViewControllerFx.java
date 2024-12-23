@@ -5,6 +5,8 @@ import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.Clipboard;
+import javafx.scene.input.ClipboardContent;
 import javafx.scene.text.Text;
 import maville.equipe27.controllers.ResidentController;
 import maville.equipe27.enums.TravauxTypes;
@@ -15,6 +17,7 @@ import maville.equipe27.models.PrefHoraire;
 import java.text.Normalizer;
 import java.time.LocalDate;
 import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -200,6 +203,12 @@ public class ResidentMenuViewControllerFx {
     private TableColumn<Notification, String> colNotificationsDate;
 
     @FXML
+    private Button faireChoixButton;
+
+    @FXML
+    private ComboBox<String> choisirIntervenantComboBox;
+
+    @FXML
     public void initialize() {
         residentController = new ResidentController();
 
@@ -306,6 +315,11 @@ public class ResidentMenuViewControllerFx {
         ResidentReqColType.setCellValueFactory(new PropertyValueFactory<>("typeTravail"));
         ResidentReqColDebut.setCellValueFactory(new PropertyValueFactory<>("dateDebut"));
         updateRequestTable();
+
+        faireChoixButton.setOnAction(evt -> {
+            String selectedCourriel = choisirIntervenantComboBox.getSelectionModel().getSelectedItem();
+            residentController.acceptSubmission(selectedCourriel);
+        });
     }
 
     private void handleEntraveSearch() {
@@ -368,6 +382,21 @@ public class ResidentMenuViewControllerFx {
         if (!userRequests.isEmpty()) {
             ObservableList<RequeteTravail> dataRequetes = FXCollections.observableArrayList(userRequests);
             residentRequtesTableView.setItems(dataRequetes);
+            residentRequtesTableView.setRowFactory(tv -> {
+                TableRow<RequeteTravail> row = new TableRow<>();
+                row.setOnMouseClicked(event -> {
+                    if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                        RequeteTravail rowData = row.getItem();
+                        if (rowData.getStatus().equals("Candidatures soumises")) {
+                            ArrayList<String> candidates = new ArrayList<>(rowData.getCandidates());
+                            ObservableList<String> options = FXCollections.observableArrayList(candidates);
+                            choisirIntervenantComboBox.setItems(options);
+                            choisirIntervenantComboBox.setValue(options.getFirst());
+                        }
+                    }
+                });
+                return row;
+            });
         }
     }
 
@@ -399,9 +428,21 @@ public class ResidentMenuViewControllerFx {
 
         List<Travail> travaux = residentController.consulterTravaux(isFutur, typeRecherche, filtre);
 
+        Clipboard clipboard = Clipboard.getSystemClipboard();
+        ClipboardContent content = new ClipboardContent();
         if (!travaux.isEmpty()) {
             ObservableList<Travail> data = FXCollections.observableArrayList(travaux);
             travauxTableView.setItems(data);
+            travauxTableView.setRowFactory(tv -> {
+                TableRow<Travail> row = new TableRow<>();
+                row.setOnMouseClicked(event -> {
+                    if (event.getClickCount() == 2 && (!row.isEmpty())) {
+                        content.putString(row.getItem().getId());
+                        clipboard.setContent(content);
+                    }
+                });
+                return row;
+            });
         }
     }
 

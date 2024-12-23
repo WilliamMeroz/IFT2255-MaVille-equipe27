@@ -92,8 +92,39 @@ public class RequeteTravailDataStore {
         for (RequeteTravail r : requetes) {
             if (r.getOwner().equals(requete.getOwner()) && r.getTitreTravail().equals(requete.getTitreTravail())) {
                 r.getCandidates().add(candidature);
+                r.setStatus("Candidatures en attente");
                 success = true;
                 break;
+            }
+        }
+
+        try (FileWriter fileWriter = new FileWriter(FILE_NAME)) {
+            GsonBuilder builder = new GsonBuilder();
+            builder.registerTypeHierarchyAdapter(List.class, new RequeteTravailJsonAdapter());
+            builder.setPrettyPrinting();
+            Gson gson = builder.create();
+            gson.toJson(requetes, fileWriter);
+            success = true;
+        } catch (IOException e) {
+            success = false;
+            e.printStackTrace();
+        }
+
+        return success;
+    }
+
+    public boolean acceptRequest(String email) {
+        ArrayList<RequeteTravail> requetes = new ArrayList<>(getRequetes());
+        boolean success = false;
+
+        for (RequeteTravail r : requetes) {
+            for (String candidate : r.getCandidates()) {
+                if (candidate.equals(email)) {
+                    r.setChosenCandidate(email);
+                    r.setStatus("Candidature confirmée");
+                    success = true;
+                    break;
+                }
             }
         }
 

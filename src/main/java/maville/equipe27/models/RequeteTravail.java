@@ -45,6 +45,8 @@ public class RequeteTravail {
      */
     private String owner;
 
+    private String chosenCandidate = "";
+
     // Constructeurs
 
     /**
@@ -201,5 +203,13 @@ public class RequeteTravail {
 
     public List<String> getCandidates() {
         return candidates;
+    }
+
+    public void setChosenCandidate(String candidate) {
+        this.chosenCandidate = candidate;
+    }
+
+    public String getChosenCandidate() {
+        return this.chosenCandidate;
     }
 }

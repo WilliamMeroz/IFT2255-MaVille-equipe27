@@ -4,9 +4,11 @@
     "description": "Une descripotion",
     "type": "PAYSAGER",
     "date": "2024-12-24",
-    "status": "INCHANGÉ",
+    "status": "Candidatures en attente",
     "owner": "resident@gmail.com",
+    "chosenCandidate": "",
     "candidates": [
+      "intervenant@gmail.com",
       "intervenant@gmail.com"
     ]
   }
