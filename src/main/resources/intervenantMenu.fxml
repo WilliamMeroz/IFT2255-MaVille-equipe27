@@ -28,7 +28,7 @@
                      <children>
                         <Pane layoutX="7.0" layoutY="7.0" prefHeight="474.0" prefWidth="764.0">
                            <children>
-                              <TableView id="tableViewRequetes" fx:id="tableViewRequetes" layoutX="22.0" layoutY="12.0" prefHeight="453.0" prefWidth="733.0">
+                              <TableView id="tableViewRequetes" fx:id="tableViewRequetes" layoutX="22.0" layoutY="12.0" prefHeight="383.0" prefWidth="733.0">
                                 <columns>
                                   <TableColumn id="colRequetesTitre" fx:id="colRequetesTitre" prefWidth="160.0" text="Titre" />
                                   <TableColumn id="colRequetesDesc" fx:id="colRequetesDesc" minWidth="0.0" prefWidth="248.0" text="Description" />
@@ -36,6 +36,7 @@
                                     <TableColumn id="colRequetesDate" fx:id="colRequetesDate" minWidth="6.33331298828125" prefWidth="170.16665649414062" text="Date" />
                                 </columns>
                               </TableView>
+                              <Text layoutX="230.0" layoutY="430.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Double cliquer la requête pour soumettre sa candidature" />
                            </children></Pane>
                      </children>
                   </AnchorPane>

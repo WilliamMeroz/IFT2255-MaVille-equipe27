@@ -1,2 +1,17 @@
 [
+  {
+    "message": "Nouveau projet Projet 1 dans votre quartier!",
+    "associatedEmail": "resident1@gmail.com",
+    "dateEmitted": "Dec 23, 2024, 9:46:50 PM"
+  },
+  {
+    "message": "Nouveau projet Projet 1 dans votre quartier!",
+    "associatedEmail": "resident2@gmail.com",
+    "dateEmitted": "Dec 23, 2024, 9:46:50 PM"
+  },
+  {
+    "message": "Nouveau projet Projet 3 dans votre quartier!",
+    "associatedEmail": "resident4@gmail.com",
+    "dateEmitted": "Dec 23, 2024, 9:47:54 PM"
+  }
 ]

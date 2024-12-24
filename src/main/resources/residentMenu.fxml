@@ -364,6 +364,7 @@
                         </Text>
                         <ComboBox id="choisirIntervenantComboBox" fx:id="choisirIntervenantComboBox" layoutX="797.0" layoutY="678.0" prefWidth="150.0" promptText="Choisir intervenant" />
                         <Button id="faireChoixButton" fx:id="faireChoixButton" layoutX="833.0" layoutY="742.0" mnemonicParsing="false" text="Faire choix" />
+                        <Text layoutX="813.0" layoutY="655.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Double cliquer la requête pour la traiter" />
                      </children>
                   </Pane>
                </content></Tab>

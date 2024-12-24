@@ -1,31 +1,97 @@
 [
   {
-    "email": "resident@gmail.com",
-    "password": "$2a$10$DAAbBPgHIk2OBLJsJxYGt.coHSl0vo3n8WxG3V.ty5uu405sTzfju",
+    "email": "resident1@gmail.com",
+    "password": "$2a$10$hcmT77/Fyo5U2ke2SiVPquw971bUrKdza4cM6DJofXAE6GPu75q0e",
     "role": "1",
-    "firstname": "William",
-    "lastname": "Meroz-Moreau",
-    "dob": "2024-10-15",
-    "phone": "514-795-9132",
-    "address": "1,rue de Test,Plateau-Mont-Royal,0,J5R 0B3"
+    "firstname": "John",
+    "lastname": "Smith",
+    "dob": "2009-02-11",
+    "phone": "514-675-4534",
+    "address": "2,Rue du test,Plateau-Mont-Royal,0,j5r 0b3"
   },
   {
-    "email": "intervenant@gmail.com",
-    "password": "$2a$10$w6lcTswH8OnFfmbMi5dYPOz9EbFWgF8Jia89DScCSpypJrMjzGLBS",
+    "email": "resident2@gmail.com",
+    "password": "$2a$10$DH8.PwT.CuD818SpCRJOreNQfGQVgOUnsV2DRxXrvMTggG2b6zpX.",
+    "role": "1",
+    "firstname": "Jane",
+    "lastname": "Doe",
+    "dob": "2015-12-10",
+    "phone": "454-345-3443",
+    "address": "1,Rue du test,Plateau-Mont-Royal,0,J5C 0C3"
+  },
+  {
+    "email": "resident3@gmail.com",
+    "password": "$2a$10$0b1YfinR2vIjVkrPjSR.GOUD/p3jJbl9tlSAzBdoCW0mWGfoCemH.",
+    "role": "1",
+    "firstname": "Bob",
+    "lastname": "Graton",
+    "dob": "2004-12-23",
+    "phone": "453-434-5454",
+    "address": "1,Rue de la pomme,Outremont,0,R7W 1R5"
+  },
+  {
+    "email": "resident4@gmail.com",
+    "password": "$2a$10$D4TsR6uhl6wK8/AM7oXpSeyqsTz./7PZ9pFYSEImIvXKF.S9U.B/y",
+    "role": "1",
+    "firstname": "Julien",
+    "lastname": "Lachance",
+    "dob": "2005-11-09",
+    "phone": "514-543-7868",
+    "address": "3,Rue de la poire,Petite Italie,0,J6Y 8X1"
+  },
+  {
+    "email": "resident5@gmail.com",
+    "password": "$2a$10$rG70fAwxavPwM.gOcht9fusD91WHqGwAYlFJ3YfXiaraQG5SMAbau",
+    "role": "1",
+    "firstname": "Sophie",
+    "lastname": "Jones",
+    "dob": "2011-05-18",
+    "phone": "514-543-5554",
+    "address": "23,rue de la tomate,Centre-ville,0,K8C 2Z9"
+  },
+  {
+    "email": "intervenant1@gmail.com",
+    "password": "$2a$10$0z0ru36XkGJwSXrmU6xSNuy4q7SmGJnRlz6U.Qdn27.cM6grEkyyO",
     "role": "2",
-    "firstname": "William",
-    "lastname": "meroz-Moreau",
+    "firstname": "Roger",
+    "lastname": "Tulipe",
     "companyChoices": "PUBLIC",
     "cityIdentifier": "12345678"
   },
   {
-    "email": "bob@gmail.com",
-    "password": "$2a$10$/akco3nOlTOVMWmMo0vLeO8Czliok0rr.UmGWyf8HMNcTxrbHGTSO",
-    "role": "1",
-    "firstname": "Bob",
-    "lastname": "Graton",
-    "dob": "2016-12-20",
-    "phone": "514-134-3456",
-    "address": "12,rue du test,Plateau-Mont-Royal,0,J5C 2A3"
+    "email": "intervenant2@gmail.com",
+    "password": "$2a$10$j9UcGbCzxfvNXvk/XPq5M.a4IU03xl5aemIj7yFs6.cD9WTEyvSQi",
+    "role": "2",
+    "firstname": "Fabien",
+    "lastname": "Lacroix",
+    "companyChoices": "PARTICULIER",
+    "cityIdentifier": "11111111"
+  },
+  {
+    "email": "intervenant3@gmail.com",
+    "password": "$2a$10$sMiTorN0eNngbvNbKxpd9.REBJ8Qy1IMoWnveCzqvDm54VQXn3UNC",
+    "role": "2",
+    "firstname": "George",
+    "lastname": "Tremblay",
+    "companyChoices": "PRIVÉ",
+    "cityIdentifier": "22222222"
+  },
+  {
+    "email": "intervenant4@gmail.com",
+    "password": "$2a$10$CoxajAnjIUNXhKwU4dNTSOhPk93qKzjY6Yuqu4dRVYZ2uDllLOC8S",
+    "role": "2",
+    "firstname": "Fabrice",
+    "lastname": "Robidoux",
+    "companyChoices": "PUBLIC",
+    "cityIdentifier": "99999999"
+  },
+  {
+    "email": "intervenant5@gmail.com",
+    "password": "$2a$10$cOl3nZdqtfZz1isPSBdfO.7qZwwoC/K2GlnXDKfqM/CcS/hwkD/mi",
+    "role": "2",
+    "firstname": "Chantal",
+    "lastname": "Lapierre",
+    "companyChoices": "PARTICULIER",
+    "cityIdentifier": "66666666"
   }
 ]

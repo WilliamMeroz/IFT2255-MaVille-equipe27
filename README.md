@@ -41,12 +41,25 @@ Pour exécuter le programme, il faut s'assurer d'avoir les fichiers:
 - `horaires.json`
 - `test_users.json`
 
-dans le même répertoire que l'exécutable en .JAR. Des comptes préconfigurés sont mis à la disposition de l'utilisateur.
+dans le même répertoire que l'exécutable en .JAR. Des comptes préconfigurés sont mis à la disposition de l'utilisateur. Les données suivantes sont également mises à la disposition de l'utilisateur.
 
-| Compte      | Courriel              | Mot de passe |
-|-------------|-----------------------|--------------|
-| Résident    | resident@gmail.com    | pomme123     |
-| Intervenant | intervenant@gmail.com | pomme123     |
+| Compte      | Courriel               | Mot de passe | Quartier      |
+|-------------|------------------------|--------------|---------------|
+| Résident    | resident1@gmail.com    | pomme123     | Plateau       |
+| Résident    | resident2@gmail.com    | pomme123     | Plateau       |
+| Résident    | resident3@gmail.com    | pomme123     | Outremont     |
+| Résident    | resident4@gmail.com    | pomme123     | Petite Italie |
+| Résident    | resident5@gmail.com    | pomme123     | Centre-Ville  |
+| Intervenant | intervenant1@gmail.com | pomme123     | NA            |
+| Intervenant | intervenant2@gmail.com | pomme123     | NA            |
+| Intervenant | intervenant3@gmail.com | pomme123     | NA            |
+| Intervenant | intervenant4@gmail.com | pomme123     | NA            |
+| Intervenant | intervenant5@gmail.com | pomme123     | NA            |
+
+Chaque résident à une requête à son nom, et l'intervenant1 à donné sa candidature à la requête du résident1. 
+Pareillement, l'intervenant2 à donné sa candidature à la requête du résident 2.
+
+Les 5 projets sont au nom de l'intervenant 1.
 
 De plus, une version de Maven 4.0.0 et Java 21 seront nécessaires. Il n'est pas nécessaire d'installer les librairies
 vous-mêmes puisque Maven le fera pour vous.

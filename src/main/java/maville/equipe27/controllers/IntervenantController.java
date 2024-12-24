@@ -1,6 +1,5 @@
 package maville.equipe27.controllers;
 
-import com.google.gson.Gson;
 import maville.equipe27.helpers.ConnectedIntervenant;
 import maville.equipe27.helpers.NotifcationEmitter;
 import maville.equipe27.helpers.ProjectDataStore;
@@ -10,10 +9,8 @@ import maville.equipe27.models.Projet;
 import maville.equipe27.models.RequeteTravail;
 import maville.equipe27.views.IntervenantView;
 import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import org.beryx.textio.TextIO;
 import java.io.FileReader;
 import java.util.ArrayList;
 import java.util.List;
